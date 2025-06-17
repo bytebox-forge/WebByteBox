@@ -1,0 +1,396 @@
+// Animation Keyframes and Effects
+// Cyberpunk-themed animations for the Byte Box site
+
+// Keyframe Animations
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+@keyframes glitch-1 {
+    0% { 
+        transform: translateX(0);
+        clip-path: polygon(0 0, 100% 0, 100% 5%, 0 5%);
+    }
+    10% { 
+        transform: translateX(-2px);
+        clip-path: polygon(0 0, 100% 0, 100% 10%, 0 10%);
+    }
+    20% { 
+        transform: translateX(2px);
+        clip-path: polygon(0 15%, 100% 15%, 100% 20%, 0 20%);
+    }
+    30% { 
+        transform: translateX(-1px);
+        clip-path: polygon(0 25%, 100% 25%, 100% 35%, 0 35%);
+    }
+    40% { 
+        transform: translateX(1px);
+        clip-path: polygon(0 40%, 100% 40%, 100% 50%, 0 50%);
+    }
+    50% { 
+        transform: translateX(-2px);
+        clip-path: polygon(0 55%, 100% 55%, 100% 70%, 0 70%);
+    }
+    60% { 
+        transform: translateX(2px);
+        clip-path: polygon(0 75%, 100% 75%, 100% 85%, 0 85%);
+    }
+    70% { 
+        transform: translateX(-1px);
+        clip-path: polygon(0 90%, 100% 90%, 100% 95%, 0 95%);
+    }
+    80% { 
+        transform: translateX(1px);
+        clip-path: polygon(0 95%, 100% 95%, 100% 100%, 0 100%);
+    }
+    90% { 
+        transform: translateX(-2px);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    100% { 
+        transform: translateX(0);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+}
+
+@keyframes glitch-2 {
+    0% { 
+        transform: translateX(0);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    15% { 
+        transform: translateX(2px);
+        clip-path: polygon(0 0, 100% 0, 100% 15%, 0 15%);
+    }
+    25% { 
+        transform: translateX(-1px);
+        clip-path: polygon(0 20%, 100% 20%, 100% 30%, 0 30%);
+    }
+    35% { 
+        transform: translateX(1px);
+        clip-path: polygon(0 35%, 100% 35%, 100% 45%, 0 45%);
+    }
+    45% { 
+        transform: translateX(-2px);
+        clip-path: polygon(0 50%, 100% 50%, 100% 65%, 0 65%);
+    }
+    55% { 
+        transform: translateX(2px);
+        clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%);
+    }
+    65% { 
+        transform: translateX(-1px);
+        clip-path: polygon(0 85%, 100% 85%, 100% 90%, 0 90%);
+    }
+    75% { 
+        transform: translateX(1px);
+        clip-path: polygon(0 95%, 100% 95%, 100% 100%, 0 100%);
+    }
+    100% { 
+        transform: translateX(0);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes matrix-rain {
+    0% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+@keyframes scanline {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+@keyframes crt-flicker {
+    0% { opacity: 1; }
+    98% { opacity: 1; }
+    99% { opacity: 0.98; }
+    100% { opacity: 1; }
+}
+
+@keyframes neon-glow {
+    0%, 100% {
+        text-shadow: 
+            0 0 5px currentColor,
+            0 0 10px currentColor,
+            0 0 15px currentColor,
+            0 0 20px currentColor;
+    }
+    50% {
+        text-shadow: 
+            0 0 2px currentColor,
+            0 0 5px currentColor,
+            0 0 8px currentColor,
+            0 0 12px currentColor;
+    }
+}
+
+@keyframes terminal-boot {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Animation Classes
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.7s ease-out;
+}
+
+.typing-animation {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid var(--neon-green);
+    animation: typewriter 2s steps(40, end), blink 1s infinite step-end;
+}
+
+.neon-glow-animate {
+    animation: neon-glow 2s ease-in-out infinite;
+}
+
+.crt-flicker {
+    animation: crt-flicker 0.15s infinite;
+}
+
+// Matrix Background Animation
+.matrix-char {
+    color: var(--neon-green);
+    opacity: 0;
+    animation: matrix-rain 3s linear infinite;
+    
+    &:nth-child(2n) {
+        animation-delay: 0.5s;
+        color: var(--amber);
+    }
+    
+    &:nth-child(3n) {
+        animation-delay: 1s;
+    }
+    
+    &:nth-child(4n) {
+        animation-delay: 1.5s;
+        color: var(--purple);
+    }
+    
+    &:nth-child(5n) {
+        animation-delay: 2s;
+    }
+}
+
+// Boot Sequence Animation
+.boot-sequence {
+    .boot-line {
+        opacity: 0;
+        animation: terminal-boot 0.5s ease forwards;
+        
+        &:nth-child(1) { animation-delay: 0.1s; }
+        &:nth-child(2) { animation-delay: 0.3s; }
+        &:nth-child(3) { animation-delay: 0.5s; }
+        &:nth-child(4) { animation-delay: 0.7s; }
+        &:nth-child(5) { animation-delay: 0.9s; }
+        &:nth-child(6) { animation-delay: 1.1s; }
+        &:nth-child(7) { animation-delay: 1.3s; }
+        &:nth-child(8) { animation-delay: 1.5s; }
+    }
+}
+
+// Hover Animations
+.hover-glitch {
+    transition: all 0.3s ease;
+    
+    &:hover {
+        animation: glitch-1 0.3s ease-in-out;
+        
+        &::before {
+            animation: glitch-2 0.3s ease-in-out;
+        }
+    }
+}
+
+.hover-neon {
+    transition: all 0.3s ease;
+    
+    &:hover {
+        text-shadow: 
+            0 0 5px currentColor,
+            0 0 10px currentColor,
+            0 0 15px currentColor,
+            0 0 20px currentColor;
+    }
+}
+
+// Loading Animations
+.loading-dots {
+    &::after {
+        content: '';
+        animation: loading-dots 1.5s infinite;
+    }
+}
+
+@keyframes loading-dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60% { content: '...'; }
+    80%, 100% { content: ''; }
+}
+
+// Typing Effect
+.typing-text {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid var(--neon-green);
+    width: 0;
+    animation: 
+        typewriter 3s steps(40, end) forwards,
+        blink 1s infinite;
+    
+    &.typed {
+        border-right: none;
+        animation: none;
+        width: auto;
+    }
+}
+
+// Terminal Cursor Animation
+.terminal-cursor {
+    display: inline-block;
+    background: var(--neon-green);
+    width: 10px;
+    height: 1em;
+    animation: blink 1s infinite;
+    margin-left: 2px;
+}
+
+// Glitch Overlay Effect
+.glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9998;
+    pointer-events: none;
+    opacity: 0;
+    background: 
+        linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(255, 0, 64, 0.1) 25%, 
+            transparent 26%, 
+            transparent 74%, 
+            rgba(138, 43, 226, 0.1) 75%, 
+            transparent 100%
+        );
+    animation: glitch-overlay 0.5s ease-in-out;
+}
+
+@keyframes glitch-overlay {
+    0% { opacity: 0; transform: translateX(0); }
+    10% { opacity: 0.8; transform: translateX(-2px); }
+    20% { opacity: 0; transform: translateX(2px); }
+    30% { opacity: 0.6; transform: translateX(-1px); }
+    40% { opacity: 0; transform: translateX(1px); }
+    50% { opacity: 0.4; transform: translateX(-2px); }
+    60% { opacity: 0; transform: translateX(2px); }
+    70% { opacity: 0.2; transform: translateX(-1px); }
+    100% { opacity: 0; transform: translateX(0); }
+}
+
+// Progressive Enhancement - Reduce animations for users who prefer reduced motion
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .blink,
+    .crt-flicker,
+    .neon-glow-animate {
+        animation: none !important;
+    }
+    
+    .typing-text {
+        animation: none !important;
+        width: auto !important;
+        border-right: none !important;
+    }
+}

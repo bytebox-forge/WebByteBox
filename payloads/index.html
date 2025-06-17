@@ -1,0 +1,307 @@
+---
+layout: default
+title: "Payload Vault"
+---
+
+<div class="payloads-terminal">
+    <div class="terminal-window">
+        <div class="terminal-title-bar">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+            <span class="terminal-title">{{ site.cyberpunk.terminal_prompt }} cd ~/bytebox/payloads && ls -la</span>
+        </div>
+        
+        <div class="payloads-content">
+            <div class="security-warning">
+                <div class="cmd-line">
+                    <span class="prompt error-prompt">SECURITY@bytebox:~$</span>
+                    <span class="command">cat /etc/security/payload_disclaimer.txt</span>
+                </div>
+                <div class="warning-content">
+                    <p class="red">⚠️ SECURITY NOTICE: Educational and Research Use Only</p>
+                    <p class="amber">All tools and scripts provided are for educational, research, and authorized testing purposes only.</p>
+                    <p class="purple">Use responsibly. Obtain proper authorization before deployment in production environments.</p>
+                    <p class="neon-green">By downloading, you agree to comply with all applicable laws and regulations.</p>
+                </div>
+            </div>
+
+            <div class="payload-stats">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">find . -type f -name "*.sh" -o -name "*.py" -o -name "*.rb" | wc -l</span>
+                </div>
+                <div class="output">
+                    <p class="neon-green">Available payloads: {{ site.payloads | size }}</p>
+                    <p class="amber">Total downloads: ∞</p>
+                    <p class="purple">Last updated: {{ site.time | date: "%Y-%m-%d %H:%M" }}</p>
+                </div>
+            </div>
+
+            <div class="payload-listing">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">ls -la *.{sh,py,rb,pl,go} | sort -k 9</span>
+                </div>
+                
+                {% if site.payloads.size > 0 %}
+                    {% for payload in site.payloads %}
+                    <div class="payload-entry">
+                        <div class="file-info">
+                            <span class="permissions">-rwxr-xr-x</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">arsenal</span>
+                            <span class="size">{{ payload.content | size }}</span>
+                            <span class="date">{{ payload.date | date: "%b %d %H:%M" }}</span>
+                            <a href="{{ payload.url | relative_url }}" class="filename {% cycle 'neon-green', 'amber', 'purple' %}">{{ payload.title | slugify }}{% if payload.file_extension %}.{{ payload.file_extension }}{% else %}.sh{% endif %}</a>
+                        </div>
+                        {% if payload.description %}
+                        <div class="file-description">
+                            <span class="desc-label amber">description:</span>
+                            <span class="desc-text">{{ payload.description }}</span>
+                        </div>
+                        {% endif %}
+                        {% if payload.tags %}
+                        <div class="file-tags">
+                            <span class="tags-label purple">categories:</span>
+                            {% for tag in payload.tags %}
+                            <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        {% if payload.download_url %}
+                        <div class="file-actions">
+                            <a href="{{ payload.download_url }}" class="download-link neon-green" download>
+                                [DOWNLOAD]
+                            </a>
+                            <a href="{{ payload.url | relative_url }}" class="view-link amber">
+                                [VIEW SOURCE]
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <!-- Placeholder payloads when none exist -->
+                    <div class="payload-entry placeholder">
+                        <div class="file-info">
+                            <span class="permissions">-rwxr-xr-x</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">arsenal</span>
+                            <span class="size">2048</span>
+                            <span class="date">{{ site.time | date: "%b %d %H:%M" }}</span>
+                            <span class="filename neon-green">network_discovery.py</span>
+                        </div>
+                        <div class="file-description">
+                            <span class="desc-label amber">description:</span>
+                            <span class="desc-text">Advanced network discovery and enumeration tool</span>
+                        </div>
+                        <div class="file-tags">
+                            <span class="tags-label purple">categories:</span>
+                            <span class="tag">reconnaissance</span>
+                            <span class="tag">networking</span>
+                            <span class="tag">python</span>
+                        </div>
+                        <div class="file-actions">
+                            <span class="download-link neon-green">[DOWNLOAD]</span>
+                            <span class="view-link amber">[VIEW SOURCE]</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payload-entry placeholder">
+                        <div class="file-info">
+                            <span class="permissions">-rwxr-xr-x</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">arsenal</span>
+                            <span class="size">4096</span>
+                            <span class="date">{{ site.time | date: "%b %d %H:%M" }}</span>
+                            <span class="filename amber">docker_manager.sh</span>
+                        </div>
+                        <div class="file-description">
+                            <span class="desc-label amber">description:</span>
+                            <span class="desc-text">Comprehensive Docker container lifecycle management script</span>
+                        </div>
+                        <div class="file-tags">
+                            <span class="tags-label purple">categories:</span>
+                            <span class="tag">docker</span>
+                            <span class="tag">automation</span>
+                            <span class="tag">bash</span>
+                        </div>
+                        <div class="file-actions">
+                            <span class="download-link neon-green">[DOWNLOAD]</span>
+                            <span class="view-link amber">[VIEW SOURCE]</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payload-entry placeholder">
+                        <div class="file-info">
+                            <span class="permissions">-rwxr-xr-x</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">arsenal</span>
+                            <span class="size">1337</span>
+                            <span class="date">{{ site.time | date: "%b %d %H:%M" }}</span>
+                            <span class="filename purple">vuln_scanner.rb</span>
+                        </div>
+                        <div class="file-description">
+                            <span class="desc-label amber">description:</span>
+                            <span class="desc-text">Automated vulnerability assessment and reporting tool</span>
+                        </div>
+                        <div class="file-tags">
+                            <span class="tags-label purple">categories:</span>
+                            <span class="tag">security</span>
+                            <span class="tag">scanner</span>
+                            <span class="tag">ruby</span>
+                        </div>
+                        <div class="file-actions">
+                            <span class="download-link neon-green">[DOWNLOAD]</span>
+                            <span class="view-link amber">[VIEW SOURCE]</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payload-entry placeholder">
+                        <div class="file-info">
+                            <span class="permissions">-rwxr-xr-x</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">arsenal</span>
+                            <span class="size">8192</span>
+                            <span class="date">{{ site.time | date: "%b %d %H:%M" }}</span>
+                            <span class="filename neon-green">log_analyzer.go</span>
+                        </div>
+                        <div class="file-description">
+                            <span class="desc-label amber">description:</span>
+                            <span class="desc-text">High-performance log parsing and anomaly detection engine</span>
+                        </div>
+                        <div class="file-tags">
+                            <span class="tags-label purple">categories:</span>
+                            <span class="tag">logs</span>
+                            <span class="tag">analysis</span>
+                            <span class="tag">golang</span>
+                        </div>
+                        <div class="file-actions">
+                            <span class="download-link neon-green">[DOWNLOAD]</span>
+                            <span class="view-link amber">[VIEW SOURCE]</span>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="payload-categories">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">tree payloads/ | grep -E "^[├└]" | awk '{print $2}' | sort | uniq</span>
+                </div>
+                <div class="categories-tree">
+                    <div class="category-branch">
+                        <span class="tree-icon">├──</span>
+                        <span class="category-name neon-green">reconnaissance/</span>
+                        <div class="subcategories">
+                            <span class="tree-icon">│   ├──</span> <span class="subcat">network_discovery.py</span><br>
+                            <span class="tree-icon">│   ├──</span> <span class="subcat">port_scanner.sh</span><br>
+                            <span class="tree-icon">│   └──</span> <span class="subcat">subdomain_enum.rb</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-branch">
+                        <span class="tree-icon">├──</span>
+                        <span class="category-name amber">automation/</span>
+                        <div class="subcategories">
+                            <span class="tree-icon">│   ├──</span> <span class="subcat">docker_manager.sh</span><br>
+                            <span class="tree-icon">│   ├──</span> <span class="subcat">backup_rotator.py</span><br>
+                            <span class="tree-icon">│   └──</span> <span class="subcat">system_monitor.go</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-branch">
+                        <span class="tree-icon">├──</span>
+                        <span class="category-name purple">security/</span>
+                        <div class="subcategories">
+                            <span class="tree-icon">│   ├──</span> <span class="subcat">vuln_scanner.rb</span><br>
+                            <span class="tree-icon">│   ├──</span> <span class="subcat">log_analyzer.go</span><br>
+                            <span class="tree-icon">│   └──</span> <span class="subcat">forensic_tools.py</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-branch">
+                        <span class="tree-icon">└──</span>
+                        <span class="category-name red">exploits/</span>
+                        <div class="subcategories">
+                            <span class="tree-icon">    ├──</span> <span class="subcat amber">CVE-2024-XXXX.py</span><br>
+                            <span class="tree-icon">    ├──</span> <span class="subcat amber">buffer_overflow.c</span><br>
+                            <span class="tree-icon">    └──</span> <span class="subcat amber">privilege_escalation.sh</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="installation-guide">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">cat INSTALLATION.md</span>
+                </div>
+                <div class="install-content">
+                    <h3 class="section-title neon-green">// Installation & Usage //</h3>
+                    <div class="install-steps">
+                        <div class="step">
+                            <span class="step-number amber">1.</span>
+                            <div class="step-content">
+                                <span class="step-title">Download payload:</span>
+                                <code class="step-code">wget https://byte-box.org/payloads/[filename]</code>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <span class="step-number amber">2.</span>
+                            <div class="step-content">
+                                <span class="step-title">Make executable:</span>
+                                <code class="step-code">chmod +x [filename]</code>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <span class="step-number amber">3.</span>
+                            <div class="step-content">
+                                <span class="step-title">Review source code:</span>
+                                <code class="step-code">cat [filename] | less</code>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <span class="step-number amber">4.</span>
+                            <div class="step-content">
+                                <span class="step-title">Execute safely:</span>
+                                <code class="step-code">./[filename] --help</code>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="install-warning">
+                        <p class="red">⚠️ Always review code before execution</p>
+                        <p class="amber">⚠️ Test in isolated environments first</p>
+                        <p class="purple">⚠️ Ensure you have proper authorization</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payload-search">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">grep -r --include="*.py" --include="*.sh" -l</span>
+                    <input type="text" class="search-input" placeholder="search_term" id="payload-search">
+                </div>
+                <div class="search-results" id="payload-search-results">
+                    <!-- Search results populated via JavaScript -->
+                </div>
+            </div>
+
+            <div class="command-prompt">
+                <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                <span class="cursor blink">_</span>
+            </div>
+        </div>
+    </div>
+</div>

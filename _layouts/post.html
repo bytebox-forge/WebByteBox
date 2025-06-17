@@ -1,0 +1,89 @@
+---
+layout: default
+---
+
+<article class="terminal-post">
+    <header class="post-header">
+        <div class="terminal-window">
+            <div class="terminal-title-bar">
+                <span class="terminal-button close"></span>
+                <span class="terminal-button minimize"></span>
+                <span class="terminal-button maximize"></span>
+                <span class="terminal-title">{{ site.cyberpunk.terminal_prompt }} cat {{ page.title | slugify }}.md</span>
+            </div>
+            <div class="post-meta">
+                <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                <span class="command">ls -la {{ page.title | slugify }}.md</span>
+                <div class="file-info">
+                    <span class="permissions">-rw-r--r--</span>
+                    <span class="owner">root</span>
+                    <span class="group">bytebox</span>
+                    <span class="size">{{ content | size }}</span>
+                    <span class="date">{{ page.date | date: "%b %d %H:%M" }}</span>
+                    <span class="filename neon-green">{{ page.title | slugify }}.md</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="post-content terminal-content">
+        <h1 class="post-title glitch-text" data-text="{{ page.title }}">{{ page.title }}</h1>
+        
+        {% if page.description %}
+        <div class="post-description">
+            <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+            <span class="command">head -n 1 {{ page.title | slugify }}.md</span>
+            <div class="output">{{ page.description }}</div>
+        </div>
+        {% endif %}
+
+        {% if page.tags %}
+        <div class="post-tags">
+            <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+            <span class="command">grep -o "#[a-zA-Z0-9_]*" {{ page.title | slugify }}.md</span>
+            <div class="output">
+                {% for tag in page.tags %}
+                <span class="tag">#{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="content-body">
+            {{ content }}
+        </div>
+    </div>
+
+    <footer class="post-footer">
+        <div class="terminal-prompt">
+            <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+            <span class="command">echo "EOF reached. Exit code: 0"</span>
+        </div>
+        
+        {% if page.github_repo %}
+        <div class="source-link">
+            <a href="{{ page.github_repo }}" class="btn-cyber" target="_blank">
+                <span class="btn-text">View Source</span>
+                <span class="btn-glitch" data-text="View Source">View Source</span>
+            </a>
+        </div>
+        {% endif %}
+
+        <!-- TODO: Add post navigation -->
+        <div class="post-navigation">
+            {% if page.previous %}
+            <a href="{{ page.previous.url | relative_url }}" class="nav-prev">
+                <span class="nav-label">← Previous</span>
+                <span class="nav-title">{{ page.previous.title }}</span>
+            </a>
+            {% endif %}
+            
+            {% if page.next %}
+            <a href="{{ page.next.url | relative_url }}" class="nav-next">
+                <span class="nav-label">Next →</span>
+                <span class="nav-title">{{ page.next.title }}</span>
+            </a>
+            {% endif %}
+        </div>
+    </footer>
+</article>

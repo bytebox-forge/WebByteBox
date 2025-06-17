@@ -1,0 +1,268 @@
+// Cyberpunk Base Styles
+// Reset and foundational styles for the Byte Box theme
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// Color Palette - Cyberpunk Theme
+:root {
+    // Primary Colors
+    --bg-black: #000000;
+    --bg-dark: #0a0a0a;
+    --bg-darker: #050505;
+    
+    // Neon Colors
+    --neon-green: #00ff41;
+    --neon-green-glow: #00ff4180;
+    --amber: #ffb000;
+    --amber-glow: #ffb00080;
+    --purple: #8a2be2;
+    --purple-glow: #8a2be280;
+    --red: #ff0040;
+    --red-glow: #ff004080;
+    
+    // Terminal Colors
+    --terminal-bg: #0c0c0c;
+    --terminal-border: #333333;
+    --terminal-text: #c7c7c7;
+    --terminal-prompt: var(--neon-green);
+    
+    // Typography
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-size-base: 14px;
+    --font-size-large: 16px;
+    --font-size-small: 12px;
+    
+    // Spacing
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    
+    // Effects
+    --scanline-opacity: 0.1;
+    --glitch-intensity: 2px;
+    --crt-curve: 0.02;
+}
+
+// Base Typography
+html {
+    font-size: var(--font-size-base);
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-mono);
+    background: var(--bg-black);
+    color: var(--terminal-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    
+    // CRT Effect Base
+    &.crt-mode {
+        &::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 65, var(--scanline-opacity)) 2px,
+                    rgba(0, 255, 65, var(--scanline-opacity)) 4px
+                );
+            pointer-events: none;
+            z-index: 9999;
+        }
+    }
+}
+
+// Hidden by default (will be shown by JavaScript)
+.hidden {
+    display: none !important;
+}
+
+// Container
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    
+    @media (max-width: 768px) {
+        padding: 0 var(--spacing-sm);
+    }
+}
+
+// Typography Styles
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-green-glow);
+    
+    @media (max-width: 768px) {
+        font-size: 1.8rem;
+    }
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--amber);
+    text-shadow: 0 0 8px var(--amber-glow);
+    
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+    }
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: var(--purple);
+    text-shadow: 0 0 6px var(--purple-glow);
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.7;
+}
+
+// Link Styles
+a {
+    color: var(--neon-green);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+    
+    &:hover {
+        color: var(--amber);
+        text-shadow: 0 0 5px var(--amber-glow);
+        border-bottom-color: var(--amber);
+    }
+    
+    &:focus {
+        outline: 2px solid var(--neon-green);
+        outline-offset: 2px;
+    }
+}
+
+// Code and Pre
+code {
+    font-family: var(--font-mono);
+    background: var(--terminal-bg);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 3px;
+    border: 1px solid var(--terminal-border);
+    color: var(--neon-green);
+    font-size: var(--font-size-small);
+}
+
+pre {
+    font-family: var(--font-mono);
+    background: var(--terminal-bg);
+    padding: var(--spacing-md);
+    border-radius: 5px;
+    border: 1px solid var(--terminal-border);
+    overflow-x: auto;
+    line-height: 1.4;
+    
+    code {
+        background: none;
+        border: none;
+        padding: 0;
+        font-size: inherit;
+    }
+}
+
+// Lists
+ul, ol {
+    margin-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    
+    li {
+        margin-bottom: var(--spacing-sm);
+    }
+}
+
+// Color Utility Classes
+.neon-green {
+    color: var(--neon-green) !important;
+    text-shadow: 0 0 5px var(--neon-green-glow);
+}
+
+.amber {
+    color: var(--amber) !important;
+    text-shadow: 0 0 5px var(--amber-glow);
+}
+
+.purple {
+    color: var(--purple) !important;
+    text-shadow: 0 0 5px var(--purple-glow);
+}
+
+.red {
+    color: var(--red) !important;
+    text-shadow: 0 0 5px var(--red-glow);
+}
+
+// Matrix Background
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+// Scanlines Effect
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: var(--scanline-opacity);
+    background: linear-gradient(
+        transparent 50%,
+        rgba(0, 255, 65, 0.03) 50%
+    );
+    background-size: 100% 4px;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    :root {
+        --font-size-base: 12px;
+        --spacing-md: 0.75rem;
+        --spacing-lg: 1rem;
+    }
+    
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --font-size-base: 11px;
+    }
+}

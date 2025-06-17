@@ -1,0 +1,210 @@
+---
+layout: default
+title: "whoami"
+---
+
+<div class="terminal-bio">
+    <div class="terminal-window">
+        <div class="terminal-title-bar">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+            <span class="terminal-title">{{ site.cyberpunk.terminal_prompt }} ./whoami --verbose</span>
+        </div>
+        
+        <div class="bio-content">
+            <div class="command-output">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">cat /etc/passwd | grep $(whoami)</span>
+                </div>
+                <div class="output">
+                    <span class="username neon-green">root</span>:x:0:0:<span class="amber">Digital Architect, Homelab Overlord</span>:/home/bytebox:/bin/bash
+                </div>
+            </div>
+
+            <div class="user-info">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">finger $(whoami)</span>
+                </div>
+                <div class="finger-output">
+                    <pre class="user-details">
+Login: root                         Name: <span class="neon-green">[YOUR NAME HERE]</span> <!-- TODO: Add your name -->
+Directory: /home/bytebox            Shell: /bin/bash
+Office: The Basement                Office Phone: 555-HACK
+Home Phone: [ENCRYPTED]             
+On since {{ site.time | date: "%a %b %d %H:%M" }} (Matrix Time) on pts/0 from reality.local
+Mail last read {{ site.time | date: "%a %b %d %H:%M %Y" }}
+Project: Building the digital future, one container at a time
+Plan: Escape the matrix through superior infrastructure
+                    </pre>
+                </div>
+            </div>
+
+            <div class="skills-section">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">ls -la ~/skills/</span>
+                </div>
+                <div class="skills-listing">
+                    <!-- TODO: Customize your skills -->
+                    <div class="skill-item">
+                        <span class="permissions">-rwxrwxrwx</span>
+                        <span class="owner">root</span>
+                        <span class="group">devops</span>
+                        <span class="skill-name neon-green">docker_mastery.sh</span>
+                        <span class="skill-level">███████████ 95%</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="permissions">-rwxrwxrwx</span>
+                        <span class="owner">root</span>
+                        <span class="group">sysadmin</span>
+                        <span class="skill-name amber">linux_wizardry.py</span>
+                        <span class="skill-level">██████████░ 90%</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="permissions">-rwxrwxrwx</span>
+                        <span class="owner">root</span>
+                        <span class="group">security</span>
+                        <span class="skill-name purple">network_ninja.rb</span>
+                        <span class="skill-level">████████░░░ 80%</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="permissions">-rwxrwxrwx</span>
+                        <span class="owner">root</span>
+                        <span class="group">code</span>
+                        <span class="skill-name neon-green">automation_god.js</span>
+                        <span class="skill-level">█████████░░ 85%</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="permissions">-rw-rw-rw-</span>
+                        <span class="owner">root</span>
+                        <span class="group">social</span>
+                        <span class="skill-name amber">human_interaction.exe</span>
+                        <span class="skill-level">███░░░░░░░░ 30%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="system-specs">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">cat /proc/bio_info</span>
+                </div>
+                <div class="bio-specs">
+                    <div class="spec-line">
+                        <span class="spec-label">Processor:</span>
+                        <span class="spec-value">Coffee-powered Human v2.0 (Caffeine Architecture)</span>
+                    </div>
+                    <div class="spec-line">
+                        <span class="spec-label">Memory:</span>
+                        <span class="spec-value">Variable, improves with coffee intake</span>
+                    </div>
+                    <div class="spec-line">
+                        <span class="spec-label">Storage:</span>
+                        <span class="spec-value">Unlimited cloud backup to GitHub</span>
+                    </div>
+                    <div class="spec-line">
+                        <span class="spec-label">Operating System:</span>
+                        <span class="spec-value">Linux Enthusiast, Windows Survivor, macOS Curious</span>
+                    </div>
+                    <div class="spec-line">
+                        <span class="spec-label">Network:</span>
+                        <span class="spec-value">Gigabit fiber, VPN always-on, Tor when paranoid</span>
+                    </div>
+                    <div class="spec-line">
+                        <span class="spec-label">Security:</span>
+                        <span class="spec-value">Paranoid-level encryption, 2FA everything</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="current-projects">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">ps aux | grep -v grep | grep current_projects</span>
+                </div>
+                <div class="process-list">
+                    <!-- TODO: Add your current projects -->
+                    <div class="process">
+                        <span class="pid">1337</span>
+                        <span class="cpu neon-green">99.9</span>
+                        <span class="mem">15.0</span>
+                        <span class="command">./homelab_expansion --mode=aggressive</span>
+                    </div>
+                    <div class="process">
+                        <span class="pid">2048</span>
+                        <span class="cpu amber">45.2</span>
+                        <span class="mem">8.1</span>
+                        <span class="command">docker-compose up -d --scale services=∞</span>
+                    </div>
+                    <div class="process">
+                        <span class="pid">3141</span>
+                        <span class="cpu purple">23.7</span>
+                        <span class="mem">12.3</span>
+                        <span class="command">./learn_kubernetes --difficulty=insane</span>
+                    </div>
+                    <div class="process">
+                        <span class="pid">4096</span>
+                        <span class="cpu neon-green">67.4</span>
+                        <span class="mem">5.5</span>
+                        <span class="command">vim /dev/random</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">cat ~/.ssh/authorized_keys | head -n 1</span>
+                </div>
+                <div class="contact-methods">
+                    <!-- TODO: Add your actual contact info -->
+                    <div class="contact-item">
+                        <span class="contact-type">ssh-rsa</span>
+                        <span class="contact-value">
+                            <a href="mailto:{{ site.author.email }}" class="contact-link neon-green">{{ site.author.email }}</a>
+                        </span>
+                        <span class="contact-desc">Primary Secure Channel</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-type">matrix</span>
+                        <span class="contact-value">
+                            <a href="https://matrix.to/#/{{ site.author.matrix }}" class="contact-link amber">{{ site.author.matrix }}</a>
+                        </span>
+                        <span class="contact-desc">Encrypted Comms</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-type">github</span>
+                        <span class="contact-value">
+                            <a href="https://github.com/[YOUR_USERNAME]" class="contact-link purple">[YOUR_USERNAME]</a> <!-- TODO: Add GitHub -->
+                        </span>
+                        <span class="contact-desc">Code Repository</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-prompt">
+                <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                <span class="cursor blink">_</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ASCII Art Bio -->
+<div class="ascii-bio">
+    <pre class="ascii-art-bio">
+    ┌─────────────────────────────────────────────────────────┐
+    │  "In the matrix of servers and silicon dreams,          │
+    │   I architect digital realms where data flows           │
+    │   like electric rivers through fiber optic veins.      │
+    │   Every container is a universe, every script a spell,  │
+    │   every deployment a step closer to computational       │
+    │   enlightenment."                                       │
+    │                                                         │
+    │   - A Digital Nomad in the Server Wilderness           │
+    └─────────────────────────────────────────────────────────┘
+    </pre>
+</div>

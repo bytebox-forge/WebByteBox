@@ -1,0 +1,216 @@
+---
+layout: default
+title: "Secure Channel"
+---
+
+<div class="contact-terminal">
+    <div class="terminal-window">
+        <div class="terminal-title-bar">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+            <span class="terminal-title">{{ site.cyberpunk.terminal_prompt }} ./establish_contact --secure</span>
+        </div>
+        
+        <div class="contact-content">
+            <div class="security-warning">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">cat /etc/security/contact_policy.txt</span>
+                </div>
+                <div class="warning-text">
+                    <p class="amber">⚠️ SECURE COMMUNICATIONS PROTOCOL ACTIVE</p>
+                    <p>All transmissions are monitored for OpSec compliance.</p>
+                    <p>Use encrypted channels for sensitive discussions.</p>
+                    <p>Trust no one. Verify everything. Encrypt all the things.</p>
+                </div>
+            </div>
+
+            <div class="contact-methods">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">netstat -an | grep LISTEN | grep contact</span>
+                </div>
+                
+                <div class="contact-list">
+                    <!-- Primary Secure Email -->
+                    <div class="contact-method">
+                        <div class="method-header">
+                            <span class="protocol neon-green">PGP/GPG</span>
+                            <span class="port">:587</span>
+                            <span class="status">SECURE</span>
+                        </div>
+                        <div class="method-details">
+                            <div class="detail-line">
+                                <span class="label">Address:</span>
+                                <span class="value">
+                                    <a href="mailto:{{ site.author.email }}" class="contact-link">{{ site.author.email }}</a>
+                                </span>
+                            </div>
+                            <div class="detail-line">
+                                <span class="label">Encryption:</span>
+                                <span class="value amber">Required for sensitive topics</span>
+                            </div>
+                            <div class="detail-line">
+                                <span class="label">Response Time:</span>
+                                <span class="value">24-48 hours (coffee dependent)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Matrix Protocol -->
+                    <div class="contact-method">
+                        <div class="method-header">
+                            <span class="protocol purple">Matrix</span>
+                            <span class="port">:8448</span>
+                            <span class="status">E2E_ENCRYPTED</span>
+                        </div>
+                        <div class="method-details">
+                            <div class="detail-line">
+                                <span class="label">Handle:</span>
+                                <span class="value">
+                                    <a href="https://matrix.to/#/{{ site.author.matrix }}" class="contact-link">{{ site.author.matrix }}</a>
+                                </span>
+                            </div>
+                            <div class="detail-line">
+                                <span class="label">Protocol:</span>
+                                <span class="value neon-green">End-to-end encrypted by default</span>
+                            </div>
+                            <div class="detail-line">
+                                <span class="label">Use Case:</span>
+                                <span class="value">Real-time collaboration, quick questions</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GitHub -->
+                    <div class="contact-method">
+                        <div class="method-header">
+                            <span class="protocol amber">GitHub</span>
+                            <span class="port">:443</span>
+                            <span class="status">PUBLIC</span>
+                        </div>
+                        <div class="method-details">
+                            <div class="detail-line">
+                                <span class="label">Profile:</span>
+                                <span class="value">
+                                    <a href="https://github.com/[YOUR_USERNAME]" class="contact-link">[YOUR_USERNAME]</a> <!-- TODO: Add GitHub -->
+                                </span>
+                            </div>
+                            <div class="detail-line">
+                                <span class="label">Best For:</span>
+                                <span class="value">Code reviews, project collaboration, issues</span>
+                            </div>
+                            <div class="detail-line">
+                                <span class="label">Public Key:</span>
+                                <span class="value purple">Available in GitHub profile</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mastodon/Fediverse -->
+                    <div class="contact-method">
+                        <div class="method-header">
+                            <span class="protocol neon-green">Mastodon</span>
+                            <span class="port">:443</span>
+                            <span class="status">FEDERATED</span>
+                        </div>
+                        <div class="method-details">
+                            <div class="detail-line">
+                                <span class="label">Handle:</span>
+                                <span class="value">
+                                    <a href="https://mastodon.social/@[YOUR_HANDLE]" class="contact-link">@[YOUR_HANDLE]@mastodon.social</a> <!-- TODO: Add Mastodon -->
+                                </span>
+                            </div>
+                            <div class="detail-line">
+                                <span class="label">Content:</span>
+                                <span class="value">Tech rants, project updates, coffee pics</span>
+                            </div>
+                            <div class="detail-line">
+                                <span class="label">Privacy:</span>
+                                <span class="value amber">Public posts, DMs for private msgs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PGP Public Key -->
+            <div class="pgp-section">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">gpg --armor --export [KEY_ID] | head -n 20</span>
+                </div>
+                <div class="pgp-key">
+                    <pre class="key-block">
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+<!-- TODO: Add your actual PGP public key -->
+[YOUR PGP PUBLIC KEY GOES HERE]
+
+For now, this is a placeholder. Import your real key:
+1. Generate: gpg --full-generate-key
+2. Export: gpg --armor --export [YOUR_EMAIL] > public.key
+3. Paste the contents here
+
+Or link to your key on a keyserver:
+keyserver.ubuntu.com, keys.openpgp.org, etc.
+-----END PGP PUBLIC KEY BLOCK-----
+                    </pre>
+                    <div class="key-actions">
+                        <a href="#" class="btn-cyber" id="download-key">
+                            <span class="btn-text">Download Public Key</span>
+                            <span class="btn-glitch" data-text="Download Public Key">Download Public Key</span>
+                        </a>
+                        <a href="#" class="btn-cyber" id="verify-key">
+                            <span class="btn-text">Verify Fingerprint</span>
+                            <span class="btn-glitch" data-text="Verify Fingerprint">Verify Fingerprint</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Guidelines -->
+            <div class="security-guidelines">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">cat ~/docs/opsec_guidelines.md</span>
+                </div>
+                <div class="guidelines-content">
+                    <h3 class="section-title neon-green">// Operational Security Guidelines //</h3>
+                    <ul class="guidelines-list">
+                        <li><span class="bullet amber">▶</span> Use Signal or Matrix for real-time secure messaging</li>
+                        <li><span class="bullet neon-green">▶</span> PGP encrypt sensitive emails (key above)</li>
+                        <li><span class="bullet purple">▶</span> Verify my identity through multiple channels</li>
+                        <li><span class="bullet amber">▶</span> No sensitive info in plaintext over unsecured channels</li>
+                        <li><span class="bullet neon-green">▶</span> When in doubt, assume the NSA is listening 👁️</li>
+                    </ul>
+                    
+                    <h3 class="section-title purple">// Response Time Expectations //</h3>
+                    <ul class="response-times">
+                        <li><span class="time neon-green">&lt; 4 hours</span> - Security vulnerabilities, urgent system issues</li>
+                        <li><span class="time amber">&lt; 24 hours</span> - Project collaboration, code reviews</li>
+                        <li><span class="time purple">&lt; 48 hours</span> - General inquiries, casual conversation</li>
+                        <li><span class="time red">&gt; 72 hours</span> - Marketing spam (auto-deleted)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Easter Egg -->
+            <div class="hidden-message" id="hidden-message">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">echo "VGhhbmtzIGZvciByZWFkaW5nIHRoZSBzb3VyY2UgY29kZSEgWW91J3JlIG15IGtpbmQgb2YgcGVyc29uLg==" | base64 -d</span>
+                </div>
+                <div class="output">
+                    <p class="neon-green">Thanks for reading the source code! You're my kind of person.</p>
+                    <p class="amber">Feel free to mention this easter egg when you contact me. 🥚</p>
+                </div>
+            </div>
+
+            <div class="command-prompt">
+                <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                <span class="cursor blink">_</span>
+            </div>
+        </div>
+    </div>
+</div>

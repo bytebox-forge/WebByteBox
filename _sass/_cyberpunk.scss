@@ -1,0 +1,400 @@
+// Cyberpunk Theme Components
+// Terminal windows, buttons, and cyberpunk-specific UI elements
+
+// Terminal Window Base
+.terminal-window {
+    background: var(--terminal-bg);
+    border: 2px solid var(--terminal-border);
+    border-radius: 8px;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 65, 0.1),
+        inset 0 0 20px rgba(0, 255, 65, 0.05);
+    margin-bottom: var(--spacing-lg);
+    overflow: hidden;
+    position: relative;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(
+                ellipse at center,
+                transparent 0%,
+                rgba(0, 0, 0, 0.1) 100%
+            );
+        pointer-events: none;
+    }
+}
+
+// Terminal Title Bar
+.terminal-title-bar {
+    background: var(--bg-darker);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 1px solid var(--terminal-border);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    
+    .terminal-button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        
+        &.close {
+            background: var(--red);
+            box-shadow: 0 0 5px var(--red-glow);
+        }
+        
+        &.minimize {
+            background: var(--amber);
+            box-shadow: 0 0 5px var(--amber-glow);
+        }
+        
+        &.maximize {
+            background: var(--neon-green);
+            box-shadow: 0 0 5px var(--neon-green-glow);
+        }
+    }
+    
+    .terminal-title {
+        flex: 1;
+        color: var(--terminal-text);
+        font-size: var(--font-size-small);
+        font-weight: normal;
+        margin-left: var(--spacing-md);
+    }
+}
+
+// Terminal Content Areas
+.terminal-content {
+    padding: var(--spacing-lg);
+    
+    @media (max-width: 768px) {
+        padding: var(--spacing-md);
+    }
+}
+
+// Command Line Elements
+.cmd-line, .command-output {
+    margin-bottom: var(--spacing-md);
+    
+    .prompt {
+        color: var(--terminal-prompt);
+        font-weight: bold;
+        margin-right: var(--spacing-sm);
+    }
+    
+    .command {
+        color: var(--amber);
+        font-weight: normal;
+    }
+    
+    .output {
+        margin-top: var(--spacing-sm);
+        padding-left: var(--spacing-lg);
+        color: var(--terminal-text);
+        
+        @media (max-width: 768px) {
+            padding-left: var(--spacing-md);
+        }
+    }
+}
+
+// Navigation Links
+.terminal-nav {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    
+    @media (max-width: 768px) {
+        gap: var(--spacing-sm);
+    }
+    
+    .nav-link {
+        color: var(--terminal-text);
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border: 1px solid transparent;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+        font-size: var(--font-size-small);
+        
+        &:hover {
+            color: var(--neon-green);
+            border-color: var(--neon-green);
+            background: rgba(0, 255, 65, 0.1);
+            text-shadow: 0 0 5px var(--neon-green-glow);
+        }
+        
+        &.active {
+            color: var(--amber);
+            border-color: var(--amber);
+            background: rgba(255, 176, 0, 0.1);
+            text-shadow: 0 0 5px var(--amber-glow);
+        }
+    }
+}
+
+// Cyberpunk Buttons
+.btn-cyber {
+    display: inline-block;
+    position: relative;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: transparent;
+    border: 2px solid var(--neon-green);
+    color: var(--neon-green);
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+    
+    &:hover {
+        background: var(--neon-green);
+        color: var(--bg-black);
+        box-shadow: 
+            0 0 20px var(--neon-green-glow),
+            inset 0 0 20px rgba(0, 0, 0, 0.2);
+        text-shadow: none;
+    }
+    
+    .btn-glitch {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateX(-100%);
+        transition: all 0.3s ease;
+    }
+    
+    &:hover .btn-glitch {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    &:hover .btn-text {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+// Glitch Text Effect
+.glitch-text {
+    position: relative;
+    display: inline-block;
+    
+    &::before,
+    &::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    
+    &:hover {
+        &::before {
+            animation: glitch-1 0.5s infinite;
+            color: var(--red);
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        &::after {
+            animation: glitch-2 0.5s infinite;
+            color: var(--purple);
+            opacity: 0.7;
+            z-index: -2;
+        }
+    }
+}
+
+// Blinking Cursor
+.cursor {
+    color: var(--neon-green);
+    
+    &.blink {
+        animation: blink 1s infinite;
+    }
+    
+    &.error-cursor {
+        color: var(--red);
+    }
+}
+
+// File/Directory Listings
+.directory-listing,
+.file-listing {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-small);
+    
+    .dir-item,
+    .file-item {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto 1fr;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-xs) 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        align-items: center;
+        
+        &:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+        
+        @media (max-width: 768px) {
+            grid-template-columns: auto 1fr;
+            gap: var(--spacing-xs);
+            
+            .permissions,
+            .links,
+            .owner,
+            .group,
+            .size,
+            .date {
+                display: none;
+            }
+        }
+    }
+    
+    .permissions {
+        color: var(--amber);
+        font-size: var(--font-size-small);
+    }
+    
+    .dirname,
+    .filename {
+        font-weight: bold;
+        
+        &:hover {
+            text-shadow: 0 0 5px currentColor;
+        }
+    }
+}
+
+// Status Indicators
+.status {
+    font-weight: bold;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 3px;
+    
+    &.ok {
+        color: var(--neon-green);
+        background: rgba(0, 255, 65, 0.1);
+    }
+    
+    &.warning {
+        color: var(--amber);
+        background: rgba(255, 176, 0, 0.1);
+    }
+    
+    &.error {
+        color: var(--red);
+        background: rgba(255, 0, 64, 0.1);
+    }
+}
+
+// Progress Bars (for skills, etc.)
+.progress-bar {
+    width: 100px;
+    height: 10px;
+    background: var(--bg-darker);
+    border: 1px solid var(--terminal-border);
+    border-radius: 5px;
+    overflow: hidden;
+    
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--neon-green), var(--amber));
+        transition: width 0.3s ease;
+        box-shadow: 0 0 10px var(--neon-green-glow);
+    }
+}
+
+// ASCII Art Containers
+.ascii-art,
+.ascii-art-bio {
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-green-glow);
+    font-size: var(--font-size-small);
+    line-height: 1.2;
+    overflow-x: auto;
+    
+    @media (max-width: 768px) {
+        font-size: 10px;
+        transform: scale(0.8);
+        transform-origin: left top;
+    }
+}
+
+// Tag System
+.tag {
+    display: inline-block;
+    background: rgba(0, 255, 65, 0.1);
+    color: var(--neon-green);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 3px;
+    border: 1px solid var(--neon-green);
+    font-size: var(--font-size-small);
+    margin-right: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+    
+    &:hover {
+        background: rgba(0, 255, 65, 0.2);
+        box-shadow: 0 0 5px var(--neon-green-glow);
+    }
+}
+
+// Special Error/404 Styles
+.error-window {
+    border-color: var(--red);
+    box-shadow: 
+        0 0 20px var(--red-glow),
+        inset 0 0 20px rgba(255, 0, 64, 0.05);
+    
+    .error-title {
+        color: var(--red);
+        text-shadow: 0 0 5px var(--red-glow);
+    }
+}
+
+.error-prompt {
+    color: var(--red) !important;
+    text-shadow: 0 0 5px var(--red-glow);
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .terminal-window {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .terminal-title-bar {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        
+        .terminal-title {
+            font-size: 10px;
+            margin-left: var(--spacing-sm);
+        }
+        
+        .terminal-button {
+            width: 10px;
+            height: 10px;
+        }
+    }
+    
+    .btn-cyber {
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-size: var(--font-size-small);
+    }
+}

@@ -1,0 +1,83 @@
+# Byte Box - Cyberpunk Tech Blog Configuration
+title: "Byte Box"
+description: "A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem"
+url: "https://byte-box.org"
+baseurl: ""
+
+# Author info
+author:
+  name: "Mayor" # TODO: Customize your hacker alias
+  email: "alexnyk@outlook.com" # TODO: Add your secure contact
+ # matrix: "@you:matrix.org" # TODO: Add Matrix handle if desired
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Collections for organized content
+collections:
+  lab-logs:
+    output: true
+    permalink: /:collection/:name/
+  modules:
+    output: true
+    permalink: /:collection/:name/
+  payloads:
+    output: true
+    permalink: /:collection/:name/
+  blackbox:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "lab-logs"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "modules"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "payloads"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "blackbox"
+    values:
+      layout: "post"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+
+# TODO: Add custom variables for your setup
+cyberpunk:
+  terminal_prompt: "root@bytebox:~$"
+  ascii_art: true
+  glitch_effects: true
+  crt_scanlines: true

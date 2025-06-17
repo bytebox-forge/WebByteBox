@@ -1,0 +1,211 @@
+---
+layout: default
+title: "Lab Logs"
+---
+
+<div class="lab-logs-terminal">
+    <div class="terminal-window">
+        <div class="terminal-title-bar">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+            <span class="terminal-title">{{ site.cyberpunk.terminal_prompt }} cd ~/bytebox/lab-logs && ls -la</span>
+        </div>
+        
+        <div class="logs-content">
+            <div class="directory-header">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">pwd && ls -la *.md | wc -l</span>
+                </div>
+                <div class="output">
+                    <p>/home/bytebox/lab-logs</p>
+                    <p class="neon-green">Total experiments: {{ site.lab-logs | size }}</p>
+                </div>
+            </div>
+
+            <div class="log-listing">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">ls -la --time-style=long-iso | grep -E "\.(md|log)$"</span>
+                </div>
+                
+                {% if site.lab-logs.size > 0 %}
+                    {% for post in site.lab-logs reversed %}
+                    <div class="log-entry">
+                        <div class="file-info">
+                            <span class="permissions">-rw-r--r--</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">labrats</span>
+                            <span class="size">{{ post.content | size }}</span>
+                            <span class="date">{{ post.date | date: "%Y-%m-%d %H:%M" }}</span>
+                            <a href="{{ post.url | relative_url }}" class="filename neon-green">{{ post.title | slugify }}.md</a>
+                        </div>
+                        {% if post.description %}
+                        <div class="file-preview">
+                            <span class="preview-label amber">preview:</span>
+                            <span class="preview-text">{{ post.description | truncate: 80 }}</span>
+                        </div>
+                        {% endif %}
+                        {% if post.tags %}
+                        <div class="file-tags">
+                            <span class="tags-label purple">tags:</span>
+                            {% for tag in post.tags %}
+                            <span class="tag">#{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <!-- Placeholder entries when no posts exist -->
+                    <div class="log-entry placeholder">
+                        <div class="file-info">
+                            <span class="permissions">-rw-r--r--</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">labrats</span>
+                            <span class="size">2048</span>
+                            <span class="date">{{ site.time | date: "%Y-%m-%d %H:%M" }}</span>
+                            <span class="filename amber">docker_swarm_setup.md</span>
+                        </div>
+                        <div class="file-preview">
+                            <span class="preview-label amber">preview:</span>
+                            <span class="preview-text">Setting up a Docker Swarm cluster for homelab orchestration...</span>
+                        </div>
+                        <div class="file-tags">
+                            <span class="tags-label purple">tags:</span>
+                            <span class="tag">#docker</span>
+                            <span class="tag">#swarm</span>
+                            <span class="tag">#homelab</span>
+                        </div>
+                    </div>
+                    
+                    <div class="log-entry placeholder">
+                        <div class="file-info">
+                            <span class="permissions">-rw-r--r--</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">labrats</span>
+                            <span class="size">4096</span>
+                            <span class="date">{{ site.time | date: "%Y-%m-%d %H:%M" }}</span>
+                            <span class="filename neon-green">kubernetes_pi_cluster.md</span>
+                        </div>
+                        <div class="file-preview">
+                            <span class="preview-label amber">preview:</span>
+                            <span class="preview-text">Building a Kubernetes cluster with Raspberry Pi nodes...</span>
+                        </div>
+                        <div class="file-tags">
+                            <span class="tags-label purple">tags:</span>
+                            <span class="tag">#kubernetes</span>
+                            <span class="tag">#raspberry-pi</span>
+                            <span class="tag">#edge-computing</span>
+                        </div>
+                    </div>
+                    
+                    <div class="log-entry placeholder">
+                        <div class="file-info">
+                            <span class="permissions">-rw-r--r--</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">labrats</span>
+                            <span class="size">1337</span>
+                            <span class="date">{{ site.time | date: "%Y-%m-%d %H:%M" }}</span>
+                            <span class="filename purple">network_security_lab.md</span>
+                        </div>
+                        <div class="file-preview">
+                            <span class="preview-label amber">preview:</span>
+                            <span class="preview-text">Building isolated network segments for penetration testing...</span>
+                        </div>
+                        <div class="file-tags">
+                            <span class="tags-label purple">tags:</span>
+                            <span class="tag">#network</span>
+                            <span class="tag">#security</span>
+                            <span class="tag">#vlan</span>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="lab-stats">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">cat lab_statistics.json | jq '.'</span>
+                </div>
+                <div class="stats-output">
+                    <pre class="json-stats">
+{
+  "total_experiments": {{ site.lab-logs | size }},
+  "categories": {
+    "docker": "{{ site.lab-logs | where: 'tags', 'docker' | size }}",
+    "kubernetes": "{{ site.lab-logs | where: 'tags', 'kubernetes' | size }}",
+    "networking": "{{ site.lab-logs | where: 'tags', 'networking' | size }}",
+    "security": "{{ site.lab-logs | where: 'tags', 'security' | size }}"
+  },
+  "status": "active",
+  "last_update": "{{ site.time | date: "%Y-%m-%d" }}",
+  "lab_uptime": "99.42%",
+  "coffee_consumed": "∞"
+}
+                    </pre>
+                </div>
+            </div>
+
+            <div class="lab-tools">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">which lab_tools</span>
+                </div>
+                <div class="tools-list">
+                    <div class="tool-category">
+                        <h3 class="category-title neon-green">// Container Orchestration //</h3>
+                        <ul class="tool-list">
+                            <li><span class="tool-name">Docker</span> <span class="tool-version amber">v24.0+</span></li>
+                            <li><span class="tool-name">Docker Compose</span> <span class="tool-version amber">v2.x</span></li>
+                            <li><span class="tool-name">Kubernetes</span> <span class="tool-version amber">v1.28+</span></li>
+                            <li><span class="tool-name">Helm</span> <span class="tool-version amber">v3.x</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tool-category">
+                        <h3 class="category-title purple">// Infrastructure //</h3>
+                        <ul class="tool-list">
+                            <li><span class="tool-name">Proxmox VE</span> <span class="tool-version amber">v8.x</span></li>
+                            <li><span class="tool-name">TrueNAS Scale</span> <span class="tool-version amber">v23.x</span></li>
+                            <li><span class="tool-name">pfSense</span> <span class="tool-version amber">v2.7+</span></li>
+                            <li><span class="tool-name">Terraform</span> <span class="tool-version amber">v1.x</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tool-category">
+                        <h3 class="category-title amber">// Monitoring & Observability //</h3>
+                        <ul class="tool-list">
+                            <li><span class="tool-name">Prometheus</span> <span class="tool-version amber">v2.x</span></li>
+                            <li><span class="tool-name">Grafana</span> <span class="tool-version amber">v10.x</span></li>
+                            <li><span class="tool-name">ELK Stack</span> <span class="tool-version amber">v8.x</span></li>
+                            <li><span class="tool-name">Zabbix</span> <span class="tool-version amber">v6.x</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TODO: Add search functionality -->
+            <div class="search-section" id="search-section">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">grep -r --include="*.md" -n</span>
+                    <input type="text" class="search-input" placeholder="search_term" id="search-input">
+                </div>
+                <div class="search-results" id="search-results">
+                    <!-- Search results will be populated here via JavaScript -->
+                </div>
+            </div>
+
+            <div class="command-prompt">
+                <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                <span class="cursor blink">_</span>
+            </div>
+        </div>
+    </div>
+</div>

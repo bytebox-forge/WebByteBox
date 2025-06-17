@@ -1,0 +1,320 @@
+---
+layout: default
+title: "System Modules"
+---
+
+<div class="modules-terminal">
+    <div class="terminal-window">
+        <div class="terminal-title-bar">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+            <span class="terminal-title">{{ site.cyberpunk.terminal_prompt }} cd ~/bytebox/modules && systemctl list-units</span>
+        </div>
+        
+        <div class="modules-content">
+            <div class="modules-header">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">find . -name "*.service" -type f | wc -l</span>
+                </div>
+                <div class="output">
+                    <p class="neon-green">Active modules: {{ site.modules | size }}</p>
+                    <p class="amber">Status: All systems operational</p>
+                </div>
+            </div>
+
+            <div class="modules-listing">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">systemctl status --all | grep -E "(active|loaded)"</span>
+                </div>
+                
+                {% if site.modules.size > 0 %}
+                    {% for module in site.modules %}
+                    <div class="module-entry">
+                        <div class="module-header">
+                            <div class="service-line">
+                                <span class="indicator neon-green">●</span>
+                                <span class="service-name">{{ module.title | slugify }}.service</span>
+                                <span class="service-status">loaded active running</span>
+                                <span class="service-desc">{{ module.description | default: module.title }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-details">
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <span class="label">Loaded:</span>
+                                    <span class="value neon-green">loaded (/etc/systemd/system/{{ module.title | slugify }}.service)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Active:</span>
+                                    <span class="value amber">active (running) since {{ module.date | date: "%b %d %H:%M" }}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Main PID:</span>
+                                    <span class="value">{{ 1000 | plus: forloop.index | times: 337 }}</span>
+                                </div>
+                                {% if module.github_repo %}
+                                <div class="detail-item">
+                                    <span class="label">Repository:</span>
+                                    <span class="value purple">
+                                        <a href="{{ module.github_repo }}" class="repo-link" target="_blank">{{ module.github_repo | remove: 'https://github.com/' }}</a>
+                                    </span>
+                                </div>
+                                {% endif %}
+                                {% if module.demo_url %}
+                                <div class="detail-item">
+                                    <span class="label">Live Demo:</span>
+                                    <span class="value neon-green">
+                                        <a href="{{ module.demo_url }}" class="demo-link" target="_blank">{{ module.demo_url }}</a>
+                                    </span>
+                                </div>
+                                {% endif %}
+                                {% if module.tags %}
+                                <div class="detail-item">
+                                    <span class="label">Dependencies:</span>
+                                    <span class="value">
+                                        {% for tag in module.tags %}
+                                        <span class="dependency">{{ tag }}</span>{% unless forloop.last %}, {% endunless %}
+                                        {% endfor %}
+                                    </span>
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="module-actions">
+                                <a href="{{ module.url | relative_url }}" class="btn-cyber btn-small">
+                                    <span class="btn-text">View Details</span>
+                                    <span class="btn-glitch" data-text="View Details">View Details</span>
+                                </a>
+                                {% if module.github_repo %}
+                                <a href="{{ module.github_repo }}" class="btn-cyber btn-small" target="_blank">
+                                    <span class="btn-text">Source Code</span>
+                                    <span class="btn-glitch" data-text="Source Code">Source Code</span>
+                                </a>
+                                {% endif %}
+                                {% if module.demo_url %}
+                                <a href="{{ module.demo_url }}" class="btn-cyber btn-small" target="_blank">
+                                    <span class="btn-text">Live Demo</span>
+                                    <span class="btn-glitch" data-text="Live Demo">Live Demo</span>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <!-- Placeholder modules when none exist -->
+                    <div class="module-entry placeholder">
+                        <div class="module-header">
+                            <div class="service-line">
+                                <span class="indicator neon-green">●</span>
+                                <span class="service-name">homelab-dashboard.service</span>
+                                <span class="service-status">loaded active running</span>
+                                <span class="service-desc">Real-time homelab monitoring dashboard</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-details">
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <span class="label">Loaded:</span>
+                                    <span class="value neon-green">loaded (/etc/systemd/system/homelab-dashboard.service)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Active:</span>
+                                    <span class="value amber">active (running) since {{ site.time | date: "%b %d %H:%M" }}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Main PID:</span>
+                                    <span class="value">3141</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Repository:</span>
+                                    <span class="value purple">
+                                        <span class="repo-link">github.com/username/homelab-dashboard</span>
+                                    </span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Dependencies:</span>
+                                    <span class="value">
+                                        <span class="dependency">docker</span>, 
+                                        <span class="dependency">grafana</span>, 
+                                        <span class="dependency">prometheus</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="module-entry placeholder">
+                        <div class="module-header">
+                            <div class="service-line">
+                                <span class="indicator amber">●</span>
+                                <span class="service-name">network-scanner.service</span>
+                                <span class="service-status">loaded active exited</span>
+                                <span class="service-desc">Automated network discovery and mapping tool</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-details">
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <span class="label">Loaded:</span>
+                                    <span class="value neon-green">loaded (/etc/systemd/system/network-scanner.service)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Active:</span>
+                                    <span class="value amber">active (exited) since {{ site.time | date: "%b %d %H:%M" }}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Repository:</span>
+                                    <span class="value purple">
+                                        <span class="repo-link">github.com/username/network-scanner</span>
+                                    </span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Dependencies:</span>
+                                    <span class="value">
+                                        <span class="dependency">nmap</span>, 
+                                        <span class="dependency">python3</span>, 
+                                        <span class="dependency">sqlite</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="module-entry placeholder">
+                        <div class="module-header">
+                            <div class="service-line">
+                                <span class="indicator purple">●</span>
+                                <span class="service-name">container-orchestrator.service</span>
+                                <span class="service-status">loaded active running</span>
+                                <span class="service-desc">Custom Docker Swarm management interface</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-details">
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <span class="label">Loaded:</span>
+                                    <span class="value neon-green">loaded (/etc/systemd/system/container-orchestrator.service)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Active:</span>
+                                    <span class="value amber">active (running) since {{ site.time | date: "%b %d %H:%M" }}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Main PID:</span>
+                                    <span class="value">2048</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Dependencies:</span>
+                                    <span class="value">
+                                        <span class="dependency">docker</span>, 
+                                        <span class="dependency">swarm</span>, 
+                                        <span class="dependency">nodejs</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="system-resources">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">docker stats --no-stream | head -n 10</span>
+                </div>
+                <div class="resources-output">
+                    <div class="stats-header">
+                        <span class="col-container">CONTAINER ID</span>
+                        <span class="col-name">NAME</span>
+                        <span class="col-cpu">CPU %</span>
+                        <span class="col-mem">MEM USAGE / LIMIT</span>
+                        <span class="col-mem-perc">MEM %</span>
+                        <span class="col-net">NET I/O</span>
+                        <span class="col-block">BLOCK I/O</span>
+                    </div>
+                    
+                    <div class="stats-row">
+                        <span class="col-container neon-green">a1b2c3d4e5f6</span>
+                        <span class="col-name">homelab-dashboard</span>
+                        <span class="col-cpu amber">15.43%</span>
+                        <span class="col-mem">256MiB / 2GiB</span>
+                        <span class="col-mem-perc">12.50%</span>
+                        <span class="col-net purple">1.2MB / 856KB</span>
+                        <span class="col-block">4.1MB / 2.3MB</span>
+                    </div>
+                    
+                    <div class="stats-row">
+                        <span class="col-container neon-green">f6e5d4c3b2a1</span>
+                        <span class="col-name">grafana</span>
+                        <span class="col-cpu amber">8.21%</span>
+                        <span class="col-mem">512MiB / 4GiB</span>
+                        <span class="col-mem-perc">12.80%</span>
+                        <span class="col-net purple">3.4MB / 1.2MB</span>
+                        <span class="col-block">12MB / 8.7MB</span>
+                    </div>
+                    
+                    <div class="stats-row">
+                        <span class="col-container neon-green">1a2b3c4d5e6f</span>
+                        <span class="col-name">prometheus</span>
+                        <span class="col-cpu amber">23.67%</span>
+                        <span class="col-mem">1.2GiB / 8GiB</span>
+                        <span class="col-mem-perc">15.00%</span>
+                        <span class="col-net purple">5.7MB / 2.1MB</span>
+                        <span class="col-block">45MB / 23MB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="module-categories">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">ls -la modules/ | grep -E "^d" | awk '{print $9}' | sort</span>
+                </div>
+                <div class="categories-output">
+                    <div class="category-section">
+                        <h3 class="category-title neon-green">// Infrastructure //</h3>
+                        <ul class="category-list">
+                            <li><span class="bullet">▶</span> Homelab monitoring dashboards</li>
+                            <li><span class="bullet">▶</span> Container orchestration tools</li>
+                            <li><span class="bullet">▶</span> Network topology mappers</li>
+                            <li><span class="bullet">▶</span> Backup automation systems</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="category-section">
+                        <h3 class="category-title amber">// Security Tools //</h3>
+                        <ul class="category-list">
+                            <li><span class="bullet">▶</span> Vulnerability scanners</li>
+                            <li><span class="bullet">▶</span> Log analysis engines</li>
+                            <li><span class="bullet">▶</span> Intrusion detection systems</li>
+                            <li><span class="bullet">▶</span> Penetration testing frameworks</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="category-section">
+                        <h3 class="category-title purple">// Development //</h3>
+                        <ul class="category-list">
+                            <li><span class="bullet">▶</span> CI/CD pipeline tools</li>
+                            <li><span class="bullet">▶</span> Code quality analyzers</li>
+                            <li><span class="bullet">▶</span> API testing suites</li>
+                            <li><span class="bullet">▶</span> Documentation generators</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-prompt">
+                <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                <span class="cursor blink">_</span>
+            </div>
+        </div>
+    </div>
+</div>
