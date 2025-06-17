@@ -152,10 +152,9 @@ while true; do
     uptime -p | sed 's/up //' | tr -d '\n'
     echo "                                              │"
     echo "└────────────────────────────────────────────────────────────┘"
-    
-    # Docker containers status
+      # Docker containers status
     echo "┌─ CONTAINER STATUS ─────────────────────────────────────────┐"
-    docker ps --format "table {{.Names}}\t{{.Status}}" | tail -n +2 | while read line; do
+    docker ps --format "table {% raw %}{{.Names}}\t{{.Status}}{% endraw %}" | tail -n +2 | while read line; do
         name=$(echo $line | awk '{print $1}')
         status=$(echo $line | awk '{print $2}')
         if [[ $status == "Up" ]]; then
