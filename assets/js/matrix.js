@@ -57,7 +57,7 @@ class MatrixBackground {
         this.canvas.style.width = '100%';
         this.canvas.style.height = '100%';
         this.canvas.style.zIndex = '-1';
-        this.canvas.style.opacity = '0.15';  // Increased from 0.05 to make it visible
+        this.canvas.style.opacity = '0.45';  // Increased 200% from 0.15 to make it clearly visible
         this.canvas.style.pointerEvents = 'none';
         
         this.ctx = this.canvas.getContext('2d');
@@ -77,11 +77,10 @@ class MatrixBackground {
         for (let x = 0; x < this.columns; x++) {
             this.drops[x] = Math.floor(Math.random() * this.canvas.height / this.fontSize);
         }
-    }
-      draw() {        if (!this.ctx || !this.canvas) return;
+    }      draw() {        if (!this.ctx || !this.canvas) return;
         
-        // Create trailing effect (reduced for better visibility)
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
+        // Create trailing effect (minimal fade for maximum visibility)
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
         // Get theme-aware colors
@@ -170,16 +169,14 @@ class MatrixBackground {
     
     // Method to temporarily intensify the effect
     intensify(duration = 5000) {
-        if (!this.canvas) return;
-          const originalOpacity = this.canvas.style.opacity;
-        this.canvas.style.opacity = '0.4';  // Increased for better visibility during theme switch
+        if (!this.canvas) return;        const originalOpacity = this.canvas.style.opacity;
+        this.canvas.style.opacity = '0.8';  // Strong effect during theme switch
         
         // Add color variation
         const originalDraw = this.draw.bind(this);
         this.draw = () => {            if (!this.ctx || !this.canvas) return;
-            
-            // Create trailing effect (reduced for better visibility)
-            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
+              // Create trailing effect (minimal fade for maximum visibility)
+            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
             
             // Get theme-aware colors
