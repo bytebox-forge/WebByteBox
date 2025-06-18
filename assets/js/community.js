@@ -3,6 +3,7 @@
 
 class CommunityIntegration {    constructor() {
         this.apiBase = 'https://api.github.com';
+        this.orgDiscussions = 'https://github.com/orgs/bytebox-forge/discussions';
         this.repo = 'bytebox-forge/WebByteBox';
         this.discussionsContainer = document.getElementById('recent-discussions');
         this.loadingContainer = document.querySelector('.loading-discussions');
@@ -209,7 +210,7 @@ if (window.Terminal) {
     
     window.Terminal.prototype.processCommand = function(command, prompt) {        const communityCommands = {
             'community': 'Welcome to ByteBox Community! Visit /community.html for discussions',
-            'discussions': 'GitHub Discussions: https://github.com/bytebox-forge/WebByteBox/discussions',
+            'discussions': 'GitHub Discussions: https://github.com/orgs/bytebox-forge/discussions',
             'forum': 'Community forum available at ./community',
             'connect': 'Connecting to community network... Type "community" for more info',
             'social': 'Connect with the community:\n• GitHub Discussions\n• Terminal Chat\n• Project Showcase'

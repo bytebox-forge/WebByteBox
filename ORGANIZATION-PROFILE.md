@@ -57,10 +57,10 @@ This is my baby - a website that boots up like it's 1995 but with modern web tec
 
 I figured other people might have the same weird obsessions, so there's a place to chat:
 
-- **[💡 Random Ideas](https://github.com/bytebox-forge/WebByteBox/discussions/categories/ideas)** - For when inspiration strikes at 3 AM
-- **[❓ Help Desk](https://github.com/bytebox-forge/WebByteBox/discussions/categories/q-a)** - When things inevitably break
-- **[🚀 Show Off](https://github.com/bytebox-forge/WebByteBox/discussions/categories/show-and-tell)** - Your homelab is cooler than mine, prove it
-- **[💬 Just Talking](https://github.com/bytebox-forge/WebByteBox/discussions/categories/general)** - About whatever, really
+- **[💡 Random Ideas](https://github.com/orgs/bytebox-forge/discussions/categories/ideas)** - For when inspiration strikes at 3 AM
+- **[❓ Help Desk](https://github.com/orgs/bytebox-forge/discussions/categories/q-a)** - When things inevitably break
+- **[🚀 Show Off](https://github.com/orgs/bytebox-forge/discussions/categories/show-and-tell)** - Your homelab is cooler than mine, prove it
+- **[💬 Just Talking](https://github.com/orgs/bytebox-forge/discussions/categories/general)** - About whatever, really
 
 ### 🛠️ Want to contribute?
 
@@ -108,7 +108,7 @@ $ whoami
 ```
 
 - **Main hangout**: [The Terminal](https://bytebox-forge.github.io/WebByteBox/)
-- **Community space**: [GitHub Discussions](https://github.com/bytebox-forge/WebByteBox/discussions)
+- **Community space**: [GitHub Discussions](https://github.com/orgs/bytebox-forge/discussions)
 - **Code dumps**: Right here on GitHub
 - **Status**: Probably debugging something that worked yesterday
 
