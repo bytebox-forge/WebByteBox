@@ -359,3 +359,8 @@ function generateMatrixRain() {
 
 // Export for other scripts
 window.Terminal = Terminal;
+
+// Initialize terminal when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    new Terminal();
+});
