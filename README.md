@@ -271,14 +271,79 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🎯 Roadmap
 
+### Core Features
+
 - [ ] Dark/light theme toggle
 - [ ] Search functionality across all content
 - [ ] RSS feed for all collections
-- [ ] Command-line interface easter eggs
 - [ ] Progressive Web App features
 - [ ] Integration with telnet server
 - [ ] Matrix chat widget
 - [ ] Real-time server status dashboard
+
+### 🥚 Easter Eggs & Interactive Features
+
+#### Current Easter Eggs (Implemented)
+
+- [x] Konami Code (↑↑↓↓←→←→BA) - Color inversion + matrix rain
+- [x] Interactive Terminal Commands - Click cursors for mini-terminal
+- [x] Source Code Message - Base64 hidden message in contact.html
+- [x] Empty Container - Placeholder for future additions
+
+#### Keyboard-Based Easter Eggs
+
+- [ ] "HACK" Typing Sequence - Matrix cascade effect
+- [ ] Triple-Click Logo - ASCII art transformation + elite mode
+- [ ] 404 Page Pranks - Fake breach detection
+- [ ] Glitch Art Generator - Visual distortion effects (Shift+Ctrl+Alt)
+
+#### Time-Based Easter Eggs
+
+- [ ] Midnight Hacker Mode - Spooky terminal messages (12-1 AM)
+- [ ] Coffee Break Messages - Time-based coffee themes (9-10 AM, 3-4 PM)
+- [ ] Birthday Mode - Celebratory animations (configurable date)
+- [ ] Halloween Spooky Mode - Seasonal theming (October)
+
+#### Interactive Learning Experiences
+
+- [ ] Cybersecurity Quiz Terminal - Terminal-based security questions
+- [ ] Docker Tutorial Playground - Interactive Docker command simulator
+- [ ] Homelab Simulator - Text-based infrastructure management game
+- [ ] Log File Analyzer Game - Find bugs/issues in fake log files
+- [ ] Password Strength Tester - Terminal-based password analysis
+- [ ] Network Topology Visualizer - ASCII art network diagrams
+
+#### Creative Storytelling
+
+- [ ] Cyberpunk Choose-Your-Own-Adventure - Hacker infiltration story
+- [ ] AI Companion Chat Bot - Sarcastic terminal AI assistant
+- [ ] Digital Diary Entries - Fake "found" log files with humor
+- [ ] File System Explorer - Hidden fake files/logs (`find /secrets`)
+- [ ] Network Scanner Simulation - Fake nmap results
+- [ ] Social Engineering Test - Security warnings + educational tips
+
+#### Gamification Elements
+
+- [ ] Hacker Rank Progression System - Level up from Script Kiddie to Cyber Ninja
+- [ ] Achievement System - Explorer, Code Reader, Easter Egg Hunter badges
+- [ ] Daily Challenges - New terminal puzzle/riddle each day
+- [ ] Visitor Terminal Sessions - Anonymous command logging
+- [ ] Code Review Roulette - Find bugs in random code snippets
+
+#### Audio/Visual Enhancements
+
+- [ ] Retro Terminal Sounds - Authentic computer sounds (dial-up, beeps, typing)
+- [ ] ASCII Art Gallery - Cycling cyberpunk art (`gallery` command)
+- [ ] Live System Monitoring Dashboard - Real-time ASCII charts
+- [ ] Terminal Time Machine - Simulate different computing eras
+
+#### Advanced Interactive Features
+
+- [ ] Capture The Flag (CTF) Challenges - Security puzzles throughout site
+- [ ] Terminal Multiplayer Chat - Anonymous chat room via terminal
+- [ ] Collaborative Troubleshooting - Community problem-solving platform
+- [ ] Virtual Homelab Tour - Text-based "walking tour" of setup
+- [ ] Incident Response Simulation - Timed security breach scenarios
 
 ## 🐛 Known Issues
 
