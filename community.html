@@ -66,19 +66,19 @@ title: "Community Terminal"
                     <span class="prompt">mayor@bytebox:~/community$</span>
                     <span class="command">ls -la ./forums/</span>
                 </div>
-                
-                <div class="forum-listing">
+                  <div class="forum-listing">
                     <div class="forum-item">
                         <span class="permissions">drwxr-xr-x</span>
                         <span class="links">∞</span>
                         <span class="owner">community</span>
                         <span class="group">bytebox</span>
-                        <span class="size">live</span>
-                        <span class="date">24/7</span>
+                        <span class="size">setup</span>
+                        <span class="date">pending</span>
                         <a href="https://github.com/anykolaiszyn/WebByteBox/discussions" 
                            target="_blank" 
+                           rel="noopener noreferrer"
                            class="forum-link neon-green">
-                           discussions/ <span class="forum-desc">→ Main forum & knowledge base</span>
+                           discussions/ <span class="forum-desc">→ Main forum (Setup Required)</span>
                         </a>
                     </div>
                     
@@ -87,12 +87,13 @@ title: "Community Terminal"
                         <span class="links">∞</span>
                         <span class="owner">community</span>
                         <span class="group">bytebox</span>
-                        <span class="size">live</span>
-                        <span class="date">24/7</span>
-                        <a href="https://github.com/anykolaiszyn/WebByteBox/discussions/categories/q-a" 
+                        <span class="size">setup</span>
+                        <span class="date">pending</span>
+                        <a href="https://github.com/anykolaiszyn/WebByteBox/issues" 
                            target="_blank" 
+                           rel="noopener noreferrer"
                            class="forum-link amber">
-                           help-desk/ <span class="forum-desc">→ Get technical support</span>
+                           issues/ <span class="forum-desc">→ Bug reports & feature requests</span>
                         </a>
                     </div>
                     
@@ -103,32 +104,100 @@ title: "Community Terminal"
                         <span class="group">bytebox</span>
                         <span class="size">live</span>
                         <span class="date">24/7</span>
-                        <a href="https://github.com/anykolaiszyn/WebByteBox/discussions/categories/show-and-tell" 
+                        <a href="https://github.com/anykolaiszyn/WebByteBox" 
                            target="_blank" 
+                           rel="noopener noreferrer"
                            class="forum-link purple">
-                           showcase/ <span class="forum-desc">→ Show off your projects</span>
+                           repository/ <span class="forum-desc">→ Source code & collaboration</span>
                         </a>
                     </div>
                     
-                    <div class="forum-item">
-                        <span class="permissions">drwxr-xr-x</span>
-                        <span class="links">∞</span>
-                        <span class="owner">community</span>
+                    <div class="forum-item setup-notice">
+                        <span class="permissions">-rw-r--r--</span>
+                        <span class="links">1</span>
+                        <span class="owner">admin</span>
                         <span class="group">bytebox</span>
-                        <span class="size">live</span>
-                        <span class="date">24/7</span>
-                        <a href="https://github.com/anykolaiszyn/WebByteBox/discussions/categories/general" 
-                           target="_blank" 
-                           class="forum-link neon-green">
-                           general/ <span class="forum-desc">→ Everything else</span>
-                        </a>
+                        <span class="size">info</span>
+                        <span class="date">now</span>
+                        <span class="forum-link amber">
+                           README.txt <span class="forum-desc">→ Setup instructions below</span>
+                        </span>
+                    </div>
+                </div>
+            </div>            <!-- Community Guidelines -->
+            <div class="community-rules">
+                <div class="rules-prompt">
+                    <span class="prompt">mayor@bytebox:~/community$</span>
+                    <span class="command">cat setup_instructions.txt</span>
+                </div>
+                
+                <div class="setup-instructions">
+                    <h3 class="setup-title neon-green">// GitHub Discussions Setup Required //</h3>
+                    <div class="setup-content">
+                        <p class="setup-intro amber">🚧 Community platform is ready, but needs activation!</p>
+                        
+                        <div class="setup-steps">
+                            <div class="setup-step">
+                                <span class="step-number neon-green">[1]</span>
+                                <div class="step-content">
+                                    <span class="step-title">Enable GitHub Discussions</span>
+                                    <div class="step-details">
+                                        <p>Go to: <a href="https://github.com/anykolaiszyn/WebByteBox/settings" target="_blank" rel="noopener noreferrer" class="neon-green">Repository Settings</a></p>
+                                        <p>Scroll to <strong>"Features"</strong> section</p>
+                                        <p>Check the <strong>"Discussions"</strong> checkbox</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="setup-step">
+                                <span class="step-number purple">[2]</span>
+                                <div class="step-content">
+                                    <span class="step-title">Configure Categories</span>
+                                    <div class="step-details">
+                                        <p>GitHub will auto-create default categories:</p>
+                                        <ul>
+                                            <li><strong>General</strong> - Open-ended discussions</li>
+                                            <li><strong>Ideas</strong> - Feature requests & suggestions</li>
+                                            <li><strong>Q&A</strong> - Questions & technical support</li>
+                                            <li><strong>Show and Tell</strong> - Project showcases</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="setup-step">
+                                <span class="step-number amber">[3]</span>
+                                <div class="step-content">
+                                    <span class="step-title">Community Ready!</span>
+                                    <div class="step-details">
+                                        <p>Once enabled, this page will automatically link to:</p>
+                                        <ul>
+                                            <li>📚 Main discussions feed</li>
+                                            <li>❓ Q&A for technical help</li>
+                                            <li>🚀 Project showcase area</li>
+                                            <li>💡 Ideas & feature requests</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="setup-note">
+                            <p class="note-title purple">💡 Alternative Options:</p>
+                            <p>While setting up discussions, you can use:</p>
+                            <ul>
+                                <li><a href="https://github.com/anykolaiszyn/WebByteBox/issues" target="_blank" rel="noopener noreferrer" class="amber">GitHub Issues</a> for bug reports & feature requests</li>
+                                <li><a href="https://github.com/anykolaiszyn/WebByteBox" target="_blank" rel="noopener noreferrer" class="neon-green">Repository</a> for code collaboration</li>
+                                <li>Contact form for direct communication</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Community Guidelines -->
-            <div class="community-rules">
-                <div class="rules-prompt">
+            <!-- Original Community Guidelines -->
+            <div class="community-guidelines">
+                <div class="guidelines-prompt">
                     <span class="prompt">mayor@bytebox:~/community$</span>
                     <span class="command">cat community_guidelines.txt</span>
                 </div>
@@ -158,36 +227,41 @@ title: "Community Terminal"
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Quick Actions -->
+            </div>            <!-- Quick Actions -->
             <div class="quick-actions">
                 <div class="actions-prompt">
                     <span class="prompt">mayor@bytebox:~/community$</span>
-                    <span class="command">./quick_actions</span>
+                    <span class="command">./quick_actions --available</span>
                 </div>
                 
                 <div class="action-buttons">
-                    <a href="https://github.com/anykolaiszyn/WebByteBox/discussions/new?category=q-a" 
+                    <a href="https://github.com/anykolaiszyn/WebByteBox/issues/new" 
                        target="_blank" 
+                       rel="noopener noreferrer"
                        class="action-btn help-btn">
-                        <span class="btn-icon">❓</span>
-                        <span class="btn-text">Ask for Help</span>
+                        <span class="btn-icon">🐛</span>
+                        <span class="btn-text">Report Issue</span>
                     </a>
                     
-                    <a href="https://github.com/anykolaiszyn/WebByteBox/discussions/new?category=show-and-tell" 
+                    <a href="https://github.com/anykolaiszyn/WebByteBox" 
                        target="_blank" 
+                       rel="noopener noreferrer"
                        class="action-btn show-btn">
-                        <span class="btn-icon">🚀</span>
-                        <span class="btn-text">Share Project</span>
+                        <span class="btn-icon">⭐</span>
+                        <span class="btn-text">Star Project</span>
                     </a>
                     
-                    <a href="https://github.com/anykolaiszyn/WebByteBox/discussions/new?category=general" 
-                       target="_blank" 
+                    <a href="/WebByteBox/contact.html" 
                        class="action-btn chat-btn">
-                        <span class="btn-icon">💬</span>
-                        <span class="btn-text">Start Discussion</span>
+                        <span class="btn-icon">📧</span>
+                        <span class="btn-text">Contact Directly</span>
                     </a>
+                </div>
+                
+                <div class="actions-note">
+                    <p class="note-text amber">
+                        💡 Once GitHub Discussions is enabled, these will link to discussion categories
+                    </p>
                 </div>
             </div>
 

@@ -36,50 +36,84 @@ class CommunityIntegration {
             this.showOfflineMessage();
         }
     }
-    
-    showSampleDiscussions() {
+      showSampleDiscussions() {
         if (!this.discussionsContainer || !this.loadingContainer) return;
         
         // Hide loading indicator
         this.loadingContainer.style.display = 'none';
         
-        // Sample discussions to show the format
-        const sampleDiscussions = [
-            {
-                title: "Setting up Proxmox VE cluster - networking issues",
-                author: "lab_explorer",
-                category: "Q&A",
-                replies: 8,
-                url: `https://github.com/${this.repo}/discussions`,
-                created: "2 hours ago"
-            },
-            {
-                title: "My Docker Swarm homelab setup with monitoring stack",
-                author: "container_ninja",
-                category: "Show and Tell", 
-                replies: 12,
-                url: `https://github.com/${this.repo}/discussions`,
-                created: "6 hours ago"
-            },
-            {
-                title: "Best practices for home network segmentation?",
-                author: "security_first",
-                category: "General",
-                replies: 15,
-                url: `https://github.com/${this.repo}/discussions`,
-                created: "1 day ago"
-            },
-            {
-                title: "Ansible playbook for automated server setup",
-                author: "automation_wizard",
-                category: "Show and Tell",
-                replies: 6,
-                url: `https://github.com/${this.repo}/discussions`,
-                created: "2 days ago"
+        // Check if discussions are enabled by trying to access the API
+        this.checkDiscussionsStatus().then(enabled => {
+            if (enabled) {
+                // Sample discussions to show the format once enabled
+                const sampleDiscussions = [
+                    {
+                        title: "Setting up Proxmox VE cluster - networking issues",
+                        author: "lab_explorer",
+                        category: "Q&A",
+                        replies: 8,
+                        url: `https://github.com/${this.repo}/discussions`,
+                        created: "2 hours ago"
+                    },
+                    {
+                        title: "My Docker Swarm homelab setup with monitoring stack",
+                        author: "container_ninja",
+                        category: "Show and Tell", 
+                        replies: 12,
+                        url: `https://github.com/${this.repo}/discussions`,
+                        created: "6 hours ago"
+                    },
+                    {
+                        title: "Best practices for home network segmentation?",
+                        author: "security_first",
+                        category: "General",
+                        replies: 15,
+                        url: `https://github.com/${this.repo}/discussions`,
+                        created: "1 day ago"
+                    }
+                ];
+                
+                this.renderDiscussions(sampleDiscussions);
+            } else {
+                this.showSetupMessage();
             }
-        ];
+        });
+    }
+    
+    async checkDiscussionsStatus() {
+        try {
+            // Try to fetch discussions page to see if it exists
+            const response = await fetch(`https://github.com/${this.repo}/discussions`);
+            return response.status !== 404;
+        } catch (error) {
+            return false;
+        }
+    }
+    
+    showSetupMessage() {
+        if (!this.discussionsContainer) return;
         
-        this.renderDiscussions(sampleDiscussions);
+        const setupHtml = `
+            <div class="setup-message">
+                <div class="setup-prompt">
+                    <span class="prompt">mayor@bytebox:~/community$</span>
+                    <span class="command">./check_discussions_status</span>
+                </div>
+                <div class="setup-output">
+                    <p class="amber">⚠️ GitHub Discussions not yet enabled</p>
+                    <p>To activate the community platform:</p>
+                    <ol>
+                        <li>Go to <a href="https://github.com/${this.repo}/settings" target="_blank" rel="noopener noreferrer" class="neon-green">Repository Settings</a></li>
+                        <li>Scroll to "Features" section</li>
+                        <li>Enable "Discussions"</li>
+                        <li>Refresh this page</li>
+                    </ol>
+                    <p class="purple">Meanwhile, you can use <a href="https://github.com/${this.repo}/issues" target="_blank" rel="noopener noreferrer" class="amber">GitHub Issues</a> for bug reports and feature requests.</p>
+                </div>
+            </div>
+        `;
+        
+        this.discussionsContainer.innerHTML = setupHtml;
     }
     
     renderDiscussions(discussions) {
