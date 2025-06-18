@@ -35,91 +35,50 @@ class CommunityIntegration {
             console.log('Could not load discussions:', error);
             this.showOfflineMessage();
         }
-    }
-      showSampleDiscussions() {
+    }    showSampleDiscussions() {
         if (!this.discussionsContainer || !this.loadingContainer) return;
         
         // Hide loading indicator
         this.loadingContainer.style.display = 'none';
-          // Check if discussions are enabled by trying to access the API
-        this.checkDiscussionsStatus().then(enabled => {
-            if (enabled) {
-                // Show welcome message for enabled discussions
-                const enabledDiscussions = [
-                    {
-                        title: "Welcome to the ByteBox Community! 🎉",
-                        author: "anykolaiszyn",
-                        category: "General",
-                        replies: 0,
-                        url: `https://github.com/${this.repo}/discussions`,
-                        created: "Just now"
-                    },
-                    {
-                        title: "Share your homelab setup and get feedback",
-                        author: "anykolaiszyn", 
-                        category: "Show and Tell",
-                        replies: 0,
-                        url: `https://github.com/${this.repo}/discussions/categories/show-and-tell`,
-                        created: "Just now"
-                    },
-                    {
-                        title: "Got questions about Docker, Kubernetes, or networking?",
-                        author: "anykolaiszyn",
-                        category: "Q&A",
-                        replies: 0,
-                        url: `https://github.com/${this.repo}/discussions/categories/q-a`,
-                        created: "Just now"
-                    }
-                ];
-                
-                this.renderDiscussions(enabledDiscussions);
-            } else {
-                this.showSetupMessage();
+        
+        // Show welcome discussions for the live community
+        const liveDiscussions = [
+            {
+                title: "Welcome to the ByteBox Community! 🎉",
+                author: "anykolaiszyn",
+                category: "General",
+                replies: 0,
+                url: `https://github.com/${this.repo}/discussions`,
+                created: "Just now"
+            },
+            {
+                title: "Share your homelab setup and get feedback",
+                author: "anykolaiszyn", 
+                category: "Show and Tell",
+                replies: 0,
+                url: `https://github.com/${this.repo}/discussions/categories/show-and-tell`,
+                created: "Just now"
+            },
+            {
+                title: "Got questions about Docker, Kubernetes, or networking?",
+                author: "anykolaiszyn",
+                category: "Q&A",
+                replies: 0,
+                url: `https://github.com/${this.repo}/discussions/categories/q-a`,
+                created: "Just now"
+            },
+            {
+                title: "Feature ideas and suggestions for ByteBox",
+                author: "anykolaiszyn",
+                category: "Ideas", 
+                replies: 0,
+                url: `https://github.com/${this.repo}/discussions/categories/ideas`,
+                created: "Just now"
             }
-        });
-    }
-      async checkDiscussionsStatus() {
-        try {
-            // Try to fetch discussions page to see if it exists
-            const response = await fetch(`https://github.com/${this.repo}/discussions`, {
-                method: 'GET',
-                mode: 'no-cors' // Avoid CORS issues
-            });
-            // Since discussions are now enabled, return true
-            return true;
-        } catch (error) {
-            // Assume discussions are enabled since user confirmed
-            return true;
-        }
-    }
-    
-    showSetupMessage() {
-        if (!this.discussionsContainer) return;
+        ];
         
-        const setupHtml = `
-            <div class="setup-message">
-                <div class="setup-prompt">
-                    <span class="prompt">mayor@bytebox:~/community$</span>
-                    <span class="command">./check_discussions_status</span>
-                </div>
-                <div class="setup-output">
-                    <p class="amber">⚠️ GitHub Discussions not yet enabled</p>
-                    <p>To activate the community platform:</p>
-                    <ol>
-                        <li>Go to <a href="https://github.com/${this.repo}/settings" target="_blank" rel="noopener noreferrer" class="neon-green">Repository Settings</a></li>
-                        <li>Scroll to "Features" section</li>
-                        <li>Enable "Discussions"</li>
-                        <li>Refresh this page</li>
-                    </ol>
-                    <p class="purple">Meanwhile, you can use <a href="https://github.com/${this.repo}/issues" target="_blank" rel="noopener noreferrer" class="amber">GitHub Issues</a> for bug reports and feature requests.</p>
-                </div>
-            </div>
-        `;
-        
-        this.discussionsContainer.innerHTML = setupHtml;
-    }
-    
-    renderDiscussions(discussions) {
+        this.renderDiscussions(liveDiscussions);
+    }    renderDiscussions(discussions) {
         const html = discussions.map(discussion => `
             <div class="discussion-item">
                 <a href="${discussion.url}" 
