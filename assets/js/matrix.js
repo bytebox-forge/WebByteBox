@@ -21,34 +21,30 @@ class MatrixBackground {
         this.setupEventListeners();
         this.setupThemeListener();
     }
-    
-    setupThemeListener() {
+      setupThemeListener() {
         // Listen for theme changes
         window.addEventListener('themeChanged', (e) => {
+            console.log('Matrix received theme change:', e.detail.theme); // Debug log
             this.currentTheme = e.detail.theme;
+            // Force a visual refresh by briefly intensifying the effect
+            this.intensify(500);
         });
         
         // Get initial theme from document
         this.currentTheme = document.documentElement.getAttribute('data-theme') || 'classic-green';
+        console.log('Matrix initial theme:', this.currentTheme); // Debug log
     }
-    
-    getThemeColors() {
-        // Get CSS custom properties for current theme
-        const rootStyles = getComputedStyle(document.documentElement);
-        const primaryColor = rootStyles.getPropertyValue('--primary-color').trim();
-        const secondaryColor = rootStyles.getPropertyValue('--secondary-color').trim() || primaryColor;
-        const accentColor = rootStyles.getPropertyValue('--accent-color').trim() || primaryColor;
-        
-        // Fallback colors if CSS variables aren't available
-        const fallbackColors = {
+      getThemeColors() {
+        // Use direct theme-based colors for reliability
+        const themeColors = {
             'classic-green': ['#00ff41', '#00ff00', '#008000'],
             'cyber-blue': ['#00d4ff', '#0099cc', '#006699'],
             'hacker-red': ['#ff0040', '#ff3366', '#cc0033'],
             'retro-amber': ['#ffb000', '#ffaa00', '#cc8800'],
             'purple-haze': ['#aa00ff', '#8800cc', '#660099']
         };
-        
-        return fallbackColors[this.currentTheme] || [primaryColor, secondaryColor, accentColor].filter(Boolean);
+          console.log('Matrix theme:', this.currentTheme); // Debug log
+        return themeColors[this.currentTheme] || themeColors['classic-green'];
     }
     
     createCanvas() {
