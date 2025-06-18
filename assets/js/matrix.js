@@ -3,6 +3,7 @@
 
 class MatrixBackground {
     constructor() {
+        console.log('MatrixBackground constructor called'); // Debug
         this.canvas = null;
         this.ctx = null;
         this.characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
@@ -13,6 +14,7 @@ class MatrixBackground {
         this.currentTheme = 'classic-green';
         
         this.init();
+        console.log('MatrixBackground initialization complete'); // Debug
     }
       init() {
         this.createCanvas();
@@ -46,10 +48,14 @@ class MatrixBackground {
           console.log('Matrix theme:', this.currentTheme); // Debug log
         return themeColors[this.currentTheme] || themeColors['classic-green'];
     }
-    
-    createCanvas() {
+      createCanvas() {
+        console.log('Creating matrix canvas...'); // Debug
         const matrixBg = document.querySelector('.matrix-bg');
-        if (!matrixBg) return;
+        console.log('Matrix bg element found:', !!matrixBg); // Debug
+        if (!matrixBg) {
+            console.error('Matrix background element not found!');
+            return;
+        }
         
         this.canvas = document.createElement('canvas');        this.canvas.style.position = 'fixed';
         this.canvas.style.top = '0';
@@ -62,6 +68,7 @@ class MatrixBackground {
         
         this.ctx = this.canvas.getContext('2d');
         matrixBg.appendChild(this.canvas);
+        console.log('Matrix canvas created and added to DOM'); // Debug
     }
     
     setupCanvas() {
@@ -328,10 +335,15 @@ class MatrixParticles {
 
 // Initialize matrix background
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing matrix...'); // Debug
+    console.log('Window width:', window.innerWidth); // Debug
+    
     // Use canvas-based matrix for better performance
     if (window.innerWidth > 768) {
+        console.log('Creating MatrixBackground for desktop'); // Debug
         window.matrixBackground = new MatrixBackground();
     } else {
+        console.log('Creating MatrixParticles for mobile'); // Debug
         // Use simpler particle effect on mobile
         window.matrixParticles = new MatrixParticles();
     }
