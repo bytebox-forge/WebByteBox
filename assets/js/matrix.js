@@ -10,15 +10,45 @@ class MatrixBackground {
         this.columns = 0;
         this.drops = [];
         this.animationId = null;
+        this.currentTheme = 'classic-green';
         
         this.init();
     }
-    
-    init() {
+      init() {
         this.createCanvas();
         this.setupCanvas();
         this.startAnimation();
         this.setupEventListeners();
+        this.setupThemeListener();
+    }
+    
+    setupThemeListener() {
+        // Listen for theme changes
+        window.addEventListener('themeChanged', (e) => {
+            this.currentTheme = e.detail.theme;
+        });
+        
+        // Get initial theme from document
+        this.currentTheme = document.documentElement.getAttribute('data-theme') || 'classic-green';
+    }
+    
+    getThemeColors() {
+        // Get CSS custom properties for current theme
+        const rootStyles = getComputedStyle(document.documentElement);
+        const primaryColor = rootStyles.getPropertyValue('--primary-color').trim();
+        const secondaryColor = rootStyles.getPropertyValue('--secondary-color').trim() || primaryColor;
+        const accentColor = rootStyles.getPropertyValue('--accent-color').trim() || primaryColor;
+        
+        // Fallback colors if CSS variables aren't available
+        const fallbackColors = {
+            'classic-green': ['#00ff41', '#00ff00', '#008000'],
+            'cyber-blue': ['#00d4ff', '#0099cc', '#006699'],
+            'hacker-red': ['#ff0040', '#ff3366', '#cc0033'],
+            'retro-amber': ['#ffb000', '#ffaa00', '#cc8800'],
+            'purple-haze': ['#aa00ff', '#8800cc', '#660099']
+        };
+        
+        return fallbackColors[this.currentTheme] || [primaryColor, secondaryColor, accentColor].filter(Boolean);
     }
     
     createCanvas() {
@@ -53,22 +83,27 @@ class MatrixBackground {
             this.drops[x] = Math.floor(Math.random() * this.canvas.height / this.fontSize);
         }
     }
-    
-    draw() {
+      draw() {
         if (!this.ctx || !this.canvas) return;
         
         // Create trailing effect
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
-        // Set text properties
-        this.ctx.fillStyle = '#00ff41';
+        // Get theme-aware colors
+        const colors = this.getThemeColors();
+        
+        // Set text properties with primary theme color
+        this.ctx.fillStyle = colors[0];
         this.ctx.font = `${this.fontSize}px monospace`;
         
         // Draw characters
         for (let i = 0; i < this.drops.length; i++) {
             // Random character from the set
             const char = this.characters.charAt(Math.floor(Math.random() * this.characters.length));
+            
+            // Use random color from theme palette
+            this.ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
             
             // Draw the character
             this.ctx.fillText(char, i * this.fontSize, this.drops[i] * this.fontSize);
@@ -154,13 +189,12 @@ class MatrixBackground {
             // Create trailing effect
             this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-            
-            // Draw characters with random colors
+              // Draw characters with random colors
             for (let i = 0; i < this.drops.length; i++) {
                 const char = this.characters.charAt(Math.floor(Math.random() * this.characters.length));
                 
-                // Random cyberpunk colors
-                const colors = ['#00ff41', '#ffb000', '#8a2be2', '#ff0040'];
+                // Use theme-aware colors instead of hardcoded ones
+                const colors = this.getThemeColors();
                 this.ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
                 this.ctx.font = `${this.fontSize}px monospace`;
                 

@@ -54,11 +54,15 @@ class PaletteSelector {
         
         // Update active button state
         this.updateActiveButton(theme);
-        
-        // Trigger custom event for other components that might need to know
+          // Trigger custom event for other components that might need to know
         window.dispatchEvent(new CustomEvent('themeChanged', { 
             detail: { theme } 
         }));
+        
+        // Trigger matrix background refresh if it exists
+        if (window.matrixBackground && typeof window.matrixBackground.intensify === 'function') {
+            window.matrixBackground.intensify(1000);
+        }
     }
 
     updateActiveButton(theme) {
