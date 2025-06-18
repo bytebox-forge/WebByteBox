@@ -1,10 +1,9 @@
 // GitHub Discussions Integration for ByteBox Community
 // Fetches recent discussions and displays them in terminal style
 
-class CommunityIntegration {
-    constructor() {
+class CommunityIntegration {    constructor() {
         this.apiBase = 'https://api.github.com';
-        this.repo = 'anykolaiszyn/WebByteBox';
+        this.repo = 'bytebox-forge/WebByteBox';
         this.discussionsContainer = document.getElementById('recent-discussions');
         this.loadingContainer = document.querySelector('.loading-discussions');
         
@@ -208,10 +207,9 @@ document.addEventListener('DOMContentLoaded', () => {
 if (window.Terminal) {
     const originalProcessCommand = window.Terminal.prototype.processCommand;
     
-    window.Terminal.prototype.processCommand = function(command, prompt) {
-        const communityCommands = {
+    window.Terminal.prototype.processCommand = function(command, prompt) {        const communityCommands = {
             'community': 'Welcome to ByteBox Community! Visit /community.html for discussions',
-            'discussions': 'GitHub Discussions: https://github.com/anykolaiszyn/WebByteBox/discussions',
+            'discussions': 'GitHub Discussions: https://github.com/bytebox-forge/WebByteBox/discussions',
             'forum': 'Community forum available at ./community',
             'connect': 'Connecting to community network... Type "community" for more info',
             'social': 'Connect with the community:\n• GitHub Discussions\n• Terminal Chat\n• Project Showcase'
