@@ -1193,3 +1193,404 @@
         transition: none;
     }
 }
+
+// Community Page Styles
+.community-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+.community-terminal {
+    margin-bottom: var(--spacing-xl);
+    
+    .terminal-content {
+        max-height: none;
+        overflow: visible;
+    }
+}
+
+.community-boot {
+    margin-bottom: var(--spacing-lg);
+    
+    .boot-line {
+        opacity: 0;
+        animation: fadeInUp 0.5s ease forwards;
+        
+        &:nth-child(1) { animation-delay: 0s; }
+        &:nth-child(2) { animation-delay: 0.5s; }
+        &:nth-child(3) { animation-delay: 1s; }
+        &:nth-child(4) { animation-delay: 1.5s; }
+    }
+}
+
+.community-welcome {
+    margin-bottom: var(--spacing-xl);
+    
+    .ascii-art {
+        font-size: 0.5rem;
+        line-height: 1;
+        color: var(--amber);
+        margin-bottom: var(--spacing-lg);
+        
+        @media (max-width: 768px) {
+            font-size: 0.3rem;
+        }
+    }
+}
+
+.community-intro {
+    .prompt-line {
+        margin-bottom: var(--spacing-md);
+        
+        .prompt {
+            color: var(--neon-green);
+        }
+        
+        .command {
+            color: var(--amber);
+        }
+    }
+    
+    .community-description {
+        padding-left: var(--spacing-md);
+        border-left: 2px solid var(--neon-green);
+        
+        p {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: var(--spacing-md) 0;
+            
+            li {
+                margin-bottom: var(--spacing-xs);
+                display: flex;
+                align-items: center;
+                
+                .bullet {
+                    margin-right: var(--spacing-sm);
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+.community-nav {
+    margin-bottom: var(--spacing-xl);
+    
+    .nav-prompt {
+        margin-bottom: var(--spacing-md);
+        
+        .prompt {
+            color: var(--neon-green);
+        }
+        
+        .command {
+            color: var(--amber);
+        }
+    }
+    
+    .forum-listing {
+        background: rgba(0, 0, 0, 0.3);
+        padding: var(--spacing-md);
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--terminal-border);
+        
+        .forum-item {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-xs) 0;
+            font-family: var(--font-mono);
+            font-size: var(--font-size-sm);
+            
+            &:hover {
+                background: rgba(0, 255, 65, 0.1);
+            }
+            
+            .permissions,
+            .links,
+            .owner,
+            .group,
+            .size,
+            .date {
+                color: var(--terminal-text);
+                margin-right: var(--spacing-sm);
+                min-width: 60px;
+            }
+            
+            .forum-link {
+                color: inherit;
+                text-decoration: none;
+                flex: 1;
+                transition: all 0.3s ease;
+                
+                &:hover {
+                    text-shadow: 0 0 5px currentColor;
+                }
+                
+                .forum-desc {
+                    color: var(--terminal-text);
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+}
+
+.community-rules {
+    margin-bottom: var(--spacing-xl);
+    
+    .rules-prompt {
+        margin-bottom: var(--spacing-md);
+        
+        .prompt {
+            color: var(--neon-green);
+        }
+        
+        .command {
+            color: var(--amber);
+        }
+    }
+    
+    .rules-content {
+        padding: var(--spacing-md);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--terminal-border);
+        
+        .rules-title {
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-lg);
+            text-align: center;
+        }
+        
+        .rules-list {
+            .rule-item {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: var(--spacing-sm);
+                
+                .rule-number {
+                    font-weight: bold;
+                    margin-right: var(--spacing-sm);
+                    min-width: 30px;
+                }
+                
+                .rule-text {
+                    flex: 1;
+                }
+            }
+        }
+    }
+}
+
+.quick-actions {
+    margin-bottom: var(--spacing-xl);
+    
+    .actions-prompt {
+        margin-bottom: var(--spacing-md);
+        
+        .prompt {
+            color: var(--neon-green);
+        }
+        
+        .command {
+            color: var(--amber);
+        }
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: var(--spacing-md);
+        flex-wrap: wrap;
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: transparent;
+            border: 2px solid var(--terminal-border);
+            border-radius: var(--radius-sm);
+            color: var(--terminal-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: var(--font-mono);
+            
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+            
+            .btn-icon {
+                margin-right: var(--spacing-sm);
+                font-size: 1.2em;
+            }
+            
+            &.help-btn {
+                border-color: var(--neon-green);
+                
+                &:hover {
+                    background: var(--neon-green);
+                    color: var(--bg-dark);
+                    box-shadow: 0 4px 8px var(--neon-green-glow);
+                }
+            }
+            
+            &.show-btn {
+                border-color: var(--purple);
+                
+                &:hover {
+                    background: var(--purple);
+                    color: var(--bg-dark);
+                    box-shadow: 0 4px 8px rgba(147, 51, 234, 0.3);
+                }
+            }
+            
+            &.chat-btn {
+                border-color: var(--amber);
+                
+                &:hover {
+                    background: var(--amber);
+                    color: var(--bg-dark);
+                    box-shadow: 0 4px 8px rgba(251, 191, 36, 0.3);
+                }
+            }
+        }
+    }
+}
+
+.connection-status {
+    .status-line {
+        margin-bottom: var(--spacing-sm);
+        
+        .prompt {
+            color: var(--neon-green);
+        }
+        
+        .command {
+            color: var(--amber);
+        }
+    }
+    
+    .status-output {
+        padding: var(--spacing-md);
+        background: rgba(0, 255, 65, 0.1);
+        border-radius: var(--radius-sm);
+        border-left: 4px solid var(--neon-green);
+        
+        .status-connected {
+            font-weight: bold;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .status-info {
+            opacity: 0.8;
+        }
+    }
+}
+
+.discussions-embed {
+    margin-top: var(--spacing-xl);
+    
+    .loading-discussions {
+        text-align: center;
+        padding: var(--spacing-xl);
+        
+        .loading-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--terminal-border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: var(--spacing-md);
+            
+            .loading-progress {
+                height: 100%;
+                background: var(--neon-green);
+                border-radius: 2px;
+                animation: loading-progress 2s ease-in-out infinite;
+            }
+        }
+    }
+    
+    #recent-discussions {
+        .discussion-item {
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--neon-green);
+            
+            .discussion-title {
+                color: var(--neon-green);
+                text-decoration: none;
+                font-weight: bold;
+                margin-bottom: var(--spacing-xs);
+                display: block;
+                
+                &:hover {
+                    text-shadow: 0 0 5px var(--neon-green);
+                }
+            }
+            
+            .discussion-meta {
+                font-size: var(--font-size-sm);
+                color: var(--terminal-text);
+                opacity: 0.7;
+                
+                .discussion-author {
+                    color: var(--amber);
+                }
+                
+                .discussion-category {
+                    color: var(--purple);
+                }
+            }
+        }
+    }
+}
+
+@keyframes loading-progress {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0%); }
+    100% { transform: translateX(100%); }
+}
+
+// Mobile responsiveness for community page
+@media (max-width: 768px) {
+    .community-container {
+        padding: var(--spacing-md);
+    }
+    
+    .forum-listing .forum-item {
+        flex-direction: column;
+        align-items: flex-start;
+        
+        .permissions,
+        .links,
+        .owner,
+        .group,
+        .size,
+        .date {
+            display: none;
+        }
+        
+        .forum-link {
+            width: 100%;
+            padding: var(--spacing-xs) 0;
+        }
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        
+        .action-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+}

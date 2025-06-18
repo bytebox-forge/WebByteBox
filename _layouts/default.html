@@ -42,14 +42,14 @@
                     <span class="terminal-button minimize"></span>
                     <span class="terminal-button maximize"></span>
                     <span class="terminal-title">{{ site.cyberpunk.terminal_prompt }} ./bytebox</span>
-                </div>
-                <nav class="terminal-nav">
+                </div>                <nav class="terminal-nav">
                     <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">~/home</a>
                     <a href="{{ '/about.html' | relative_url }}" class="nav-link {% if page.url == '/about.html' %}active{% endif %}">./whoami</a>
                     <a href="{{ '/lab-logs/' | relative_url }}" class="nav-link {% if page.url contains 'lab-logs' %}active{% endif %}">./lab-logs</a>
                     <a href="{{ '/modules/' | relative_url }}" class="nav-link {% if page.url contains 'modules' %}active{% endif %}">./modules</a>
                     <a href="{{ '/payloads/' | relative_url }}" class="nav-link {% if page.url contains 'payloads' %}active{% endif %}">./payloads</a>
                     <a href="{{ '/blackbox/' | relative_url }}" class="nav-link {% if page.url contains 'blackbox' %}active{% endif %}">./blackbox</a>
+                    <a href="{{ '/community.html' | relative_url }}" class="nav-link {% if page.url == '/community.html' %}active{% endif %}">./community</a>
                     <a href="{{ '/contact.html' | relative_url }}" class="nav-link {% if page.url == '/contact.html' %}active{% endif %}">./contact</a>
                 </nav>
             </div>
@@ -88,6 +88,7 @@
     <script src="{{ '/assets/js/terminal.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/glitch.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/matrix.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/community.js' | relative_url }}"></script>
     
     <!-- TODO: Add analytics if needed -->
 </body>

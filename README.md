@@ -345,6 +345,24 @@ This project is open source and available under the [MIT License](LICENSE).
 - [ ] Virtual Homelab Tour - Text-based "walking tour" of setup
 - [ ] Incident Response Simulation - Timed security breach scenarios
 
+#### Community & Forum Integration
+
+- [ ] **Terminal-Style Forum** - BBS-inspired discussion boards with ASCII art
+- [ ] **GitHub Discussions Integration** - Embed GitHub Discussions with terminal styling
+- [ ] **Discord Widget** - Live chat widget with cyberpunk theming
+- [ ] **Matrix/Element Integration** - Decentralized chat rooms for privacy-focused users
+- [ ] **Utterances Comments** - GitHub Issues-based commenting system
+- [ ] **Giscus Integration** - GitHub Discussions-powered comment system
+- [ ] **Custom Terminal Chat** - Real-time WebSocket chat with terminal interface
+- [ ] **Community Wiki** - Collaborative knowledge base with terminal navigation
+- [ ] **User Profiles** - Terminal-themed user pages with achievements/badges
+- [ ] **Reputation System** - Points for helpful posts, code contributions, Easter egg discoveries
+- [ ] **Moderation Tools** - Automated keyword filtering, report system, admin terminal
+- [ ] **Threading System** - Nested conversations with ASCII tree visualization
+- [ ] **Code Sharing Platform** - Paste.bin alternative with syntax highlighting
+- [ ] **Project Showcase** - Community gallery for homelab setups and projects
+- [ ] **Mentorship Program** - Pair beginners with experienced community members
+
 ## 🐛 Known Issues
 
 - CRT scanline effect may cause performance issues on older devices
