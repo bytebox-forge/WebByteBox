@@ -1,7 +1,7 @@
 # Byte Box - Cyberpunk Tech Blog Configuration
 title: "Byte Box"
 description: "A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem"
-url: "https://anykolaiszyn.github.io"
+url: "https://bytebox-forge.github.io"
 baseurl: "/WebByteBox"
 
 # Author info
