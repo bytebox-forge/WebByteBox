@@ -1,0 +1,172 @@
+---
+layout: default
+title: "Initializing ByteBox System..."
+---
+
+<!-- Terminal Boot Sequence (Original Aesthetic) -->
+<div class="terminal-boot" id="terminal-boot">
+    <div class="boot-sequence">
+        <div class="boot-line" data-delay="0">
+            <span class="timestamp">[0.000000]</span> Linux version 6.6.6-cyberpunk (mayor@bytebox) ##1 SMP PREEMPT
+        </div>
+        <div class="boot-line" data-delay="500">
+            <span class="timestamp">[0.142857]</span> Initializing neural pathways...
+        </div>
+        <div class="boot-line" data-delay="1000">
+            <span class="timestamp">[0.314159]</span> Loading personality matrix... <span class="status ok">OK</span>
+        </div>
+        <div class="boot-line" data-delay="1500">
+            <span class="timestamp">[0.420690]</span> Establishing secure connection to The Grid...
+        </div>
+        <div class="boot-line" data-delay="2000">
+            <span class="timestamp">[0.666666]</span> Calibrating reality distortion field... <span class="status ok">OK</span>
+        </div>
+        <div class="boot-line" data-delay="2500">
+            <span class="timestamp">[1.337000]</span> Loading homelab configurations...
+        </div>
+        <div class="boot-line" data-delay="3000">
+            <span class="timestamp">[2.048000]</span> Docker containers spinning up... <span class="status ok">OK</span>
+        </div>
+        <div class="boot-line" data-delay="3500">
+            <span class="timestamp">[3.141592]</span> System fully operational. Welcome, Mayor.
+        </div>
+        <div class="boot-line" data-delay="4000">
+            <span class="timestamp">[4.200000]</span> <span class="cursor-blink">█</span>
+        </div>
+    </div>
+</div>
+
+<!-- Main Terminal Interface (Enhanced for Mobile) -->
+<div class="terminal-welcome" id="terminal-welcome" style="display: none;">
+    <div class="terminal-window main-terminal">
+        <div class="terminal-title-bar">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+            <span class="terminal-title">mayor@bytebox:~$ cat ~/welcome.txt</span>
+        </div>
+        
+        <div class="terminal-content">
+            <!-- ASCII Art (Responsive) -->
+            <pre class="ascii-art" id="ascii-art">
+████████ ██     ██ ████████ ████████    ████████  ██████  ██   ██ 
+██    ██  ██   ██     ██    ██          ██    ██ ██    ██  ██ ██  
+████████   ██ ██      ██    ██████      ████████ ██    ██   ███   
+██    ██    ███       ██    ██          ██    ██ ██    ██  ██ ██  
+████████    ██        ██    ████████    ████████  ██████  ██   ██ 
+</pre>
+            
+            <!-- Welcome Message -->
+            <div class="welcome-message">
+                <p class="system-info">
+                    <span class="prompt">mayor@bytebox</span>:<span class="path">~</span>$ whoami<br>
+                    → Digital architect, homelab enthusiast, and coffee-powered problem solver<br>
+                    → Currently exploring: AI, containerization, and the spaces between bits<br><br>
+                </p>
+                
+                <p class="system-status">
+                    <span class="prompt">mayor@bytebox</span>:<span class="path">~</span>$ ls -la<br>
+                    <span class="dir">drwxr-xr-x</span> <span class="neon-green">lab-logs/</span> &nbsp;&nbsp;&nbsp;&nbsp; # Homelab experiments & tutorials<br>  
+                    <span class="dir">drwxr-xr-x</span> <span class="amber">modules/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Tools, scripts & automation<br>
+                    <span class="dir">drwxr-xr-x</span> <span class="purple">payloads/</span> &nbsp;&nbsp;&nbsp;&nbsp; # Security research & CTF writeups<br>
+                    <span class="dir">drwx------</span> <span class="red">blackbox/</span> &nbsp;&nbsp;&nbsp;&nbsp; # Experimental & classified projects<br><br>
+                </p>
+            </div>
+            
+            <!-- Quick Navigation (Mobile-Friendly) -->
+            <div class="nav-menu">
+                <p class="menu-header">
+                    <span class="prompt">mayor@bytebox</span>:<span class="path">~</span>$ ./navigate_to<br>
+                </p>
+                
+                <div class="nav-grid">
+                    <a href="/WebByteBox/lab-logs/" class="nav-item lab-logs">
+                        <span class="nav-icon">🔬</span>
+                        <span class="nav-label">lab-logs</span>
+                        <span class="nav-desc">Homelab & Docker tutorials</span>
+                        <span class="difficulty beginner">NEWBIE-FRIENDLY</span>
+                    </a>
+                    
+                    <a href="/WebByteBox/modules/" class="nav-item modules">
+                        <span class="nav-icon">⚙️</span>
+                        <span class="nav-label">modules</span>
+                        <span class="nav-desc">Useful scripts & tools</span>
+                        <span class="difficulty intermediate">PRACTICAL</span>
+                    </a>
+                    
+                    <a href="/WebByteBox/payloads/" class="nav-item payloads">
+                        <span class="nav-icon">🛡️</span>
+                        <span class="nav-label">payloads</span>
+                        <span class="nav-desc">Security & ethical hacking</span>
+                        <span class="difficulty advanced">ADVANCED</span>
+                    </a>
+                    
+                    <a href="/WebByteBox/blackbox/" class="nav-item blackbox">
+                        <span class="nav-icon">📦</span>
+                        <span class="nav-label">blackbox</span>
+                        <span class="nav-desc">Experimental research</span>
+                        <span class="difficulty classified">CLASSIFIED</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Recent Activity (Featured Content) -->
+            <div class="recent-activity">
+                <p class="activity-header">
+                    <span class="prompt">mayor@bytebox</span>:<span class="path">~</span>$ tail -3 ~/recent_activity.log<br>
+                </p>
+                
+                <div class="activity-list">
+                    {% for post in site.lab-logs limit:3 %}
+                    <div class="activity-item">
+                        <span class="activity-date">[{{ post.date | date: "%Y-%m-%d" }}]</span>
+                        <a href="{{ post.url | relative_url }}" class="activity-link">{{ post.title }}</a>
+                        <div class="activity-tags">
+                            {% for tag in post.tags limit:2 %}
+                            <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <p class="more-link">
+                    <span class="prompt">mayor@bytebox</span>:<span class="path">~</span>$ <a href="/WebByteBox/lab-logs/">cat lab-logs/*</a><br>
+                </p>
+            </div>
+            
+            <!-- Connection Info -->
+            <div class="connection-info">
+                <p>
+                    <span class="prompt">mayor@bytebox</span>:<span class="path">~</span>$ ./connect --help<br>
+                    Available channels:<br>
+                    &nbsp;&nbsp;<a href="/WebByteBox/about/">./about</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Learn more about the operator<br>
+                    &nbsp;&nbsp;<a href="/WebByteBox/contact/">./contact</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Secure communication channels<br>
+                    &nbsp;&nbsp;<a href="/WebByteBox/feed.xml">./subscribe</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # RSS feed for updates<br><br>
+                </p>
+                
+                <p class="system-ready">
+                    <span class="status ok">SYSTEM READY</span> - Type 'help' for available commands<br>
+                    <span class="cursor-blink">█</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hidden Interactive Terminal (Bottom Corner) -->
+<div class="mini-terminal" id="mini-terminal">
+    <div class="mini-header">
+        <span>mayor@bytebox:~$</span>
+        <button class="mini-toggle" id="mini-toggle">></button>
+    </div>
+    <div class="mini-body" id="mini-body" style="display: none;">
+        <div class="mini-input-line">
+            <span class="mini-prompt">$</span>
+            <input type="text" id="mini-input" placeholder="try: help, hack, matrix">
+        </div>
+        <div class="mini-output" id="mini-output">
+            <p>🚀 ByteBox Terminal v2.0 - Type 'help' for commands</p>
+        </div>
+    </div>
+</div>

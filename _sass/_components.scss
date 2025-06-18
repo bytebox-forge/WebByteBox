@@ -760,20 +760,19 @@
         max-width: 800px;
         width: 100%;
     }
-    
-    .boot-line {
+      .boot-line {
         margin-bottom: var(--spacing-sm);
         opacity: 0;
         transform: translateX(-20px);
-        animation: bootLineAppear 0.5s ease forwards;
+        color: var(--neon-green);
+        transition: all 0.5s ease;
         
         .timestamp {
             color: var(--terminal-text);
             opacity: 0.7;
             margin-right: var(--spacing-sm);
         }
-        
-        .status {
+          .status {
             margin-left: var(--spacing-md);
             font-weight: bold;
             
@@ -788,6 +787,7 @@
     }
 }
 
+// Boot line animation keyframe
 @keyframes bootLineAppear {
     to {
         opacity: 1;
