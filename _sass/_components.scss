@@ -1482,3 +1482,158 @@
         font-size: var(--font-size-md);
     }
 }
+
+// Color Palette Selector (integrated in terminal header)
+.palette-selector {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-left: auto;
+    
+    @media (max-width: 768px) {
+        display: none; // Hide on mobile to save space
+    }
+    
+    .palette-label {
+        font-family: var(--font-mono);
+        font-size: var(--font-size-small);        color: var(--terminal-text);
+        opacity: 0.8;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .palette-options {
+        display: flex;
+        gap: 3px;
+        align-items: center;
+    }
+    
+    .palette-option {
+        background: transparent;
+        border: 1px solid var(--terminal-border);
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        border-radius: 3px;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 0;
+        
+        &:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 8px var(--neon-green-glow);
+            transform: scale(1.1);
+        }
+        
+        &.active {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 6px var(--neon-green-glow);
+            
+            &::after {
+                content: '';
+                position: absolute;
+                top: -2px;
+                right: -2px;
+                width: 6px;
+                height: 6px;
+                background: var(--neon-green);
+                border-radius: 50%;
+                box-shadow: 0 0 4px var(--neon-green-glow);
+            }
+        }
+        
+        .palette-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: block;
+            pointer-events: none;
+        }
+    }
+    
+    // Glitch effect on hover
+    &.glitch-hover {
+        animation: paletteGlitch 0.3s ease-in-out;
+    }
+}
+
+@keyframes paletteGlitch {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-1px); }
+    40% { transform: translateX(1px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+}
+
+// Terminal title bar layout adjustment for palette selector
+.terminal-title-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    
+    .terminal-title {
+        flex: 1; // Allow title to take available space
+    }
+}
+
+// Legacy styles (kept for backwards compatibility)
+.palette-selector.fixed-position {
+    position: fixed;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    z-index: 1000;
+    background: var(--terminal-bg);
+    border: 1px solid var(--terminal-border);
+    border-radius: 4px;
+    padding: var(--spacing-sm);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    flex-direction: column;
+    
+    .palette-options {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+        min-width: 150px;
+        margin-top: var(--spacing-xs);
+    }
+    
+    .palette-option {
+        width: auto;
+        height: auto;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        
+        .palette-swatch {
+            width: 12px;
+            height: 12px;
+        }
+        
+        .palette-name {
+            margin-left: var(--spacing-xs);
+        }
+    }
+}
+
+// Palette Preview Colors
+.palette-option[data-theme="classic-green"] .palette-preview {
+    background: linear-gradient(45deg, #00ff41 0%, #ffb000 50%, #8a2be2 100%);
+}
+
+.palette-option[data-theme="cyber-blue"] .palette-preview {
+    background: linear-gradient(45deg, #00bfff 0%, #1e90ff 50%, #4169e1 100%);
+}
+
+.palette-option[data-theme="hacker-red"] .palette-preview {
+    background: linear-gradient(45deg, #ff0040 0%, #ff4500 50%, #dc143c 100%);
+}
+
+.palette-option[data-theme="retro-amber"] .palette-preview {
+    background: linear-gradient(45deg, #ffb000 0%, #ffd700 50%, #ff8c00 100%);
+}
+
+.palette-option[data-theme="purple-haze"] .palette-preview {
+    background: linear-gradient(45deg, #8a2be2 0%, #9370db 50%, #dda0dd 100%);
+}

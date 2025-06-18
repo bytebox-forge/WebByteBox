@@ -14,7 +14,7 @@
     --bg-dark: #0a0a0a;
     --bg-darker: #050505;
     
-    // Neon Colors
+    // Neon Colors (Default: Matrix Green)
     --neon-green: #00ff41;
     --neon-green-glow: #00ff4180;
     --amber: #ffb000;
@@ -47,6 +47,47 @@
     --scanline-opacity: 0.1;
     --glitch-intensity: 2px;
     --crt-curve: 0.02;
+}
+
+// Alternative Color Palettes
+:root[data-theme="classic-green"] {
+    --neon-green: #00ff41;    // Matrix green
+    --amber: #ffb000;         // Warning amber  
+    --purple: #8a2be2;        // Cyber purple
+    --red: #ff0040;           // Error red
+    --terminal-prompt: var(--neon-green);
+}
+
+:root[data-theme="cyber-blue"] {
+    --neon-green: #00bfff;    // Deep sky blue
+    --amber: #1e90ff;         // Dodger blue
+    --purple: #4169e1;        // Royal blue
+    --red: #0080ff;           // Blue variant
+    --terminal-prompt: var(--neon-green);
+}
+
+:root[data-theme="hacker-red"] {
+    --neon-green: #ff0040;    // Bright red
+    --amber: #ff4500;         // Orange red
+    --purple: #dc143c;        // Crimson
+    --red: #b22222;           // Fire brick
+    --terminal-prompt: var(--neon-green);
+}
+
+:root[data-theme="retro-amber"] {
+    --neon-green: #ffb000;    // Amber as primary
+    --amber: #ffd700;         // Gold
+    --purple: #ff8c00;        // Dark orange
+    --red: #ff6347;           // Tomato
+    --terminal-prompt: var(--neon-green);
+}
+
+:root[data-theme="purple-haze"] {
+    --neon-green: #8a2be2;    // Blue violet
+    --amber: #9370db;         // Medium purple
+    --purple: #dda0dd;        // Plum
+    --red: #ba55d3;           // Medium orchid
+    --terminal-prompt: var(--neon-green);
 }
 
 // Base Typography

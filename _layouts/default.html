@@ -36,13 +36,34 @@
     <!-- Terminal-style Header -->
     <header class="terminal-header">
         <div class="container">
-            <div class="terminal-window">
-                <div class="terminal-title-bar">
+            <div class="terminal-window">                <div class="terminal-title-bar">
                     <span class="terminal-button close"></span>
                     <span class="terminal-button minimize"></span>
                     <span class="terminal-button maximize"></span>
                     <span class="terminal-title">{{ site.cyberpunk.terminal_prompt }} ./bytebox</span>
-                </div>                <nav class="terminal-nav">
+                    
+                    <!-- Palette Selector -->
+                    <div class="palette-selector">
+                        <span class="palette-label">THEME:</span>
+                        <div class="palette-options">
+                            <button class="palette-option active" data-theme="classic-green" title="Matrix Green">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00ff00, #008000);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="cyber-blue" title="Cyber Blue">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00d4ff, #0066cc);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="hacker-red" title="Hacker Red">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ff0040, #cc0033);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="retro-amber" title="Retro Amber">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ffaa00, #cc8800);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="purple-haze" title="Purple Haze">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #aa00ff, #6600cc);"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div><nav class="terminal-nav">
                     <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">~/home</a>
                     <a href="{{ '/about.html' | relative_url }}" class="nav-link {% if page.url == '/about.html' %}active{% endif %}">./whoami</a>
                     <a href="{{ '/lab-logs/' | relative_url }}" class="nav-link {% if page.url contains 'lab-logs' %}active{% endif %}">./lab-logs</a>
@@ -89,6 +110,7 @@
     <script src="{{ '/assets/js/glitch.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/matrix.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/community.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/palette-selector.js' | relative_url }}"></script>
     
     <!-- TODO: Add analytics if needed -->
 </body>
