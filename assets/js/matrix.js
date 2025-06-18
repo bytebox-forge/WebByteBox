@@ -51,14 +51,13 @@ class MatrixBackground {
         const matrixBg = document.querySelector('.matrix-bg');
         if (!matrixBg) return;
         
-        this.canvas = document.createElement('canvas');
-        this.canvas.style.position = 'fixed';
+        this.canvas = document.createElement('canvas');        this.canvas.style.position = 'fixed';
         this.canvas.style.top = '0';
         this.canvas.style.left = '0';
         this.canvas.style.width = '100%';
         this.canvas.style.height = '100%';
         this.canvas.style.zIndex = '-1';
-        this.canvas.style.opacity = '0.05';
+        this.canvas.style.opacity = '0.15';  // Increased from 0.05 to make it visible
         this.canvas.style.pointerEvents = 'none';
         
         this.ctx = this.canvas.getContext('2d');
@@ -79,11 +78,10 @@ class MatrixBackground {
             this.drops[x] = Math.floor(Math.random() * this.canvas.height / this.fontSize);
         }
     }
-      draw() {
-        if (!this.ctx || !this.canvas) return;
+      draw() {        if (!this.ctx || !this.canvas) return;
         
-        // Create trailing effect
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        // Create trailing effect (reduced for better visibility)
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
         // Get theme-aware colors
@@ -173,19 +171,21 @@ class MatrixBackground {
     // Method to temporarily intensify the effect
     intensify(duration = 5000) {
         if (!this.canvas) return;
-        
-        const originalOpacity = this.canvas.style.opacity;
-        this.canvas.style.opacity = '0.3';
+          const originalOpacity = this.canvas.style.opacity;
+        this.canvas.style.opacity = '0.4';  // Increased for better visibility during theme switch
         
         // Add color variation
         const originalDraw = this.draw.bind(this);
-        this.draw = () => {
-            if (!this.ctx || !this.canvas) return;
+        this.draw = () => {            if (!this.ctx || !this.canvas) return;
             
-            // Create trailing effect
-            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            // Create trailing effect (reduced for better visibility)
+            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-              // Draw characters with random colors
+            
+            // Get theme-aware colors
+            const colors = this.getThemeColors();
+            
+            // Draw characters with theme colors
             for (let i = 0; i < this.drops.length; i++) {
                 const char = this.characters.charAt(Math.floor(Math.random() * this.characters.length));
                 
