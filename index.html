@@ -1,188 +1,206 @@
 ---
 layout: default
-title: "Initializing Byte Box System..."
+title: "ByteBox - Digital Playground"
 ---
 
-<div class="terminal-boot" id="terminal-boot">
-    <div class="boot-sequence">
-        <div class="boot-line" data-delay="0">
-            <span class="timestamp">[0.000000]</span> Linux version 6.6.6-cyberpunk (bytebox@matrix) #1 SMP PREEMPT
+<!-- Hero Section with Matrix Background -->
+<div class="hero-section">
+    <div class="matrix-bg" id="matrix-canvas"></div>
+    <div class="hero-content">
+        <div class="logo-container">
+            <h1 class="site-logo glitch-text" data-text="BYTE BOX">BYTE BOX</h1>
+            <p class="tagline">Where Silicon Meets Rebellion</p>
         </div>
-        <div class="boot-line" data-delay="500">
-            <span class="timestamp">[0.142857]</span> Initializing neural pathways...
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number" data-target="1337">0</span>
+                <span class="stat-label">Projects Hacked</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="42">0</span>
+                <span class="stat-label">Coffee-Fueled All-Nighters</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="99">0</span>
+                <span class="stat-label">Problems Solved</span>
+            </div>
         </div>
-        <div class="boot-line" data-delay="1000">
-            <span class="timestamp">[0.314159]</span> Loading personality matrix... <span class="status ok">OK</span>
-        </div>
-        <div class="boot-line" data-delay="1500">
-            <span class="timestamp">[0.420690]</span> Establishing secure connection to The Grid...
-        </div>
-        <div class="boot-line" data-delay="2000">
-            <span class="timestamp">[0.666666]</span> Calibrating reality distortion field... <span class="status ok">OK</span>
-        </div>
-        <div class="boot-line" data-delay="2500">
-            <span class="timestamp">[1.337000]</span> Loading homelab configurations...
-        </div>
-        <div class="boot-line" data-delay="3000">
-            <span class="timestamp">[2.048000]</span> Docker containers spinning up... <span class="status ok">OK</span>
-        </div>
-        <div class="boot-line" data-delay="3500">
-            <span class="timestamp">[3.141592]</span> System fully operational.
+        
+        <div class="cta-buttons">
+            <a href="/WebByteBox/lab-logs/" class="btn btn-primary">
+                <span class="btn-icon">🚀</span>
+                Explore Projects
+            </a>
+            <a href="/WebByteBox/about/" class="btn btn-secondary">
+                <span class="btn-icon">🤖</span>
+                Meet the Hacker
+            </a>
         </div>
     </div>
 </div>
 
-<div class="terminal-welcome" id="terminal-welcome" style="display: none;">
-    <div class="terminal-window main-terminal">
-        <div class="terminal-title-bar">
-            <span class="terminal-button close"></span>
-            <span class="terminal-button minimize"></span>
-            <span class="terminal-button maximize"></span>
-            <span class="terminal-title">{{ site.cyberpunk.terminal_prompt }} cat ~/bytebox/welcome.txt</span>
-        </div>
-        
-        <div class="terminal-content">
-            <pre class="ascii-art" id="ascii-art">
-██████╗ ██╗   ██╗████████╗███████╗    ██████╗  ██████╗ ██╗  ██╗
-██╔══██╗╚██╗ ██╔╝╚══██╔══╝██╔════╝    ██╔══██╗██╔═══██╗╚██╗██╔╝
-██████╔╝ ╚████╔╝    ██║   █████╗      ██████╔╝██║   ██║ ╚███╔╝ 
-██╔══██╗  ╚██╔╝     ██║   ██╔══╝      ██╔══██╗██║   ██║ ██╔██╗ 
-██████╔╝   ██║      ██║   ███████╗    ██████╔╝╚██████╔╝██╔╝ ██╗
-╚═════╝    ╚═╝      ╚═╝   ╚══════╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
-            </pre>
+<!-- Quick Access Menu -->
+<div class="quick-access">
+    <div class="container">
+        <div class="access-grid">
+            <a href="/WebByteBox/lab-logs/" class="access-card lab-logs">
+                <div class="card-icon">🔬</div>
+                <h3>Lab Logs</h3>
+                <p>Homelab experiments, Docker setups, and infrastructure deep-dives</p>
+                <span class="card-tag">BEGINNER FRIENDLY</span>
+            </a>
             
-            <div class="welcome-text">
-                <div class="typing-line">
-                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
-                    <span class="command typing-text" data-text="echo 'Welcome to the digital underground...'"></span>
+            <a href="/WebByteBox/modules/" class="access-card modules">
+                <div class="card-icon">⚙️</div>
+                <h3>Modules</h3>
+                <p>Scripts, tools, and automation that make life easier</p>
+                <span class="card-tag">PRACTICAL TOOLS</span>
+            </a>
+            
+            <a href="/WebByteBox/payloads/" class="access-card payloads">
+                <div class="card-icon">🛡️</div>
+                <h3>Payloads</h3>
+                <p>Security research, ethical hacking, and penetration testing</p>
+                <span class="card-tag">ADVANCED</span>
+            </a>
+            
+            <a href="/WebByteBox/blackbox/" class="access-card blackbox">
+                <div class="card-icon">📦</div>
+                <h3>BlackBox</h3>
+                <p>Experimental projects and cutting-edge research</p>
+                <span class="card-tag classified">CLASSIFIED</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Content -->
+<div class="featured-section">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="title-bracket">[</span>
+            Latest Transmissions
+            <span class="title-bracket">]</span>
+        </h2>
+        
+        <div class="featured-grid">
+            {% for post in site.lab-logs limit:3 %}
+            <article class="featured-card">
+                <div class="card-header">
+                    <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+                    <span class="post-category">{{ post.category | default: "LAB" }}</span>
                 </div>
                 
-                <div class="output-section" id="welcome-output" style="display: none;">
-                    <p class="neon-green">Welcome to the digital underground...</p>
-                    <p>This is <strong>Byte Box</strong> - a cyberpunk playground where I document my journey through:</p>
-                    <ul class="feature-list">
-                        <li><span class="bullet neon-green">▶</span> Homelab experiments and infrastructure hacks</li>
-                        <li><span class="bullet amber">▶</span> Docker containerization and microservice architectures</li>
-                        <li><span class="bullet purple">▶</span> Network security tools and penetration testing</li>
-                        <li><span class="bullet neon-green">▶</span> Custom scripts and automation payloads</li>
-                        <li><span class="bullet amber">▶</span> Stream-of-consciousness digital rants</li>
-                    </ul>
-                    
-                    <div class="system-stats">
-                        <div class="stat-line">
-                            <span class="stat-label">System Status:</span>
-                            <span class="stat-value neon-green blink">ONLINE</span>
-                        </div>
-                        <div class="stat-line">
-                            <span class="stat-label">Security Level:</span>
-                            <span class="stat-value amber">PARANOID</span>
-                        </div>
-                        <div class="stat-line">
-                            <span class="stat-label">Coffee Levels:</span>
-                            <span class="stat-value purple">CRITICAL</span>
-                        </div>
+                <h3 class="card-title">
+                    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                </h3>
+                
+                <p class="card-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+                
+                <div class="card-footer">
+                    <div class="post-tags">
+                        {% for tag in post.tags limit:3 %}
+                        <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    <a href="{{ post.url | relative_url }}" class="read-more">
+                        Read More <span class="arrow">→</span>
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        
+        <div class="section-footer">
+            <a href="/WebByteBox/lab-logs/" class="btn btn-outline">
+                View All Projects <span class="arrow">→</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Skills Matrix -->
+<div class="skills-section">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="title-bracket">[</span>
+            Current Skillset
+            <span class="title-bracket">]</span>
+        </h2>
+        
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Infrastructure</h3>
+                <div class="skill-bars">
+                    <div class="skill-bar">
+                        <span class="skill-name">Docker & Kubernetes</span>
+                        <div class="skill-level" data-level="90"></div>
+                    </div>
+                    <div class="skill-bar">
+                        <span class="skill-name">Linux Administration</span>
+                        <div class="skill-level" data-level="85"></div>
+                    </div>
+                    <div class="skill-bar">
+                        <span class="skill-name">Cloud Platforms</span>
+                        <div class="skill-level" data-level="75"></div>
                     </div>
                 </div>
             </div>
             
-            <div class="navigation-menu" id="nav-menu" style="display: none;">
-                <div class="menu-prompt">
-                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
-                    <span class="command">ls -la ~/bytebox/</span>
-                </div>
-                <div class="directory-listing">
-                    <div class="dir-item">
-                        <span class="permissions">drwxr-xr-x</span>
-                        <span class="links">3</span>
-                        <span class="owner">root</span>
-                        <span class="group">bytebox</span>
-                        <span class="size">4096</span>
-                        <span class="date">{{ site.time | date: "%b %d %H:%M" }}</span>
-                        <a href="{{ '/about.html' | relative_url }}" class="dirname neon-green">whoami/</a>
+            <div class="skill-category">
+                <h3>Development</h3>
+                <div class="skill-bars">
+                    <div class="skill-bar">
+                        <span class="skill-name">Python & Automation</span>
+                        <div class="skill-level" data-level="95"></div>
                     </div>
-                    <div class="dir-item">
-                        <span class="permissions">drwxr-xr-x</span>
-                        <span class="links">5</span>
-                        <span class="owner">root</span>
-                        <span class="group">bytebox</span>
-                        <span class="size">4096</span>
-                        <span class="date">{{ site.time | date: "%b %d %H:%M" }}</span>
-                        <a href="{{ '/lab-logs/' | relative_url }}" class="dirname amber">lab-logs/</a>
+                    <div class="skill-bar">
+                        <span class="skill-name">Web Technologies</span>
+                        <div class="skill-level" data-level="80"></div>
                     </div>
-                    <div class="dir-item">
-                        <span class="permissions">drwxr-xr-x</span>
-                        <span class="links">2</span>
-                        <span class="owner">root</span>
-                        <span class="group">bytebox</span>
-                        <span class="size">2048</span>
-                        <span class="date">{{ site.time | date: "%b %d %H:%M" }}</span>
-                        <a href="{{ '/modules/' | relative_url }}" class="dirname purple">modules/</a>
-                    </div>
-                    <div class="dir-item">
-                        <span class="permissions">drwxr-xr-x</span>
-                        <span class="links">4</span>
-                        <span class="owner">root</span>
-                        <span class="group">bytebox</span>
-                        <span class="size">8192</span>
-                        <span class="date">{{ site.time | date: "%b %d %H:%M" }}</span>
-                        <a href="{{ '/payloads/' | relative_url }}" class="dirname neon-green">payloads/</a>
-                    </div>
-                    <div class="dir-item">
-                        <span class="permissions">drwx------</span>
-                        <span class="links">1</span>
-                        <span class="owner">root</span>
-                        <span class="group">bytebox</span>
-                        <span class="size">???</span>
-                        <span class="date">??? ?? ??:??</span>
-                        <a href="{{ '/blackbox/' | relative_url }}" class="dirname amber glitch-text" data-text="blackbox/">blackbox/</a>
+                    <div class="skill-bar">
+                        <span class="skill-name">Database Design</span>
+                        <div class="skill-level" data-level="70"></div>
                     </div>
                 </div>
-                
-                <div class="command-prompt">
-                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
-                    <span class="cursor blink">_</span>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Security</h3>
+                <div class="skill-bars">
+                    <div class="skill-bar">
+                        <span class="skill-name">Penetration Testing</span>
+                        <div class="skill-level" data-level="85"></div>
+                    </div>
+                    <div class="skill-bar">
+                        <span class="skill-name">Network Security</span>
+                        <div class="skill-level" data-level="80"></div>
+                    </div>
+                    <div class="skill-bar">
+                        <span class="skill-name">Reverse Engineering</span>
+                        <div class="skill-level" data-level="65"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Quick Access Panel -->
-<div class="quick-access" id="quick-access" style="display: none;">
-    <h2 class="section-title glitch-text" data-text="// Quick Access //">// Quick Access //</h2>
-    
-    <div class="access-grid">
-        <a href="{{ '/lab-logs/' | relative_url }}" class="access-card lab-logs">
-            <div class="card-icon">🧪</div>
-            <div class="card-title">Lab Logs</div>
-            <div class="card-desc">Homelab experiments & infrastructure</div>
-            <div class="card-status">{{ site.lab-logs | size }} entries</div>
-        </a>
-        
-        <a href="{{ '/modules/' | relative_url }}" class="access-card modules">
-            <div class="card-icon">⚙️</div>
-            <div class="card-title">Modules</div>
-            <div class="card-desc">Projects & microservices</div>
-            <div class="card-status">{{ site.modules | size }} active</div>
-        </a>
-        
-        <a href="{{ '/payloads/' | relative_url }}" class="access-card payloads">
-            <div class="card-icon">💣</div>
-            <div class="card-title">Payloads</div>
-            <div class="card-desc">Tools, scripts & downloads</div>
-            <div class="card-status">{{ site.payloads | size }} available</div>
-        </a>
-        
-        <a href="{{ '/blackbox/' | relative_url }}" class="access-card blackbox">
-            <div class="card-icon">🔮</div>
-            <div class="card-title">Black Box</div>
-            <div class="card-desc">Unfiltered thoughts & rants</div>
-            <div class="card-status">{{ site.blackbox | size }} fragments</div>
-        </a>
+<!-- Terminal Easter Egg -->
+<div class="terminal-widget" id="terminal-widget">
+    <div class="terminal-header">
+        <span class="terminal-title">guest@bytebox:~$</span>
+        <button class="terminal-toggle" id="terminal-toggle">_</button>
     </div>
-</div>
-
-<!-- TODO: Add hidden easter eggs and interactive elements -->
-<div class="easter-eggs" style="display: none;">
-    <!-- Konami code, click patterns, etc. -->
+    <div class="terminal-body" id="terminal-body">
+        <div class="terminal-line">
+            <span class="prompt">guest@bytebox:~$</span>
+            <span id="terminal-input" contenteditable="true">help</span>
+        </div>
+        <div class="terminal-output" id="terminal-output">
+            <p>Available commands: help, whoami, ls, hack, matrix, clear</p>
+            <p>Type 'hack' for a surprise... 😈</p>
+        </div>
+    </div>
 </div>
