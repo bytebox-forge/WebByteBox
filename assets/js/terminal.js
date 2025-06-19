@@ -322,23 +322,22 @@ document.addEventListener('keydown', (e) => {
     if (konamiCode.join('') === konami.join('')) {
         // Activate easter egg
         document.body.style.filter = 'hue-rotate(180deg)';
-        
-        // Add matrix rain effect
-        const matrix = document.querySelector('.matrix-bg');
-        if (matrix) {
-            matrix.style.opacity = '0.3';
-            matrix.innerHTML = generateMatrixRain();
-        }
+          // Add matrix rain effect - DISABLED (using matrix-clean.js instead)
+        // const matrix = document.querySelector('.matrix-bg');
+        // if (matrix) {
+        //     matrix.style.opacity = '0.3';
+        //     matrix.innerHTML = generateMatrixRain();
+        // }
         
         // Show secret message
         console.log('🎉 Konami Code activated! Welcome, fellow hacker.');
-        
-        // Reset after 10 seconds
+          // Reset after 10 seconds
         setTimeout(() => {
             document.body.style.filter = '';
-            if (matrix) {
-                matrix.style.opacity = '0.05';
-            }
+            // Matrix reset disabled - using matrix-clean.js instead
+            // if (matrix) {
+            //     matrix.style.opacity = '0.05';
+            // }
         }, 10000);
         
         konamiCode = [];

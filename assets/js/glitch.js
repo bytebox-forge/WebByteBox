@@ -230,9 +230,13 @@ class GlitchEffects {
         
         return originalText; // Return for restoration
     }
-    
-    // Matrix-style character rain effect
+      // Matrix-style character rain effect - DISABLED (using matrix-clean.js instead)
     startMatrixRain() {
+        // Disabled to prevent conflicts with matrix-clean.js
+        console.log('Matrix rain disabled - using matrix-clean.js instead');
+        return;
+        
+        /* DISABLED CODE:
         const matrix = document.querySelector('.matrix-bg');
         if (!matrix) return;
         
@@ -276,6 +280,7 @@ class GlitchEffects {
             clearInterval(rain);
             matrix.innerHTML = '';
         }, 10000);
+        */
     }
     
     // CRT monitor effect
