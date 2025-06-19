@@ -1,10 +1,11 @@
-// Ultra-minimal Matrix Effect - Enhanced version
+// Ultra-minimal Matrix Effect - Theme-aware version
 class SimpleMatrix {
     constructor() {
         this.canvas = null;
         this.ctx = null;
         this.drops = [];
         this.frameCount = 0;
+        this.currentColor = '#00ff41'; // Default fallback
         this.init();
     }
     
@@ -36,7 +37,41 @@ class SimpleMatrix {
             this.drops[i] = Math.random() * this.canvas.height;
         }
         
+        // Update color from CSS theme
+        this.updateColor();
+        
+        // Listen for theme changes
+        this.setupThemeListener();
+        
         this.animate();
+    }
+    
+    updateColor() {
+        // Get the current --neon-green color from CSS
+        const computedStyle = getComputedStyle(document.documentElement);
+        const neonGreen = computedStyle.getPropertyValue('--neon-green').trim();
+        
+        if (neonGreen) {
+            this.currentColor = neonGreen;
+            console.log('Matrix color updated to:', this.currentColor);
+        }
+    }
+    
+    setupThemeListener() {
+        // Listen for theme change events
+        window.addEventListener('themeChanged', () => {
+            this.updateColor();
+        });
+        
+        // Also listen for any CSS variable changes
+        const observer = new MutationObserver(() => {
+            this.updateColor();
+        });
+        
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
     }
     
     animate() {
@@ -48,8 +83,8 @@ class SimpleMatrix {
         if (this.frameCount % 8 === 0) {
             // Create strong trailing effect with very subtle fade
             this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Slower fade for longer trails
-            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);            // Matrix characters without any glow or shadow effects
-            this.ctx.fillStyle = '#00ff41';
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);            // Matrix characters with theme-aware color
+            this.ctx.fillStyle = this.currentColor;
             this.ctx.font = 'bold 20px monospace';
             // Ensure no shadow effects
             this.ctx.shadowColor = 'transparent';
@@ -69,9 +104,13 @@ class SimpleMatrix {
                     this.drops[i] = -Math.random() * 200; // Start higher for better distribution
                 }
             }
-        }
-        
+        }        
         requestAnimationFrame(() => this.animate());
+    }
+    
+    // Method to manually refresh color (useful for debugging)
+    refreshColor() {
+        this.updateColor();
     }
 }
 

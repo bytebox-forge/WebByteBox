@@ -57,11 +57,10 @@ class PaletteSelector {
           // Trigger custom event for other components that might need to know
         window.dispatchEvent(new CustomEvent('themeChanged', { 
             detail: { theme }        }));
-        
-        // Trigger matrix background refresh if it exists (updated for matrix-clean.js)
-        if (window.simpleMatrix && typeof window.simpleMatrix.animate === 'function') {
-            // Matrix-clean.js doesn't have intensify method, but it automatically responds to theme changes
-            console.log('Matrix-clean.js will automatically adapt to theme change');
+          // Trigger matrix background refresh if it exists (updated for matrix-clean.js)
+        if (window.simpleMatrix && typeof window.simpleMatrix.refreshColor === 'function') {
+            // Force manual refresh of matrix color
+            window.simpleMatrix.refreshColor();
         }
     }
 
