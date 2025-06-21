@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Box - Byte Box</title>
+    
+    <!-- Cyberpunk Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Custom Cyberpunk Styles -->
+    <link rel="stylesheet" href="/WebByteBox/assets/css/main.css">
+    
+    <!-- SEO and Meta -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Black Box | Byte Box</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Black Box" />
+<meta name="author" content="Mayor" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem" />
+<meta property="og:description" content="A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem" />
+<link rel="canonical" href="http://localhost:4000/WebByteBox/blackbox/" />
+<meta property="og:url" content="http://localhost:4000/WebByteBox/blackbox/" />
+<meta property="og:site_name" content="Byte Box" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Black Box" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Mayor"},"description":"A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem","headline":"Black Box","url":"http://localhost:4000/WebByteBox/blackbox/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/WebByteBox/feed.xml" title="Byte Box" />
+    
+    <!-- Favicon TODO: Add cyberpunk favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    
+    <!-- CRT Effect Toggle -->
+    <script>
+        // TODO: Add localStorage toggle for CRT effects
+        const crtEnabled = localStorage.getItem('crt-mode') !== 'false';
+    </script>
+</head>
+<body class="crt-mode">
+    <!-- Matrix-style background pattern -->
+    <div class="matrix-bg" id="matrix-bg"></div>
+    
+    <!-- CRT Scanlines Overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- Terminal-style Header -->
+    <header class="terminal-header">
+        <div class="container">
+            <div class="terminal-window">                <div class="terminal-title-bar">
+                    <span class="terminal-button close"></span>
+                    <span class="terminal-button minimize"></span>
+                    <span class="terminal-button maximize"></span>
+                    <span class="terminal-title">root@bytebox:~$ ./bytebox</span>
+                    
+                    <!-- Palette Selector -->
+                    <div class="palette-selector">
+                        <span class="palette-label">THEME:</span>
+                        <div class="palette-options">
+                            <button class="palette-option active" data-theme="classic-green" title="Matrix Green">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00ff00, #008000);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="cyber-blue" title="Cyber Blue">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00d4ff, #0066cc);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="hacker-red" title="Hacker Red">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ff0040, #cc0033);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="retro-amber" title="Retro Amber">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ffaa00, #cc8800);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="purple-haze" title="Purple Haze">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #aa00ff, #6600cc);"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div><nav class="terminal-nav">
+                    <a href="/WebByteBox/" class="nav-link ">~/home</a>
+                    <a href="/WebByteBox/about.html" class="nav-link ">./whoami</a>
+                    <a href="/WebByteBox/lab-logs/" class="nav-link ">./lab-logs</a>
+                    <a href="/WebByteBox/modules/" class="nav-link ">./modules</a>
+                    <a href="/WebByteBox/payloads/" class="nav-link ">./payloads</a>
+                    <a href="/WebByteBox/blackbox/" class="nav-link active">./blackbox</a>
+                    <a href="/WebByteBox/community.html" class="nav-link ">./community</a>
+                    <a href="/WebByteBox/contact.html" class="nav-link ">./contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="blackbox-terminal">
+    <div class="terminal-window error-window">
+        <div class="terminal-title-bar">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+            <span class="terminal-title error-title">root@bytebox:~$ tail -f /var/log/thoughts.log</span>
+        </div>
+        
+        <div class="blackbox-content">
+            <div class="access-warning">
+                <div class="cmd-line">
+                    <span class="prompt error-prompt">PSYCHE@blackbox:~$</span>
+                    <span class="command">cat /etc/mental/disclaimer.txt</span>
+                </div>
+                <div class="warning-text">
+                    <p class="red">⚠️ UNFILTERED CONSCIOUSNESS STREAM DETECTED</p>
+                    <p class="amber">Warning: Contains raw thoughts, rants, and digital detritus</p>
+                    <p class="purple">Coherence not guaranteed. Logic may be impaired by caffeine overdose.</p>
+                    <p class="neon-green">Proceed with caution. Contents may be harmful to corporate sensibilities.</p>
+                </div>
+            </div>
+
+            <div class="thought-stats">
+                <div class="cmd-line">
+                    <span class="prompt error-prompt">PSYCHE@blackbox:~$</span>
+                    <span class="command">wc -l /var/log/thoughts.log</span>
+                </div>
+                <div class="output">
+                    <p class="red">Recorded fragments: 0</p>
+                    <p class="amber">Caffeine level: CRITICAL</p>
+                    <p class="purple">Sanity check: FAILED</p>
+                    <p class="neon-green">Last backup: Never (too dangerous)</p>
+                </div>
+            </div>
+
+            <div class="thought-stream">
+                <div class="cmd-line">
+                    <span class="prompt error-prompt">PSYCHE@blackbox:~$</span>
+                    <span class="command">tail -f thoughts.log | grep -E "(ERROR|RANT|EPIPHANY|WTFMOMENT)"</span>
+                </div>
+                
+                
+                    <!-- Placeholder thoughts when none exist -->
+                    <div class="thought-entry placeholder">
+                        <div class="log-header">
+                            <span class="timestamp red">[2025-06-20 23:27:42]</span>
+                            <span class="log-level amber">RANT</span>
+                            <span class="process-id purple">[PID:2048]</span>
+                            <span class="thought-title neon-green">Why Does Docker Eat All My RAM?</span>
+                        </div>
+                        <div class="thought-preview">
+                            <span class="preview-label amber">preview:</span>
+                            <span class="preview-text">Seriously, I started ONE container and now my system is slower than a 90s dial-up connection...</span>
+                        </div>
+                        <div class="thought-tags">
+                            <span class="tags-label purple">mental_tags:</span>
+                            <span class="tag red">docker</span>
+                            <span class="tag amber">rage</span>
+                            <span class="tag purple">memory-leak</span>
+                        </div>
+                    </div>
+                    
+                    <div class="thought-entry placeholder">
+                        <div class="log-header">
+                            <span class="timestamp red">[2025-06-20 23:27:42]</span>
+                            <span class="log-level neon-green">EPIPHANY</span>
+                            <span class="process-id purple">[PID:3141]</span>
+                            <span class="thought-title neon-green">The Matrix Was Actually About System Administration</span>
+                        </div>
+                        <div class="thought-preview">
+                            <span class="preview-label amber">preview:</span>
+                            <span class="preview-text">Think about it: Neo is basically a sysadmin who discovers he's been living in a poorly managed virtualized environment...</span>
+                        </div>
+                        <div class="thought-tags">
+                            <span class="tags-label purple">mental_tags:</span>
+                            <span class="tag red">philosophy</span>
+                            <span class="tag amber">matrix</span>
+                            <span class="tag purple">shower-thoughts</span>
+                        </div>
+                    </div>
+                    
+                    <div class="thought-entry placeholder">
+                        <div class="log-header">
+                            <span class="timestamp red">[2025-06-20 23:27:42]</span>
+                            <span class="log-level red">ERROR</span>
+                            <span class="process-id purple">[PID:1337]</span>
+                            <span class="thought-title neon-green">Coffee Machine Down: Critical System Failure</span>
+                        </div>
+                        <div class="thought-preview">
+                            <span class="preview-label amber">preview:</span>
+                            <span class="preview-text">The office coffee machine has achieved sentience and decided to take a vacation. Productivity has dropped to zero...</span>
+                        </div>
+                        <div class="thought-tags">
+                            <span class="tags-label purple">mental_tags:</span>
+                            <span class="tag red">coffee</span>
+                            <span class="tag amber">crisis</span>
+                            <span class="tag purple">productivity</span>
+                        </div>
+                    </div>
+                    
+                    <div class="thought-entry placeholder">
+                        <div class="log-header">
+                            <span class="timestamp red">[2025-06-20 23:27:42]</span>
+                            <span class="log-level purple">WTFMOMENT</span>
+                            <span class="process-id purple">[PID:4096]</span>
+                            <span class="thought-title neon-green">JavaScript: The Good, The Bad, and The WTF</span>
+                        </div>
+                        <div class="thought-preview">
+                            <span class="preview-label amber">preview:</span>
+                            <span class="preview-text">Today I discovered that [] + [] equals an empty string in JavaScript. I need stronger coffee...</span>
+                        </div>
+                        <div class="thought-tags">
+                            <span class="tags-label purple">mental_tags:</span>
+                            <span class="tag red">javascript</span>
+                            <span class="tag amber">wtf</span>
+                            <span class="tag purple">type-coercion</span>
+                        </div>
+                    </div>
+                
+            </div>
+
+            <div class="mental-state">
+                <div class="cmd-line">
+                    <span class="prompt error-prompt">PSYCHE@blackbox:~$</span>
+                    <span class="command">cat /proc/mental/status</span>
+                </div>
+                <div class="mental-output">
+                    <div class="mental-metric">
+                        <span class="metric-label">Cognitive Load:</span>
+                        <span class="metric-value red">█████████░░ 90%</span>
+                    </div>
+                    <div class="mental-metric">
+                        <span class="metric-label">Caffeine Buffer:</span>
+                        <span class="metric-value amber">██░░░░░░░░░ 20%</span>
+                    </div>
+                    <div class="mental-metric">
+                        <span class="metric-label">Sleep Debt:</span>
+                        <span class="metric-value purple">███████████ ∞%</span>
+                    </div>
+                    <div class="mental-metric">
+                        <span class="metric-label">Sarcasm Level:</span>
+                        <span class="metric-value neon-green">███████████ MAX</span>
+                    </div>
+                    <div class="mental-metric">
+                        <span class="metric-label">Imposter Syndrome:</span>
+                        <span class="metric-value red blink">CRITICAL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="thought-categories">
+                <div class="cmd-line">
+                    <span class="prompt error-prompt">PSYCHE@blackbox:~$</span>
+                    <span class="command">grep -E "^#" thoughts.log | sort | uniq -c | sort -nr</span>
+                </div>
+                <div class="categories-output">
+                    <div class="category-count">
+                        <span class="count red">47</span>
+                        <span class="category">#existential-dread</span>
+                    </div>
+                    <div class="category-count">
+                        <span class="count amber">32</span>
+                        <span class="category">#coffee-dependency</span>
+                    </div>
+                    <div class="category-count">
+                        <span class="count purple">28</span>
+                        <span class="category">#technology-rants</span>
+                    </div>
+                    <div class="category-count">
+                        <span class="count neon-green">24</span>
+                        <span class="category">#imposter-syndrome</span>
+                    </div>
+                    <div class="category-count">
+                        <span class="count red">19</span>
+                        <span class="category">#debugging-hell</span>
+                    </div>
+                    <div class="category-count">
+                        <span class="count amber">15</span>
+                        <span class="category">#shower-thoughts</span>
+                    </div>
+                    <div class="category-count">
+                        <span class="count purple">12</span>
+                        <span class="category">#matrix-metaphors</span>
+                    </div>
+                    <div class="category-count">
+                        <span class="count neon-green">8</span>
+                        <span class="category">#midnight-revelations</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stream-filters">
+                <div class="cmd-line">
+                    <span class="prompt error-prompt">PSYCHE@blackbox:~$</span>
+                    <span class="command">tail -f thoughts.log | grep -E</span>
+                    <select class="filter-select" id="thought-filter">
+                        <option value=".*">--all--</option>
+                        <option value="RANT">rants_only</option>
+                        <option value="EPIPHANY">epiphanies</option>
+                        <option value="ERROR">errors</option>
+                        <option value="WTFMOMENT">wtf_moments</option>
+                    </select>
+                </div>
+                <div class="filter-results" id="filter-results">
+                    <!-- Filtered results will appear here -->
+                </div>
+            </div>
+
+            <div class="consciousness-level">
+                <div class="cmd-line">
+                    <span class="prompt error-prompt">PSYCHE@blackbox:~$</span>
+                    <span class="command">echo $CONSCIOUSNESS_LEVEL</span>
+                </div>
+                <div class="output">
+                    <p class="glitch-text" data-text="UNSTABLE">UNSTABLE</p>
+                </div>
+            </div>
+
+            <div class="warning-footer">
+                <div class="cmd-line">
+                    <span class="prompt error-prompt">PSYCHE@blackbox:~$</span>
+                    <span class="command">cat /dev/random | base64 | head -n 1</span>
+                </div>
+                <div class="random-output">
+                    <p class="amber">Remember: The thoughts contained herein are unfiltered stream-of-consciousness</p>
+                    <p class="purple">If you find coherent insights, it's probably an accident</p>
+                    <p class="red">No warranty expressed or implied on mental stability</p>
+                    <p class="neon-green blink">Press Ctrl+C to escape if needed</p>
+                </div>
+            </div>
+
+            <div class="command-prompt">
+                <span class="prompt error-prompt">PSYCHE@blackbox:~$</span>
+                <span class="cursor blink error-cursor">_</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </main>
+
+    <!-- Terminal Footer -->
+    <footer class="terminal-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="system-info">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">uptime</span>
+                    <div class="output">
+                        System online since 2025 | 
+                        <span id="uptime-counter">Calculating...</span> | 
+                        Load avg: <span class="neon-green">0.42 0.15 0.09</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <!-- TODO: Add your social/contact links -->
+                    <a href="#" class="footer-link glitch-text" data-text="GitHub">GitHub</a>
+                    <a href="#" class="footer-link glitch-text" data-text="Matrix">Matrix</a>
+                    <a href="/WebByteBox/feed.xml" class="footer-link glitch-text" data-text="RSS">RSS</a>
+                </div>
+            </div>
+        </div>
+    </footer>    <!-- Scripts -->
+    <script src="/WebByteBox/assets/js/terminal.js"></script>
+    <script src="/WebByteBox/assets/js/glitch.js"></script>
+    <script src="/WebByteBox/assets/js/matrix-clean.js"></script>
+    <script src="/WebByteBox/assets/js/community.js"></script>
+    <script src="/WebByteBox/assets/js/palette-selector.js"></script>
+    
+    <!-- TODO: Add analytics if needed -->
+</body>
+</html>

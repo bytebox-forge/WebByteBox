@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>whoami - Byte Box</title>
+    
+    <!-- Cyberpunk Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Custom Cyberpunk Styles -->
+    <link rel="stylesheet" href="/WebByteBox/assets/css/main.css">
+    
+    <!-- SEO and Meta -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>whoami | Byte Box</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="whoami" />
+<meta name="author" content="Mayor" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem" />
+<meta property="og:description" content="A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem" />
+<link rel="canonical" href="http://localhost:4000/WebByteBox/about.html" />
+<meta property="og:url" content="http://localhost:4000/WebByteBox/about.html" />
+<meta property="og:site_name" content="Byte Box" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="whoami" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Mayor"},"description":"A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem","headline":"whoami","url":"http://localhost:4000/WebByteBox/about.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/WebByteBox/feed.xml" title="Byte Box" />
+    
+    <!-- Favicon TODO: Add cyberpunk favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    
+    <!-- CRT Effect Toggle -->
+    <script>
+        // TODO: Add localStorage toggle for CRT effects
+        const crtEnabled = localStorage.getItem('crt-mode') !== 'false';
+    </script>
+</head>
+<body class="crt-mode">
+    <!-- Matrix-style background pattern -->
+    <div class="matrix-bg" id="matrix-bg"></div>
+    
+    <!-- CRT Scanlines Overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- Terminal-style Header -->
+    <header class="terminal-header">
+        <div class="container">
+            <div class="terminal-window">                <div class="terminal-title-bar">
+                    <span class="terminal-button close"></span>
+                    <span class="terminal-button minimize"></span>
+                    <span class="terminal-button maximize"></span>
+                    <span class="terminal-title">root@bytebox:~$ ./bytebox</span>
+                    
+                    <!-- Palette Selector -->
+                    <div class="palette-selector">
+                        <span class="palette-label">THEME:</span>
+                        <div class="palette-options">
+                            <button class="palette-option active" data-theme="classic-green" title="Matrix Green">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00ff00, #008000);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="cyber-blue" title="Cyber Blue">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00d4ff, #0066cc);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="hacker-red" title="Hacker Red">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ff0040, #cc0033);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="retro-amber" title="Retro Amber">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ffaa00, #cc8800);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="purple-haze" title="Purple Haze">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #aa00ff, #6600cc);"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div><nav class="terminal-nav">
+                    <a href="/WebByteBox/" class="nav-link ">~/home</a>
+                    <a href="/WebByteBox/about.html" class="nav-link active">./whoami</a>
+                    <a href="/WebByteBox/lab-logs/" class="nav-link ">./lab-logs</a>
+                    <a href="/WebByteBox/modules/" class="nav-link ">./modules</a>
+                    <a href="/WebByteBox/payloads/" class="nav-link ">./payloads</a>
+                    <a href="/WebByteBox/blackbox/" class="nav-link ">./blackbox</a>
+                    <a href="/WebByteBox/community.html" class="nav-link ">./community</a>
+                    <a href="/WebByteBox/contact.html" class="nav-link ">./contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="terminal-bio">
+    <div class="terminal-window">
+        <div class="terminal-title-bar">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+            <span class="terminal-title">root@bytebox:~$ ./whoami --verbose</span>
+        </div>
+        
+        <div class="bio-content">
+            <div class="command-output">
+                <div class="cmd-line">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">cat /etc/passwd | grep $(whoami)</span>
+                </div>
+                <div class="output">
+                    <span class="username neon-green">root</span>:x:0:0:<span class="amber">Digital Architect, Homelab Overlord</span>:/home/bytebox:/bin/bash
+                </div>
+            </div>
+
+            <div class="user-info">
+                <div class="cmd-line">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">finger $(whoami)</span>
+                </div>
+                <div class="finger-output">
+                    <pre class="user-details">
+Login: root                         Name: <span class="neon-green">[YOUR NAME HERE]</span> <!-- TODO: Add your name -->
+Directory: /home/bytebox            Shell: /bin/bash
+Office: The Basement                Office Phone: 555-HACK
+Home Phone: [ENCRYPTED]             
+On since Fri Jun 20 23:27 (Matrix Time) on pts/0 from reality.local
+Mail last read Fri Jun 20 23:27 2025
+Project: Building the digital future, one container at a time
+Plan: Escape the matrix through superior infrastructure
+                    </pre>
+                </div>
+            </div>
+
+            <div class="skills-section">
+                <div class="cmd-line">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">ls -la ~/skills/</span>
+                </div>
+                <div class="skills-listing">
+                    <!-- TODO: Customize your skills -->
+                    <div class="skill-item">
+                        <span class="permissions">-rwxrwxrwx</span>
+                        <span class="owner">root</span>
+                        <span class="group">devops</span>
+                        <span class="skill-name neon-green">docker_mastery.sh</span>
+                        <span class="skill-level">███████████ 95%</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="permissions">-rwxrwxrwx</span>
+                        <span class="owner">root</span>
+                        <span class="group">sysadmin</span>
+                        <span class="skill-name amber">linux_wizardry.py</span>
+                        <span class="skill-level">██████████░ 90%</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="permissions">-rwxrwxrwx</span>
+                        <span class="owner">root</span>
+                        <span class="group">security</span>
+                        <span class="skill-name purple">network_ninja.rb</span>
+                        <span class="skill-level">████████░░░ 80%</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="permissions">-rwxrwxrwx</span>
+                        <span class="owner">root</span>
+                        <span class="group">code</span>
+                        <span class="skill-name neon-green">automation_god.js</span>
+                        <span class="skill-level">█████████░░ 85%</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="permissions">-rw-rw-rw-</span>
+                        <span class="owner">root</span>
+                        <span class="group">social</span>
+                        <span class="skill-name amber">human_interaction.exe</span>
+                        <span class="skill-level">███░░░░░░░░ 30%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="system-specs">
+                <div class="cmd-line">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">cat /proc/bio_info</span>
+                </div>
+                <div class="bio-specs">
+                    <div class="spec-line">
+                        <span class="spec-label">Processor:</span>
+                        <span class="spec-value">Coffee-powered Human v2.0 (Caffeine Architecture)</span>
+                    </div>
+                    <div class="spec-line">
+                        <span class="spec-label">Memory:</span>
+                        <span class="spec-value">Variable, improves with coffee intake</span>
+                    </div>
+                    <div class="spec-line">
+                        <span class="spec-label">Storage:</span>
+                        <span class="spec-value">Unlimited cloud backup to GitHub</span>
+                    </div>
+                    <div class="spec-line">
+                        <span class="spec-label">Operating System:</span>
+                        <span class="spec-value">Linux Enthusiast, Windows Survivor, macOS Curious</span>
+                    </div>
+                    <div class="spec-line">
+                        <span class="spec-label">Network:</span>
+                        <span class="spec-value">Gigabit fiber, VPN always-on, Tor when paranoid</span>
+                    </div>
+                    <div class="spec-line">
+                        <span class="spec-label">Security:</span>
+                        <span class="spec-value">Paranoid-level encryption, 2FA everything</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="current-projects">
+                <div class="cmd-line">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">ps aux | grep -v grep | grep current_projects</span>
+                </div>
+                <div class="process-list">
+                    <!-- TODO: Add your current projects -->
+                    <div class="process">
+                        <span class="pid">1337</span>
+                        <span class="cpu neon-green">99.9</span>
+                        <span class="mem">15.0</span>
+                        <span class="command">./homelab_expansion --mode=aggressive</span>
+                    </div>
+                    <div class="process">
+                        <span class="pid">2048</span>
+                        <span class="cpu amber">45.2</span>
+                        <span class="mem">8.1</span>
+                        <span class="command">docker-compose up -d --scale services=∞</span>
+                    </div>
+                    <div class="process">
+                        <span class="pid">3141</span>
+                        <span class="cpu purple">23.7</span>
+                        <span class="mem">12.3</span>
+                        <span class="command">./learn_kubernetes --difficulty=insane</span>
+                    </div>
+                    <div class="process">
+                        <span class="pid">4096</span>
+                        <span class="cpu neon-green">67.4</span>
+                        <span class="mem">5.5</span>
+                        <span class="command">vim /dev/random</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <div class="cmd-line">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">cat ~/.ssh/authorized_keys | head -n 1</span>
+                </div>
+                <div class="contact-methods">
+                    <!-- TODO: Add your actual contact info -->
+                    <div class="contact-item">
+                        <span class="contact-type">ssh-rsa</span>
+                        <span class="contact-value">
+                            <a href="mailto:alexnyk@outlook.com" class="contact-link neon-green">alexnyk@outlook.com</a>
+                        </span>
+                        <span class="contact-desc">Primary Secure Channel</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-type">matrix</span>
+                        <span class="contact-value">
+                            <a href="https://matrix.to/#/" class="contact-link amber"></a>
+                        </span>
+                        <span class="contact-desc">Encrypted Comms</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-type">github</span>
+                        <span class="contact-value">
+                            <a href="https://github.com/[YOUR_USERNAME]" class="contact-link purple">[YOUR_USERNAME]</a> <!-- TODO: Add GitHub -->
+                        </span>
+                        <span class="contact-desc">Code Repository</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-prompt">
+                <span class="prompt">root@bytebox:~$</span>
+                <span class="cursor blink">_</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ASCII Art Bio -->
+<div class="ascii-bio">
+    <pre class="ascii-art-bio">
+    ┌─────────────────────────────────────────────────────────┐
+    │  "In the matrix of servers and silicon dreams,          │
+    │   I architect digital realms where data flows           │
+    │   like electric rivers through fiber optic veins.      │
+    │   Every container is a universe, every script a spell,  │
+    │   every deployment a step closer to computational       │
+    │   enlightenment."                                       │
+    │                                                         │
+    │   - A Digital Nomad in the Server Wilderness           │
+    └─────────────────────────────────────────────────────────┘
+    </pre>
+</div>
+
+        </div>
+    </main>
+
+    <!-- Terminal Footer -->
+    <footer class="terminal-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="system-info">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">uptime</span>
+                    <div class="output">
+                        System online since 2025 | 
+                        <span id="uptime-counter">Calculating...</span> | 
+                        Load avg: <span class="neon-green">0.42 0.15 0.09</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <!-- TODO: Add your social/contact links -->
+                    <a href="#" class="footer-link glitch-text" data-text="GitHub">GitHub</a>
+                    <a href="#" class="footer-link glitch-text" data-text="Matrix">Matrix</a>
+                    <a href="/WebByteBox/feed.xml" class="footer-link glitch-text" data-text="RSS">RSS</a>
+                </div>
+            </div>
+        </div>
+    </footer>    <!-- Scripts -->
+    <script src="/WebByteBox/assets/js/terminal.js"></script>
+    <script src="/WebByteBox/assets/js/glitch.js"></script>
+    <script src="/WebByteBox/assets/js/matrix-clean.js"></script>
+    <script src="/WebByteBox/assets/js/community.js"></script>
+    <script src="/WebByteBox/assets/js/palette-selector.js"></script>
+    
+    <!-- TODO: Add analytics if needed -->
+</body>
+</html>

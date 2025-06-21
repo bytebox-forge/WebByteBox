@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payload Vault - Byte Box</title>
+    
+    <!-- Cyberpunk Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Custom Cyberpunk Styles -->
+    <link rel="stylesheet" href="/WebByteBox/assets/css/main.css">
+    
+    <!-- SEO and Meta -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Payload Vault | Byte Box</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Payload Vault" />
+<meta name="author" content="Mayor" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem" />
+<meta property="og:description" content="A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem" />
+<link rel="canonical" href="http://localhost:4000/WebByteBox/payloads/" />
+<meta property="og:url" content="http://localhost:4000/WebByteBox/payloads/" />
+<meta property="og:site_name" content="Byte Box" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Payload Vault" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Mayor"},"description":"A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem","headline":"Payload Vault","url":"http://localhost:4000/WebByteBox/payloads/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/WebByteBox/feed.xml" title="Byte Box" />
+    
+    <!-- Favicon TODO: Add cyberpunk favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    
+    <!-- CRT Effect Toggle -->
+    <script>
+        // TODO: Add localStorage toggle for CRT effects
+        const crtEnabled = localStorage.getItem('crt-mode') !== 'false';
+    </script>
+</head>
+<body class="crt-mode">
+    <!-- Matrix-style background pattern -->
+    <div class="matrix-bg" id="matrix-bg"></div>
+    
+    <!-- CRT Scanlines Overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- Terminal-style Header -->
+    <header class="terminal-header">
+        <div class="container">
+            <div class="terminal-window">                <div class="terminal-title-bar">
+                    <span class="terminal-button close"></span>
+                    <span class="terminal-button minimize"></span>
+                    <span class="terminal-button maximize"></span>
+                    <span class="terminal-title">root@bytebox:~$ ./bytebox</span>
+                    
+                    <!-- Palette Selector -->
+                    <div class="palette-selector">
+                        <span class="palette-label">THEME:</span>
+                        <div class="palette-options">
+                            <button class="palette-option active" data-theme="classic-green" title="Matrix Green">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00ff00, #008000);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="cyber-blue" title="Cyber Blue">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00d4ff, #0066cc);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="hacker-red" title="Hacker Red">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ff0040, #cc0033);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="retro-amber" title="Retro Amber">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ffaa00, #cc8800);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="purple-haze" title="Purple Haze">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #aa00ff, #6600cc);"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div><nav class="terminal-nav">
+                    <a href="/WebByteBox/" class="nav-link ">~/home</a>
+                    <a href="/WebByteBox/about.html" class="nav-link ">./whoami</a>
+                    <a href="/WebByteBox/lab-logs/" class="nav-link ">./lab-logs</a>
+                    <a href="/WebByteBox/modules/" class="nav-link ">./modules</a>
+                    <a href="/WebByteBox/payloads/" class="nav-link active">./payloads</a>
+                    <a href="/WebByteBox/blackbox/" class="nav-link ">./blackbox</a>
+                    <a href="/WebByteBox/community.html" class="nav-link ">./community</a>
+                    <a href="/WebByteBox/contact.html" class="nav-link ">./contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="payloads-terminal">
+    <div class="terminal-window">
+        <div class="terminal-title-bar">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+            <span class="terminal-title">root@bytebox:~$ cd ~/bytebox/payloads && ls -la</span>
+        </div>
+        
+        <div class="payloads-content">
+            <div class="security-warning">
+                <div class="cmd-line">
+                    <span class="prompt error-prompt">SECURITY@bytebox:~$</span>
+                    <span class="command">cat /etc/security/payload_disclaimer.txt</span>
+                </div>
+                <div class="warning-content">
+                    <p class="red">⚠️ SECURITY NOTICE: Educational and Research Use Only</p>
+                    <p class="amber">All tools and scripts provided are for educational, research, and authorized testing purposes only.</p>
+                    <p class="purple">Use responsibly. Obtain proper authorization before deployment in production environments.</p>
+                    <p class="neon-green">By downloading, you agree to comply with all applicable laws and regulations.</p>
+                </div>
+            </div>
+
+            <div class="payload-stats">
+                <div class="cmd-line">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">find . -type f -name "*.sh" -o -name "*.py" -o -name "*.rb" | wc -l</span>
+                </div>
+                <div class="output">
+                    <p class="neon-green">Available payloads: 0</p>
+                    <p class="amber">Total downloads: ∞</p>
+                    <p class="purple">Last updated: 2025-06-20 23:27</p>
+                </div>
+            </div>
+
+            <div class="payload-listing">
+                <div class="cmd-line">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">ls -la *.{sh,py,rb,pl,go} | sort -k 9</span>
+                </div>
+                
+                
+                    <!-- Placeholder payloads when none exist -->
+                    <div class="payload-entry placeholder">
+                        <div class="file-info">
+                            <span class="permissions">-rwxr-xr-x</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">arsenal</span>
+                            <span class="size">2048</span>
+                            <span class="date">Jun 20 23:27</span>
+                            <span class="filename neon-green">network_discovery.py</span>
+                        </div>
+                        <div class="file-description">
+                            <span class="desc-label amber">description:</span>
+                            <span class="desc-text">Advanced network discovery and enumeration tool</span>
+                        </div>
+                        <div class="file-tags">
+                            <span class="tags-label purple">categories:</span>
+                            <span class="tag">reconnaissance</span>
+                            <span class="tag">networking</span>
+                            <span class="tag">python</span>
+                        </div>
+                        <div class="file-actions">
+                            <span class="download-link neon-green">[DOWNLOAD]</span>
+                            <span class="view-link amber">[VIEW SOURCE]</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payload-entry placeholder">
+                        <div class="file-info">
+                            <span class="permissions">-rwxr-xr-x</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">arsenal</span>
+                            <span class="size">4096</span>
+                            <span class="date">Jun 20 23:27</span>
+                            <span class="filename amber">docker_manager.sh</span>
+                        </div>
+                        <div class="file-description">
+                            <span class="desc-label amber">description:</span>
+                            <span class="desc-text">Comprehensive Docker container lifecycle management script</span>
+                        </div>
+                        <div class="file-tags">
+                            <span class="tags-label purple">categories:</span>
+                            <span class="tag">docker</span>
+                            <span class="tag">automation</span>
+                            <span class="tag">bash</span>
+                        </div>
+                        <div class="file-actions">
+                            <span class="download-link neon-green">[DOWNLOAD]</span>
+                            <span class="view-link amber">[VIEW SOURCE]</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payload-entry placeholder">
+                        <div class="file-info">
+                            <span class="permissions">-rwxr-xr-x</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">arsenal</span>
+                            <span class="size">1337</span>
+                            <span class="date">Jun 20 23:27</span>
+                            <span class="filename purple">vuln_scanner.rb</span>
+                        </div>
+                        <div class="file-description">
+                            <span class="desc-label amber">description:</span>
+                            <span class="desc-text">Automated vulnerability assessment and reporting tool</span>
+                        </div>
+                        <div class="file-tags">
+                            <span class="tags-label purple">categories:</span>
+                            <span class="tag">security</span>
+                            <span class="tag">scanner</span>
+                            <span class="tag">ruby</span>
+                        </div>
+                        <div class="file-actions">
+                            <span class="download-link neon-green">[DOWNLOAD]</span>
+                            <span class="view-link amber">[VIEW SOURCE]</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payload-entry placeholder">
+                        <div class="file-info">
+                            <span class="permissions">-rwxr-xr-x</span>
+                            <span class="links">1</span>
+                            <span class="owner">root</span>
+                            <span class="group">arsenal</span>
+                            <span class="size">8192</span>
+                            <span class="date">Jun 20 23:27</span>
+                            <span class="filename neon-green">log_analyzer.go</span>
+                        </div>
+                        <div class="file-description">
+                            <span class="desc-label amber">description:</span>
+                            <span class="desc-text">High-performance log parsing and anomaly detection engine</span>
+                        </div>
+                        <div class="file-tags">
+                            <span class="tags-label purple">categories:</span>
+                            <span class="tag">logs</span>
+                            <span class="tag">analysis</span>
+                            <span class="tag">golang</span>
+                        </div>
+                        <div class="file-actions">
+                            <span class="download-link neon-green">[DOWNLOAD]</span>
+                            <span class="view-link amber">[VIEW SOURCE]</span>
+                        </div>
+                    </div>
+                
+            </div>
+
+            <div class="payload-categories">
+                <div class="cmd-line">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">tree payloads/ | grep -E "^[├└]" | awk '{print $2}' | sort | uniq</span>
+                </div>
+                <div class="categories-tree">
+                    <div class="category-branch">
+                        <span class="tree-icon">├──</span>
+                        <span class="category-name neon-green">reconnaissance/</span>
+                        <div class="subcategories">
+                            <span class="tree-icon">│   ├──</span> <span class="subcat">network_discovery.py</span><br>
+                            <span class="tree-icon">│   ├──</span> <span class="subcat">port_scanner.sh</span><br>
+                            <span class="tree-icon">│   └──</span> <span class="subcat">subdomain_enum.rb</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-branch">
+                        <span class="tree-icon">├──</span>
+                        <span class="category-name amber">automation/</span>
+                        <div class="subcategories">
+                            <span class="tree-icon">│   ├──</span> <span class="subcat">docker_manager.sh</span><br>
+                            <span class="tree-icon">│   ├──</span> <span class="subcat">backup_rotator.py</span><br>
+                            <span class="tree-icon">│   └──</span> <span class="subcat">system_monitor.go</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-branch">
+                        <span class="tree-icon">├──</span>
+                        <span class="category-name purple">security/</span>
+                        <div class="subcategories">
+                            <span class="tree-icon">│   ├──</span> <span class="subcat">vuln_scanner.rb</span><br>
+                            <span class="tree-icon">│   ├──</span> <span class="subcat">log_analyzer.go</span><br>
+                            <span class="tree-icon">│   └──</span> <span class="subcat">forensic_tools.py</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-branch">
+                        <span class="tree-icon">└──</span>
+                        <span class="category-name red">exploits/</span>
+                        <div class="subcategories">
+                            <span class="tree-icon">    ├──</span> <span class="subcat amber">CVE-2024-XXXX.py</span><br>
+                            <span class="tree-icon">    ├──</span> <span class="subcat amber">buffer_overflow.c</span><br>
+                            <span class="tree-icon">    └──</span> <span class="subcat amber">privilege_escalation.sh</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="installation-guide">
+                <div class="cmd-line">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">cat INSTALLATION.md</span>
+                </div>
+                <div class="install-content">
+                    <h3 class="section-title neon-green">// Installation & Usage //</h3>
+                    <div class="install-steps">
+                        <div class="step">
+                            <span class="step-number amber">1.</span>
+                            <div class="step-content">
+                                <span class="step-title">Download payload:</span>
+                                <code class="step-code">wget https://byte-box.org/payloads/[filename]</code>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <span class="step-number amber">2.</span>
+                            <div class="step-content">
+                                <span class="step-title">Make executable:</span>
+                                <code class="step-code">chmod +x [filename]</code>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <span class="step-number amber">3.</span>
+                            <div class="step-content">
+                                <span class="step-title">Review source code:</span>
+                                <code class="step-code">cat [filename] | less</code>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <span class="step-number amber">4.</span>
+                            <div class="step-content">
+                                <span class="step-title">Execute safely:</span>
+                                <code class="step-code">./[filename] --help</code>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="install-warning">
+                        <p class="red">⚠️ Always review code before execution</p>
+                        <p class="amber">⚠️ Test in isolated environments first</p>
+                        <p class="purple">⚠️ Ensure you have proper authorization</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payload-search">
+                <div class="cmd-line">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">grep -r --include="*.py" --include="*.sh" -l</span>
+                    <input type="text" class="search-input" placeholder="search_term" id="payload-search">
+                </div>
+                <div class="search-results" id="payload-search-results">
+                    <!-- Search results populated via JavaScript -->
+                </div>
+            </div>
+
+            <div class="command-prompt">
+                <span class="prompt">root@bytebox:~$</span>
+                <span class="cursor blink">_</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </main>
+
+    <!-- Terminal Footer -->
+    <footer class="terminal-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="system-info">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">uptime</span>
+                    <div class="output">
+                        System online since 2025 | 
+                        <span id="uptime-counter">Calculating...</span> | 
+                        Load avg: <span class="neon-green">0.42 0.15 0.09</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <!-- TODO: Add your social/contact links -->
+                    <a href="#" class="footer-link glitch-text" data-text="GitHub">GitHub</a>
+                    <a href="#" class="footer-link glitch-text" data-text="Matrix">Matrix</a>
+                    <a href="/WebByteBox/feed.xml" class="footer-link glitch-text" data-text="RSS">RSS</a>
+                </div>
+            </div>
+        </div>
+    </footer>    <!-- Scripts -->
+    <script src="/WebByteBox/assets/js/terminal.js"></script>
+    <script src="/WebByteBox/assets/js/glitch.js"></script>
+    <script src="/WebByteBox/assets/js/matrix-clean.js"></script>
+    <script src="/WebByteBox/assets/js/community.js"></script>
+    <script src="/WebByteBox/assets/js/palette-selector.js"></script>
+    
+    <!-- TODO: Add analytics if needed -->
+</body>
+</html>

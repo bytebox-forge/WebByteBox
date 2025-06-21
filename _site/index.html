@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initializing Byte Box System... - Byte Box</title>
+    
+    <!-- Cyberpunk Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Custom Cyberpunk Styles -->
+    <link rel="stylesheet" href="/WebByteBox/assets/css/main.css">
+    
+    <!-- SEO and Meta -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Initializing Byte Box System… | Byte Box</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Initializing Byte Box System…" />
+<meta name="author" content="Mayor" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem" />
+<meta property="og:description" content="A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem" />
+<link rel="canonical" href="http://localhost:4000/WebByteBox/" />
+<meta property="og:url" content="http://localhost:4000/WebByteBox/" />
+<meta property="og:site_name" content="Byte Box" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Initializing Byte Box System…" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Mayor"},"description":"A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem","headline":"Initializing Byte Box System…","name":"Byte Box","url":"http://localhost:4000/WebByteBox/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/WebByteBox/feed.xml" title="Byte Box" />
+    
+    <!-- Favicon TODO: Add cyberpunk favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    
+    <!-- CRT Effect Toggle -->
+    <script>
+        // TODO: Add localStorage toggle for CRT effects
+        const crtEnabled = localStorage.getItem('crt-mode') !== 'false';
+    </script>
+</head>
+<body class="crt-mode">
+    <!-- Matrix-style background pattern -->
+    <div class="matrix-bg" id="matrix-bg"></div>
+    
+    <!-- CRT Scanlines Overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- Terminal-style Header -->
+    <header class="terminal-header">
+        <div class="container">
+            <div class="terminal-window">                <div class="terminal-title-bar">
+                    <span class="terminal-button close"></span>
+                    <span class="terminal-button minimize"></span>
+                    <span class="terminal-button maximize"></span>
+                    <span class="terminal-title">root@bytebox:~$ ./bytebox</span>
+                    
+                    <!-- Palette Selector -->
+                    <div class="palette-selector">
+                        <span class="palette-label">THEME:</span>
+                        <div class="palette-options">
+                            <button class="palette-option active" data-theme="classic-green" title="Matrix Green">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00ff00, #008000);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="cyber-blue" title="Cyber Blue">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00d4ff, #0066cc);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="hacker-red" title="Hacker Red">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ff0040, #cc0033);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="retro-amber" title="Retro Amber">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ffaa00, #cc8800);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="purple-haze" title="Purple Haze">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #aa00ff, #6600cc);"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div><nav class="terminal-nav">
+                    <a href="/WebByteBox/" class="nav-link active">~/home</a>
+                    <a href="/WebByteBox/about.html" class="nav-link ">./whoami</a>
+                    <a href="/WebByteBox/lab-logs/" class="nav-link ">./lab-logs</a>
+                    <a href="/WebByteBox/modules/" class="nav-link ">./modules</a>
+                    <a href="/WebByteBox/payloads/" class="nav-link ">./payloads</a>
+                    <a href="/WebByteBox/blackbox/" class="nav-link ">./blackbox</a>
+                    <a href="/WebByteBox/community.html" class="nav-link ">./community</a>
+                    <a href="/WebByteBox/contact.html" class="nav-link ">./contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="terminal-boot" id="terminal-boot">
+    <div class="boot-sequence">
+        <div class="boot-line" data-delay="0">
+            <span class="timestamp">[0.000000]</span> Linux version 6.6.6-cyberpunk (mayor@bytebox) ##1 SMP PREEMPT
+        </div>
+        <div class="boot-line" data-delay="500">
+            <span class="timestamp">[0.142857]</span> Initializing neural pathways...
+        </div>
+        <div class="boot-line" data-delay="1000">
+            <span class="timestamp">[0.314159]</span> Loading personality matrix... <span class="status ok">OK</span>
+        </div>
+        <div class="boot-line" data-delay="1500">
+            <span class="timestamp">[0.420690]</span> Establishing secure connection to The Grid...
+        </div>
+        <div class="boot-line" data-delay="2000">
+            <span class="timestamp">[0.666666]</span> Calibrating reality distortion field... <span class="status ok">OK</span>
+        </div>
+        <div class="boot-line" data-delay="2500">
+            <span class="timestamp">[1.337000]</span> Loading homelab configurations...
+        </div>
+        <div class="boot-line" data-delay="3000">
+            <span class="timestamp">[2.048000]</span> Docker containers spinning up... <span class="status ok">OK</span>
+        </div>
+        <div class="boot-line" data-delay="3500">
+            <span class="timestamp">[3.141592]</span> System fully operational. Welcome, Mayor.
+        </div>
+    </div>
+</div>
+
+<div class="terminal-welcome" id="terminal-welcome" style="display: none;">
+    <div class="terminal-window main-terminal">
+        <div class="terminal-title-bar">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+            <span class="terminal-title">mayor@bytebox:~$ cat ~/bytebox/welcome.txt</span>
+        </div>
+
+        <div class="terminal-content">
+            <pre class="ascii-art" id="ascii-art">
+██████╗ ██╗   ██╗████████╗███████╗    ██████╗  ██████╗ ██╗  ██╗
+██╔══██╗╚██╗ ██╔╝╚══██╔══╝██╔════╝    ██╔══██╗██╔═══██╗╚██╗██╔╝
+██████╔╝ ╚████╔╝    ██║   █████╗      ██████╔╝██║   ██║ ╚███╔╝ 
+██╔══██╗  ╚██╔╝     ██║   ██╔══╝      ██╔══██╗██║   ██║ ██╔██╗ 
+██████╔╝   ██║      ██║   ███████╗    ██████╔╝╚██████╔╝██╔╝ ██╗
+╚═════╝    ╚═╝      ╚═╝   ╚══════╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
+            </pre>
+
+            <div class="welcome-text">
+                <div class="typing-line">
+                    <span class="prompt">mayor@bytebox:~$</span>
+                    <span class="command typing-text" data-text="echo 'Welcome to the digital underground...'"></span>
+                </div>                <div class="output-section" id="welcome-output" style="display: none;">
+                    <p class="neon-green">Welcome to my corner of the digital underground...</p>
+                    <p>This is <strong>Byte Box</strong> - my personal cyberpunk playground where I document the chaos of building stuff that probably shouldn't exist but totally should:</p>
+                    <ul class="feature-list">
+                        <li><span class="bullet neon-green">▶</span> Homelab adventures and the inevitable disasters</li>
+                        <li><span class="bullet amber">▶</span> Docker containers that worked yesterday</li>
+                        <li><span class="bullet purple">▶</span> Network security experiments (all legal, mom)</li>
+                        <li><span class="bullet neon-green">▶</span> Scripts that automate my laziness</li>
+                        <li><span class="bullet amber">▶</span> 3 AM coding sessions and caffeine-fueled rants</li>
+                    </ul>
+
+                    <div class="system-stats">
+                        <div class="stat-line">
+                            <span class="stat-label">System Status:</span>
+                            <span class="stat-value neon-green blink">PROBABLY WORKING</span>
+                        </div>
+                        <div class="stat-line">
+                            <span class="stat-label">Security Level:</span>
+                            <span class="stat-value amber">PARANOID</span>
+                        </div>
+                        <div class="stat-line">
+                            <span class="stat-label">Coffee Levels:</span>
+                            <span class="stat-value purple">DANGEROUSLY LOW</span>
+                        </div>
+                        <div class="stat-line">
+                            <span class="stat-label">Current Mood:</span>
+                            <span class="stat-value neon-green">DEBUGGING SOMETHING</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-menu" id="nav-menu" style="display: none;">
+                <div class="menu-prompt">
+                    <span class="prompt">mayor@bytebox:~$</span>
+                    <span class="command">ls -la ~/bytebox/</span>
+                </div>
+                <div class="directory-listing">
+                    <div class="dir-item">
+                        <span class="permissions">drwxr-xr-x</span>
+                        <span class="links">3</span>
+                        <span class="owner">root</span>
+                        <span class="group">bytebox</span>
+                        <span class="size">4096</span>
+                        <span class="date">Jun 17 15:42</span>
+                        <a href="/WebByteBox/about/" class="dirname neon-green">whoami/</a>
+                    </div>
+                    <div class="dir-item">
+                        <span class="permissions">drwxr-xr-x</span>
+                        <span class="links">5</span>
+                        <span class="owner">root</span>
+                        <span class="group">bytebox</span>
+                        <span class="size">4096</span>
+                        <span class="date">Jun 17 15:42</span>
+                        <a href="/WebByteBox/lab-logs/" class="dirname amber">lab-logs/</a>
+                    </div>
+                    <div class="dir-item">
+                        <span class="permissions">drwxr-xr-x</span>
+                        <span class="links">2</span>
+                        <span class="owner">root</span>
+                        <span class="group">bytebox</span>
+                        <span class="size">2048</span>
+                        <span class="date">Jun 17 15:42</span>
+                        <a href="/WebByteBox/modules/" class="dirname purple">modules/</a>
+                    </div>                    <div class="dir-item">
+                        <span class="permissions">drwxr-xr-x</span>
+                        <span class="links">4</span>
+                        <span class="owner">root</span>
+                        <span class="group">bytebox</span>
+                        <span class="size">8192</span>
+                        <span class="date">Jun 17 15:42</span>
+                        <a href="/WebByteBox/payloads/" class="dirname neon-green">payloads/</a>
+                    </div>
+                    <div class="dir-item">
+                        <span class="permissions">drwxr-xr-x</span>
+                        <span class="links">∞</span>
+                        <span class="owner">community</span>
+                        <span class="group">bytebox</span>
+                        <span class="size">live</span>
+                        <span class="date">24/7 online</span>
+                        <a href="/WebByteBox/community.html" class="dirname purple">community/</a>
+                    </div>
+                    <div class="dir-item">
+                        <span class="permissions">drwx------</span>
+                        <span class="links">1</span>
+                        <span class="owner">root</span>
+                        <span class="group">bytebox</span>
+                        <span class="size">???</span>
+                        <span class="date">??? ?? ??:??</span>
+                        <a href="/WebByteBox/blackbox/" class="dirname amber glitch-text" data-text="blackbox/">blackbox/</a>
+                    </div>
+                </div>
+
+                <div class="command-prompt">
+                    <span class="prompt">mayor@bytebox:~$</span>
+                    <span class="cursor blink">_</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Access Panel -->
+<div class="quick-access" id="quick-access" style="display: none;">
+    <h2 class="section-title glitch-text" data-text="// Quick Access //">// Quick Access //</h2>
+    
+    <div class="access-grid">
+        <a href="/WebByteBox/lab-logs/" class="access-card lab-logs">
+            <div class="card-icon">🧪</div>
+            <div class="card-title">Lab Logs</div>
+            <div class="card-desc">Homelab experiments & infrastructure</div>
+            <div class="card-status">Latest entries</div>
+        </a>
+
+        <a href="/WebByteBox/modules/" class="access-card modules">
+            <div class="card-icon">⚙️</div>
+            <div class="card-title">Modules</div>
+            <div class="card-desc">Projects & microservices</div>
+            <div class="card-status">Active projects</div>
+        </a>
+
+        <a href="/WebByteBox/payloads/" class="access-card payloads">
+            <div class="card-icon">💣</div>
+            <div class="card-title">Payloads</div>
+            <div class="card-desc">Tools, scripts & downloads</div>
+            <div class="card-status">Available tools</div>
+        </a>
+
+        <a href="/WebByteBox/blackbox/" class="access-card blackbox">
+            <div class="card-icon">🔮</div>
+            <div class="card-title">Black Box</div>
+            <div class="card-desc">Unfiltered thoughts & rants</div>
+            <div class="card-status">Experimental content</div>
+        </a>
+    </div>
+</div>
+
+<!-- TODO: Add hidden easter eggs and interactive elements -->
+<div class="easter-eggs" style="display: none;">
+    <!-- Konami code, click patterns, etc. -->
+</div>
+
+        </div>
+    </main>
+
+    <!-- Terminal Footer -->
+    <footer class="terminal-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="system-info">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">uptime</span>
+                    <div class="output">
+                        System online since 2025 | 
+                        <span id="uptime-counter">Calculating...</span> | 
+                        Load avg: <span class="neon-green">0.42 0.15 0.09</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <!-- TODO: Add your social/contact links -->
+                    <a href="#" class="footer-link glitch-text" data-text="GitHub">GitHub</a>
+                    <a href="#" class="footer-link glitch-text" data-text="Matrix">Matrix</a>
+                    <a href="/WebByteBox/feed.xml" class="footer-link glitch-text" data-text="RSS">RSS</a>
+                </div>
+            </div>
+        </div>
+    </footer>    <!-- Scripts -->
+    <script src="/WebByteBox/assets/js/terminal.js"></script>
+    <script src="/WebByteBox/assets/js/glitch.js"></script>
+    <script src="/WebByteBox/assets/js/matrix-clean.js"></script>
+    <script src="/WebByteBox/assets/js/community.js"></script>
+    <script src="/WebByteBox/assets/js/palette-selector.js"></script>
+    
+    <!-- TODO: Add analytics if needed -->
+</body>
+</html>
