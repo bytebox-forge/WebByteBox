@@ -1,17 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payload Vault - Byte Box</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem">
+    <meta name="keywords" content="homelab, cyberpunk, docker, kubernetes, raspberry pi, networking, automation, security, monitoring, infrastructure">
+    <meta name="author" content="Mayor">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Payload Vault - Byte Box">
+    <meta property="og:description" content="A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://localhost:4000/WebByteBox/payloads/">
+    <meta property="og:image" content="http://localhost:4000/WebByteBox/assets/img/og-image.png">
+    <meta property="og:site_name" content="Byte Box">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Payload Vault - Byte Box">
+    <meta name="twitter:description" content="A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem">
+    <meta name="twitter:image" content="http://localhost:4000/WebByteBox/assets/img/twitter-card.png">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#00ff41">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ByteBox">
+    <meta name="application-name" content="ByteBox">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="/WebByteBox/assets/img/icon-144x144.png">
     
     <!-- Cyberpunk Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/WebByteBox/manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="/WebByteBox/assets/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/WebByteBox/assets/img/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/WebByteBox/assets/img/icon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/WebByteBox/assets/img/apple-touch-icon.png">
+    
     <!-- Custom Cyberpunk Styles -->
     <link rel="stylesheet" href="/WebByteBox/assets/css/main.css">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/WebByteBox/assets/js/matrix-clean.js" as="script">
+    <link rel="preload" href="/WebByteBox/assets/js/palette-selector.js" as="script">
     
     <!-- SEO and Meta -->
     <!-- Begin Jekyll SEO tag v2.8.0 -->
@@ -34,8 +77,29 @@
 
     <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/WebByteBox/feed.xml" title="Byte Box" />
     
-    <!-- Favicon TODO: Add cyberpunk favicon -->
-    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Byte Box",
+      "description": "A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem",
+      "url": "http://localhost:4000/WebByteBox",
+      
+      "author": {
+        "@type": "Person",
+        "name": "Mayor"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Byte Box",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "http://localhost:4000/WebByteBox/assets/img/logo.png"
+        }
+      }
+    }
+    </script>
     
     <!-- CRT Effect Toggle -->
     <script>
@@ -128,7 +192,7 @@
                 <div class="output">
                     <p class="neon-green">Available payloads: 0</p>
                     <p class="amber">Total downloads: ∞</p>
-                    <p class="purple">Last updated: 2025-06-20 23:27</p>
+                    <p class="purple">Last updated: 2025-06-21 19:19</p>
                 </div>
             </div>
 
@@ -147,7 +211,7 @@
                             <span class="owner">root</span>
                             <span class="group">arsenal</span>
                             <span class="size">2048</span>
-                            <span class="date">Jun 20 23:27</span>
+                            <span class="date">Jun 21 19:19</span>
                             <span class="filename neon-green">network_discovery.py</span>
                         </div>
                         <div class="file-description">
@@ -173,7 +237,7 @@
                             <span class="owner">root</span>
                             <span class="group">arsenal</span>
                             <span class="size">4096</span>
-                            <span class="date">Jun 20 23:27</span>
+                            <span class="date">Jun 21 19:19</span>
                             <span class="filename amber">docker_manager.sh</span>
                         </div>
                         <div class="file-description">
@@ -199,7 +263,7 @@
                             <span class="owner">root</span>
                             <span class="group">arsenal</span>
                             <span class="size">1337</span>
-                            <span class="date">Jun 20 23:27</span>
+                            <span class="date">Jun 21 19:19</span>
                             <span class="filename purple">vuln_scanner.rb</span>
                         </div>
                         <div class="file-description">
@@ -225,7 +289,7 @@
                             <span class="owner">root</span>
                             <span class="group">arsenal</span>
                             <span class="size">8192</span>
-                            <span class="date">Jun 20 23:27</span>
+                            <span class="date">Jun 21 19:19</span>
                             <span class="filename neon-green">log_analyzer.go</span>
                         </div>
                         <div class="file-description">
@@ -386,12 +450,103 @@
                 </div>
             </div>
         </div>
-    </footer>    <!-- Scripts -->
+    </footer>    <!-- Performance Toggle -->
+    <button class="perf-toggle" onclick="togglePerformanceStats()" title="Toggle Performance Stats" aria-label="Toggle Performance Statistics">
+        📊
+    </button>
+
+    <!-- Scripts -->
     <script src="/WebByteBox/assets/js/terminal.js"></script>
     <script src="/WebByteBox/assets/js/glitch.js"></script>
     <script src="/WebByteBox/assets/js/matrix-clean.js"></script>
     <script src="/WebByteBox/assets/js/community.js"></script>
     <script src="/WebByteBox/assets/js/palette-selector.js"></script>
+    <script src="/WebByteBox/assets/js/accessibility.js"></script>
+    <script src="/WebByteBox/assets/js/performance.js"></script>
+    <script src="/WebByteBox/assets/js/search.js"></script>
+    
+    <!-- PWA Installation -->
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/WebByteBox/sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(registrationError => console.log('SW registration failed'));
+            });
+        }
+        
+        // PWA Install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install button
+            const installBtn = document.createElement('button');
+            installBtn.textContent = 'Install App';
+            installBtn.className = 'install-pwa-btn';
+            installBtn.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--neon-green);
+                color: var(--bg-black);
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-family: var(--font-mono);
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 1000;
+                animation: pulse 2s infinite;
+            `;
+            
+            installBtn.addEventListener('click', () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the A2HS prompt');
+                    }
+                    deferredPrompt = null;
+                    installBtn.remove();
+                });
+            });
+            
+            document.body.appendChild(installBtn);
+            
+            // Remove button after 10 seconds if not clicked
+            setTimeout(() => {
+                if (installBtn.parentNode) {
+                    installBtn.remove();
+                }
+            }, 10000);
+        });
+        
+        // Performance Dashboard Toggle
+        function togglePerformanceStats() {
+            const currentState = localStorage.getItem('showPerformanceStats') === 'true';
+            localStorage.setItem('showPerformanceStats', !currentState);
+            
+            if (!currentState) {
+                // Create performance dashboard if it doesn't exist
+                if (window.performanceOptimizer) {
+                    window.performanceOptimizer.createPerformanceDashboard();
+                }
+            } else {
+                // Remove performance dashboard
+                const dashboard = document.getElementById('performance-dashboard');
+                if (dashboard) {
+                    dashboard.remove();
+                }
+            }
+        }
+        
+        // Initialize performance optimizer
+        window.addEventListener('load', () => {
+            window.performanceOptimizer = new PerformanceOptimizer();
+        });
+    </script>
     
     <!-- TODO: Add analytics if needed -->
 </body>

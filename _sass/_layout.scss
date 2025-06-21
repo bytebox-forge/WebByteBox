@@ -603,24 +603,110 @@
     }
 }
 
-// Responsive Grid Adjustments
+// Mobile-First Responsive Improvements
 @media (max-width: 1024px) {
-    .access-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .terminal-window {
+        margin: var(--spacing-sm);
+        width: calc(100% - #{var(--spacing-md)});
+    }
+    
+    .ascii-art {
+        font-size: 8px;
+        line-height: 0.8;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 }
 
 @media (max-width: 768px) {
-    .main-content {
-        padding: var(--spacing-md) 0;
+    .terminal-content {
+        padding: var(--spacing-sm);
+        font-size: 12px;
     }
     
-    .terminal-header,
-    .terminal-footer {
-        padding: var(--spacing-md) 0;
+    .boot-sequence {
+        font-size: 11px;
     }
     
-    .access-grid {
-        grid-template-columns: 1fr;
+    .directory-listing {
+        font-size: 10px;
+        overflow-x: auto;
+    }
+    
+    // Hide ASCII art on very small screens, show text alternative
+    .ascii-art {
+        display: none;
+    }
+    
+    .ascii-alternative {
+        display: block;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        color: var(--neon-green);
+        text-shadow: 0 0 10px var(--neon-green-glow);
+    }
+}
+
+@media (max-width: 480px) {
+    .terminal-window {
+        margin: var(--spacing-xs);
+        width: calc(100% - #{var(--spacing-sm)});
+    }
+    
+    .terminal-title-bar {
+        padding: var(--spacing-xs);
+        
+        .terminal-title {
+            font-size: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+    
+    .palette-selector {
+        display: none; // Hide on very small screens
+    }
+    
+    // Simplify navigation for mobile
+    .navigation-menu {
+        .directory-listing {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-xs);
+        }
+    }
+}
+
+// Touch-friendly improvements
+@media (hover: none) and (pointer: coarse) {
+    .palette-option {
+        min-height: 44px;
+        min-width: 44px;
+        margin: var(--spacing-xs);
+    }
+    
+    .terminal-button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .dir-item {
+        padding: var(--spacing-sm);
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+// Landscape phone orientation
+@media (max-width: 768px) and (orientation: landscape) {
+    .terminal-boot {
+        height: auto;
+        padding: var(--spacing-sm);
+    }
+    
+    .boot-sequence {
+        max-height: 60vh;
+        overflow-y: auto;
     }
 }

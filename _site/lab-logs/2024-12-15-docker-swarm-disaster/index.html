@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Swarm Disaster: When Containers Go Rogue - Byte Box</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A harrowing tale of Docker Swarm chaos at 3 AM, featuring cascading failures, mystery containers, and the therapeutic power of coffee.">
+    <meta name="keywords" content="homelab, cyberpunk, docker, kubernetes, raspberry pi, networking, automation, security, monitoring, infrastructure">
+    <meta name="author" content="Mayor">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Docker Swarm Disaster: When Containers Go Rogue - Byte Box">
+    <meta property="og:description" content="A harrowing tale of Docker Swarm chaos at 3 AM, featuring cascading failures, mystery containers, and the therapeutic power of coffee.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://localhost:4000/WebByteBox/lab-logs/2024-12-15-docker-swarm-disaster/">
+    <meta property="og:image" content="http://localhost:4000/WebByteBox/assets/img/og-image.png">
+    <meta property="og:site_name" content="Byte Box">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Docker Swarm Disaster: When Containers Go Rogue - Byte Box">
+    <meta name="twitter:description" content="A harrowing tale of Docker Swarm chaos at 3 AM, featuring cascading failures, mystery containers, and the therapeutic power of coffee.">
+    <meta name="twitter:image" content="http://localhost:4000/WebByteBox/assets/img/twitter-card.png">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#00ff41">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ByteBox">
+    <meta name="application-name" content="ByteBox">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="/WebByteBox/assets/img/icon-144x144.png">
+    
+    <!-- Cyberpunk Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/WebByteBox/manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="/WebByteBox/assets/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/WebByteBox/assets/img/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/WebByteBox/assets/img/icon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/WebByteBox/assets/img/apple-touch-icon.png">
+    
+    <!-- Custom Cyberpunk Styles -->
+    <link rel="stylesheet" href="/WebByteBox/assets/css/main.css">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/WebByteBox/assets/js/matrix-clean.js" as="script">
+    <link rel="preload" href="/WebByteBox/assets/js/palette-selector.js" as="script">
+    
+    <!-- SEO and Meta -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Docker Swarm Disaster: When Containers Go Rogue | Byte Box</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Docker Swarm Disaster: When Containers Go Rogue" />
+<meta name="author" content="Mayor" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A harrowing tale of Docker Swarm chaos at 3 AM, featuring cascading failures, mystery containers, and the therapeutic power of coffee." />
+<meta property="og:description" content="A harrowing tale of Docker Swarm chaos at 3 AM, featuring cascading failures, mystery containers, and the therapeutic power of coffee." />
+<link rel="canonical" href="http://localhost:4000/WebByteBox/lab-logs/2024-12-15-docker-swarm-disaster/" />
+<meta property="og:url" content="http://localhost:4000/WebByteBox/lab-logs/2024-12-15-docker-swarm-disaster/" />
+<meta property="og:site_name" content="Byte Box" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-12-14T22:42:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Docker Swarm Disaster: When Containers Go Rogue" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Mayor"},"dateModified":"2024-12-14T22:42:00-05:00","datePublished":"2024-12-14T22:42:00-05:00","description":"A harrowing tale of Docker Swarm chaos at 3 AM, featuring cascading failures, mystery containers, and the therapeutic power of coffee.","headline":"Docker Swarm Disaster: When Containers Go Rogue","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/WebByteBox/lab-logs/2024-12-15-docker-swarm-disaster/"},"url":"http://localhost:4000/WebByteBox/lab-logs/2024-12-15-docker-swarm-disaster/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/WebByteBox/feed.xml" title="Byte Box" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "name": "Byte Box",
+      "description": "A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem",
+      "url": "http://localhost:4000/WebByteBox",
+      
+      "headline": "Docker Swarm Disaster: When Containers Go Rogue",
+      "datePublished": "2024-12-14T22:42:00-05:00",
+      "dateModified": "2024-12-14T22:42:00-05:00",
+      
+      "author": {
+        "@type": "Person",
+        "name": "Mayor"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Byte Box",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "http://localhost:4000/WebByteBox/assets/img/logo.png"
+        }
+      }
+    }
+    </script>
+    
+    <!-- CRT Effect Toggle -->
+    <script>
+        // TODO: Add localStorage toggle for CRT effects
+        const crtEnabled = localStorage.getItem('crt-mode') !== 'false';
+    </script>
+</head>
+<body class="crt-mode">
+    <!-- Matrix-style background pattern -->
+    <div class="matrix-bg" id="matrix-bg"></div>
+    
+    <!-- CRT Scanlines Overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- Terminal-style Header -->
+    <header class="terminal-header">
+        <div class="container">
+            <div class="terminal-window">                <div class="terminal-title-bar">
+                    <span class="terminal-button close"></span>
+                    <span class="terminal-button minimize"></span>
+                    <span class="terminal-button maximize"></span>
+                    <span class="terminal-title">root@bytebox:~$ ./bytebox</span>
+                    
+                    <!-- Palette Selector -->
+                    <div class="palette-selector">
+                        <span class="palette-label">THEME:</span>
+                        <div class="palette-options">
+                            <button class="palette-option active" data-theme="classic-green" title="Matrix Green">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00ff00, #008000);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="cyber-blue" title="Cyber Blue">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00d4ff, #0066cc);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="hacker-red" title="Hacker Red">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ff0040, #cc0033);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="retro-amber" title="Retro Amber">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ffaa00, #cc8800);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="purple-haze" title="Purple Haze">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #aa00ff, #6600cc);"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div><nav class="terminal-nav">
+                    <a href="/WebByteBox/" class="nav-link ">~/home</a>
+                    <a href="/WebByteBox/about.html" class="nav-link ">./whoami</a>
+                    <a href="/WebByteBox/lab-logs/" class="nav-link active">./lab-logs</a>
+                    <a href="/WebByteBox/modules/" class="nav-link ">./modules</a>
+                    <a href="/WebByteBox/payloads/" class="nav-link ">./payloads</a>
+                    <a href="/WebByteBox/blackbox/" class="nav-link ">./blackbox</a>
+                    <a href="/WebByteBox/community.html" class="nav-link ">./community</a>
+                    <a href="/WebByteBox/contact.html" class="nav-link ">./contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <article class="terminal-post">
+    <header class="post-header">
+        <div class="terminal-window">
+            <div class="terminal-title-bar">
+                <span class="terminal-button close"></span>
+                <span class="terminal-button minimize"></span>
+                <span class="terminal-button maximize"></span>
+                <span class="terminal-title">root@bytebox:~$ cat docker-swarm-disaster-when-containers-go-rogue.md</span>
+            </div>
+            <div class="post-meta">
+                <span class="prompt">root@bytebox:~$</span>
+                <span class="command">ls -la docker-swarm-disaster-when-containers-go-rogue.md</span>
+                <div class="file-info">
+                    <span class="permissions">-rw-r--r--</span>
+                    <span class="owner">root</span>
+                    <span class="group">bytebox</span>
+                    <span class="size">8122</span>
+                    <span class="date">Dec 14 22:42</span>
+                    <span class="filename neon-green">docker-swarm-disaster-when-containers-go-rogue.md</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="post-content terminal-content">
+        <h1 class="post-title glitch-text" data-text="Docker Swarm Disaster: When Containers Go Rogue">Docker Swarm Disaster: When Containers Go Rogue</h1>
+        
+        
+        <div class="post-description">
+            <span class="prompt">root@bytebox:~$</span>
+            <span class="command">head -n 1 docker-swarm-disaster-when-containers-go-rogue.md</span>
+            <div class="output">A harrowing tale of Docker Swarm chaos at 3 AM, featuring cascading failures, mystery containers, and the therapeutic power of coffee.</div>
+        </div>
+        
+
+        
+        <div class="post-tags">
+            <span class="prompt">root@bytebox:~$</span>
+            <span class="command">grep -o "#[a-zA-Z0-9_]*" docker-swarm-disaster-when-containers-go-rogue.md</span>
+            <div class="output">
+                
+                <span class="tag">#docker</span>
+                
+                <span class="tag">#swarm</span>
+                
+                <span class="tag">#disaster-recovery</span>
+                
+                <span class="tag">#3am-debugging</span>
+                
+            </div>
+        </div>
+        
+
+        <div class="content-body">
+            <h2 id="0300---the-incident">03:00 - The Incident</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>2024-12-15 03:00:47] CRITICAL: docker-swarm-01 - Multiple service failures detected
+<span class="o">[</span>2024-12-15 03:00:48] CRITICAL: docker-swarm-02 - Node unreachable
+<span class="o">[</span>2024-12-15 03:00:49] WARNING: docker-swarm-03 - High memory usage: 94%
+</code></pre></div></div>
+
+<p>Nothing says “great Saturday night” like your monitoring system screaming at 3 AM. What started as a simple container deployment turned into a full-scale digital disaster movie.</p>
+
+<h2 id="the-investigation">The Investigation</h2>
+
+<h3 id="initial-assessment">Initial Assessment</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mayor@docker-swarm-01:~<span class="nv">$ </span>docker service <span class="nb">ls
+</span>ID             NAME                MODE         REPLICAS   IMAGE                    PORTS
+ERROR: Cannot connect to the Docker daemon at unix:///var/run/docker.sock
+</code></pre></div></div>
+
+<p>Perfect. The Docker daemon decided to take an unscheduled vacation. Time for some percussive maintenance on the distributed system.</p>
+
+<h3 id="node-status-check">Node Status Check</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mayor@docker-swarm-manager:~<span class="nv">$ </span>docker node <span class="nb">ls
+</span>ID                            HOSTNAME       STATUS    AVAILABILITY   MANAGER STATUS
+7s8df9s8df9s8df9s8df9s8df9    swarm-01      Down      Active         
+2k3j4k2j34k2j34k2j34k2j34    swarm-02      Ready     Active         Leader
+5m6n5m6n5m6n5m6n5m6n5m6n     swarm-03      Ready     Active         
+</code></pre></div></div>
+
+<p>One node down, but at least the manager is still breathing. Let’s see what chaos the containers have unleashed.</p>
+
+<h2 id="the-plot-thickens">The Plot Thickens</h2>
+
+<h3 id="memory-investigation">Memory Investigation</h3>
+<p>Turns out, one of the containers decided it needed ALL the RAM. Like, literally all of it.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONTAINER ID   NAME                   CPU %     MEM USAGE / LIMIT     MEM %
+a1b2c3d4e5f6   data-processor_1       0.50%     15.8GiB / 16.0GiB     98.75%
+</code></pre></div></div>
+
+<p>A runaway data processing job was trying to process the entire internet. Noble goal, questionable execution.</p>
+
+<h3 id="the-fix">The Fix</h3>
+<ol>
+  <li><strong>Kill the Memory Hog</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">kill </span>a1b2c3d4e5f6
+<span class="c"># Sometimes you gotta be ruthless</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Restart the Down Node</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Drive to basement server room at 3:30 AM</span>
+<span class="c"># Press the power button (classic IT solution)</span>
+<span class="c"># Wait for boot sequence while questioning life choices</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Rebalance Services</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service update <span class="nt">--force</span> data-processor
+<span class="c"># Let Docker figure out where things should go this time</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="lessons-learned">Lessons Learned</h2>
+
+<ol>
+  <li>
+    <p><strong>Resource Limits Are Not Suggestions</strong>: Always set memory limits on containers. Docker is surprisingly eager to give a container all available resources.</p>
+  </li>
+  <li>
+    <p><strong>3 AM is Not Debugging Time</strong>: But sometimes the servers don’t care about your sleep schedule.</p>
+  </li>
+  <li>
+    <p><strong>Monitoring Is Life</strong>: Shoutout to Prometheus for waking me up before everything caught fire.</p>
+  </li>
+  <li>
+    <p><strong>Coffee Is Essential</strong>: Consumed approximately 47 cups during this incident.</p>
+  </li>
+</ol>
+
+<h2 id="the-resolution">The Resolution</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>2024-12-15 04:23:12] INFO: All services restored
+<span class="o">[</span>2024-12-15 04:23:13] INFO: Swarm cluster stable
+<span class="o">[</span>2024-12-15 04:23:14] INFO: mayor going back to bed
+</code></pre></div></div>
+
+<h2 id="prevention-measures">Prevention Measures</h2>
+
+<p>Added to the ever-growing list of “things to do Monday”:</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Implement proper resource quotas</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Set up automated container restart policies</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Install better monitoring for runaway processes</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Buy more coffee</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Consider a career in something less chaotic (lol, as if)</li>
+</ul>
+
+<h2 id="technical-details">Technical Details</h2>
+
+<h3 id="container-resource-configuration">Container Resource Configuration</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># docker-compose.yml - The updated, safer version</span>
+<span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">data-processor</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">data-processor:latest</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">resources</span><span class="pi">:</span>
+        <span class="na">limits</span><span class="pi">:</span>
+          <span class="na">cpus</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2.0'</span>
+          <span class="na">memory</span><span class="pi">:</span> <span class="s">4G</span>
+        <span class="na">reservations</span><span class="pi">:</span>
+          <span class="na">cpus</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1.0'</span>
+          <span class="na">memory</span><span class="pi">:</span> <span class="s">2G</span>
+      <span class="na">restart_policy</span><span class="pi">:</span>
+        <span class="na">condition</span><span class="pi">:</span> <span class="s">on-failure</span>
+        <span class="na">delay</span><span class="pi">:</span> <span class="s">5s</span>
+        <span class="na">max_attempts</span><span class="pi">:</span> <span class="m">3</span>
+        <span class="na">window</span><span class="pi">:</span> <span class="s">120s</span>
+</code></pre></div></div>
+
+<h3 id="monitoring-improvements">Monitoring Improvements</h3>
+<p>Added Prometheus alerts for:</p>
+<ul>
+  <li>Memory usage &gt; 80%</li>
+  <li>CPU usage &gt; 85% sustained for 5 minutes</li>
+  <li>Container restart loops</li>
+  <li>Node disconnections</li>
+</ul>
+
+<h2 id="aftermath">Aftermath</h2>
+
+<p>System has been stable for 48 hours now. The rogue container has been containerized (see what I did there?) with proper resource limits. Sleep has been resumed.</p>
+
+<p><strong>Status</strong>: ✅ RESOLVED<br />
+<strong>Downtime</strong>: 1 hour 23 minutes<br />
+<strong>Coffee Consumed</strong>: Too much<br />
+<strong>Lessons Learned</strong>: Priceless</p>
+
+<hr />
+
+<p><em>Next time: “Why I thought running a Kubernetes cluster on Raspberry Pis was a good idea”</em></p>
+
+        </div>
+    </div>
+
+    <footer class="post-footer">
+        <div class="terminal-prompt">
+            <span class="prompt">root@bytebox:~$</span>
+            <span class="command">echo "EOF reached. Exit code: 0"</span>
+        </div>
+        
+        
+
+        <!-- TODO: Add post navigation -->
+        <div class="post-navigation">
+            
+            <a href="/WebByteBox/lab-logs/2024-12-10-prometheus-monitoring/" class="nav-prev">
+                <span class="nav-label">← Previous</span>
+                <span class="nav-title">Prometheus Monitoring Stack: Watching the Watchers</span>
+            </a>
+            
+            
+            
+            <a href="/WebByteBox/lab-logs/2024-12-28-cyberpunk-homelab-setup/" class="nav-next">
+                <span class="nav-label">Next →</span>
+                <span class="nav-title">Building a Cyberpunk Homelab: Matrix-Style Infrastructure</span>
+            </a>
+            
+        </div>
+    </footer>
+</article>
+
+        </div>
+    </main>
+
+    <!-- Terminal Footer -->
+    <footer class="terminal-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="system-info">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">uptime</span>
+                    <div class="output">
+                        System online since 2025 | 
+                        <span id="uptime-counter">Calculating...</span> | 
+                        Load avg: <span class="neon-green">0.42 0.15 0.09</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <!-- TODO: Add your social/contact links -->
+                    <a href="#" class="footer-link glitch-text" data-text="GitHub">GitHub</a>
+                    <a href="#" class="footer-link glitch-text" data-text="Matrix">Matrix</a>
+                    <a href="/WebByteBox/feed.xml" class="footer-link glitch-text" data-text="RSS">RSS</a>
+                </div>
+            </div>
+        </div>
+    </footer>    <!-- Performance Toggle -->
+    <button class="perf-toggle" onclick="togglePerformanceStats()" title="Toggle Performance Stats" aria-label="Toggle Performance Statistics">
+        📊
+    </button>
+
+    <!-- Scripts -->
+    <script src="/WebByteBox/assets/js/terminal.js"></script>
+    <script src="/WebByteBox/assets/js/glitch.js"></script>
+    <script src="/WebByteBox/assets/js/matrix-clean.js"></script>
+    <script src="/WebByteBox/assets/js/community.js"></script>
+    <script src="/WebByteBox/assets/js/palette-selector.js"></script>
+    <script src="/WebByteBox/assets/js/accessibility.js"></script>
+    <script src="/WebByteBox/assets/js/performance.js"></script>
+    <script src="/WebByteBox/assets/js/search.js"></script>
+    
+    <!-- PWA Installation -->
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/WebByteBox/sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(registrationError => console.log('SW registration failed'));
+            });
+        }
+        
+        // PWA Install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install button
+            const installBtn = document.createElement('button');
+            installBtn.textContent = 'Install App';
+            installBtn.className = 'install-pwa-btn';
+            installBtn.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--neon-green);
+                color: var(--bg-black);
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-family: var(--font-mono);
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 1000;
+                animation: pulse 2s infinite;
+            `;
+            
+            installBtn.addEventListener('click', () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the A2HS prompt');
+                    }
+                    deferredPrompt = null;
+                    installBtn.remove();
+                });
+            });
+            
+            document.body.appendChild(installBtn);
+            
+            // Remove button after 10 seconds if not clicked
+            setTimeout(() => {
+                if (installBtn.parentNode) {
+                    installBtn.remove();
+                }
+            }, 10000);
+        });
+        
+        // Performance Dashboard Toggle
+        function togglePerformanceStats() {
+            const currentState = localStorage.getItem('showPerformanceStats') === 'true';
+            localStorage.setItem('showPerformanceStats', !currentState);
+            
+            if (!currentState) {
+                // Create performance dashboard if it doesn't exist
+                if (window.performanceOptimizer) {
+                    window.performanceOptimizer.createPerformanceDashboard();
+                }
+            } else {
+                // Remove performance dashboard
+                const dashboard = document.getElementById('performance-dashboard');
+                if (dashboard) {
+                    dashboard.remove();
+                }
+            }
+        }
+        
+        // Initialize performance optimizer
+        window.addEventListener('load', () => {
+            window.performanceOptimizer = new PerformanceOptimizer();
+        });
+    </script>
+    
+    <!-- TODO: Add analytics if needed -->
+</body>
+</html>

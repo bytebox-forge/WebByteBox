@@ -1,0 +1,217 @@
+---
+layout: default
+title: "Projects & Experiments"
+---
+
+<div class="projects-terminal">
+    <div class="terminal-window">
+        <div class="terminal-title-bar">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+            <span class="terminal-title">mayor@bytebox:~$ find ~/projects -type f -name "*.active"</span>
+        </div>
+        
+        <div class="terminal-content">
+            <div class="command-output">
+                <div class="project-category">
+                    <h2 class="category-title neon-green">🏠 HOMELAB INFRASTRUCTURE</h2>
+                    <div class="project-grid">
+                        <div class="project-card">
+                            <h3 class="project-name amber">Docker Swarm Cluster</h3>
+                            <p class="project-description">Multi-node Docker Swarm running on Raspberry Pi 4s</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Docker</span>
+                                <span class="tech-tag">Raspberry Pi</span>
+                                <span class="tech-tag">Portainer</span>
+                            </div>
+                            <div class="project-status">
+                                <span class="status-indicator running"></span>
+                                <span class="status-text">ACTIVE</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <h3 class="project-name purple">Self-Hosted Monitoring Stack</h3>
+                            <p class="project-description">Prometheus, Grafana, and AlertManager for infrastructure monitoring</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Prometheus</span>
+                                <span class="tech-tag">Grafana</span>
+                                <span class="tech-tag">Docker</span>
+                            </div>
+                            <div class="project-status">
+                                <span class="status-indicator running"></span>
+                                <span class="status-text">MONITORING</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-category">
+                    <h2 class="category-title neon-green">🔒 SECURITY EXPERIMENTS</h2>
+                    <div class="project-grid">
+                        <div class="project-card">
+                            <h3 class="project-name red">Network Penetration Testing Lab</h3>
+                            <p class="project-description">Isolated network for ethical hacking practice</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">VirtualBox</span>
+                                <span class="tech-tag">Kali Linux</span>
+                                <span class="tech-tag">pfSense</span>
+                            </div>
+                            <div class="project-status">
+                                <span class="status-indicator testing"></span>
+                                <span class="status-text">TESTING</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <h3 class="project-name amber">Honeypot Network</h3>
+                            <p class="project-description">Detecting and analyzing malicious activity</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Honeyd</span>
+                                <span class="tech-tag">ELK Stack</span>
+                                <span class="tech-tag">iptables</span>
+                            </div>
+                            <div class="project-status">
+                                <span class="status-indicator running"></span>
+                                <span class="status-text">COLLECTING</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-category">
+                    <h2 class="category-title neon-green">⚡ AUTOMATION & SCRIPTING</h2>
+                    <div class="project-grid">
+                        <div class="project-card">
+                            <h3 class="project-name neon-green">Infrastructure as Code</h3>
+                            <p class="project-description">Terraform and Ansible for automated deployments</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Terraform</span>
+                                <span class="tech-tag">Ansible</span>
+                                <span class="tech-tag">GitLab CI</span>
+                            </div>
+                            <div class="project-status">
+                                <span class="status-indicator development"></span>
+                                <span class="status-text">EVOLVING</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <h3 class="project-name purple">Smart Home Integration</h3>
+                            <p class="project-description">Home Assistant with custom automations</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Home Assistant</span>
+                                <span class="tech-tag">MQTT</span>
+                                <span class="tech-tag">Python</span>
+                            </div>
+                            <div class="project-status">
+                                <span class="status-indicator running"></span>
+                                <span class="status-text">AUTOMATED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="terminal-prompt">
+                <span class="prompt">mayor@bytebox:~/projects$</span>
+                <span class="cursor blink">█</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.project-card {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--terminal-border);
+    border-radius: 6px;
+    padding: var(--spacing-md);
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    border-color: var(--neon-green);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+    transform: translateY(-2px);
+}
+
+.project-name {
+    font-size: 1.2em;
+    margin-bottom: var(--spacing-sm);
+}
+
+.project-description {
+    color: var(--terminal-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.4;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.tech-tag {
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid var(--neon-green);
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-size: 0.8em;
+    color: var(--neon-green);
+}
+
+.project-status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    
+    &.running { background: var(--neon-green); }
+    &.testing { background: var(--amber); }
+    &.development { background: var(--purple); }
+}
+
+.status-text {
+    font-size: 0.8em;
+    color: var(--terminal-text);
+    font-weight: bold;
+}
+
+.category-title {
+    font-size: 1.4em;
+    margin: var(--spacing-xl) 0 var(--spacing-md) 0;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--terminal-border);
+}
+
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .project-card {
+        padding: var(--spacing-sm);
+    }
+    
+    .category-title {
+        font-size: 1.2em;
+    }
+}
+</style>

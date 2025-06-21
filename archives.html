@@ -1,0 +1,298 @@
+---
+layout: default
+title: "Archives & Lab Logs"
+---
+
+<div class="archives-terminal">
+    <div class="terminal-window">
+        <div class="terminal-title-bar">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+            <span class="terminal-title">mayor@bytebox:~$ tail -f ~/logs/lab_experiments.log</span>
+        </div>
+        
+        <div class="terminal-content">
+            <div class="archive-header">
+                <div class="cmd-line">
+                    <span class="prompt">mayor@bytebox:~/logs$</span>
+                    <span class="command">find . -name "*.log" -type f | head -20</span>
+                </div>
+            </div>
+            
+            <div class="logs-container">
+                {% assign sorted_posts = site.lab-logs | sort: 'date' | reverse %}
+                {% for post in sorted_posts limit: 10 %}
+                <div class="log-entry">
+                    <div class="log-timestamp">
+                        <span class="timestamp neon-green">[{{ post.date | date: "%Y-%m-%d %H:%M:%S" }}]</span>
+                        <span class="log-level {{ post.level | default: 'INFO' | downcase }}">{{ post.level | default: 'INFO' }}</span>
+                    </div>
+                    <div class="log-content">
+                        <h3 class="log-title">
+                            <a href="{{ post.url | relative_url }}" class="log-link">{{ post.title }}</a>
+                        </h3>
+                        <p class="log-description">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+                        {% if post.tags %}
+                        <div class="log-tags">
+                            {% for tag in post.tags %}
+                            <span class="log-tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <!-- Sample entries if no posts exist yet -->
+                {% if site.lab-logs.size == 0 %}
+                <div class="log-entry">
+                    <div class="log-timestamp">
+                        <span class="timestamp neon-green">[2024-12-28 03:42:17]</span>
+                        <span class="log-level warn">WARN</span>
+                    </div>
+                    <div class="log-content">
+                        <h3 class="log-title">
+                            <a href="#" class="log-link">Docker Swarm Node Mysteriously Disappeared</a>
+                        </h3>
+                        <p class="log-description">One of the Pi nodes in the Docker Swarm cluster decided to take an unscheduled vacation. Investigating network connectivity issues and potential power supply problems...</p>
+                        <div class="log-tags">
+                            <span class="log-tag">docker</span>
+                            <span class="log-tag">raspberry-pi</span>
+                            <span class="log-tag">networking</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="log-entry">
+                    <div class="log-timestamp">
+                        <span class="timestamp neon-green">[2024-12-25 23:11:43]</span>
+                        <span class="log-level info">INFO</span>
+                    </div>
+                    <div class="log-content">
+                        <h3 class="log-title">
+                            <a href="#" class="log-link">Successfully Implemented Zero-Trust Network Segmentation</a>
+                        </h3>
+                        <p class="log-description">After weeks of configuration, the homelab now has proper network segmentation with pfSense. Each VLAN is isolated with specific firewall rules. No more wondering if IoT devices are plotting against me...</p>
+                        <div class="log-tags">
+                            <span class="log-tag">pfsense</span>
+                            <span class="log-tag">networking</span>
+                            <span class="log-tag">security</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="log-entry">
+                    <div class="log-timestamp">
+                        <span class="timestamp neon-green">[2024-12-20 14:33:22]</span>
+                        <span class="log-level error">ERROR</span>
+                    </div>
+                    <div class="log-content">
+                        <h3 class="log-title">
+                            <a href="#" class="log-link">Kubernetes Cluster Self-Destructed (Again)</a>
+                        </h3>
+                        <p class="log-description">The K8s cluster decided to commit digital suicide during what should have been a simple pod restart. Investigating etcd corruption and contemplating whether Docker Swarm was the right choice after all...</p>
+                        <div class="log-tags">
+                            <span class="log-tag">kubernetes</span>
+                            <span class="log-tag">disaster-recovery</span>
+                            <span class="log-tag">existential-crisis</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="log-entry">
+                    <div class="log-timestamp">
+                        <span class="timestamp neon-green">[2024-12-15 09:17:05]</span>
+                        <span class="log-level info">INFO</span>
+                    </div>
+                    <div class="log-content">
+                        <h3 class="log-title">
+                            <a href="#" class="log-link">Home Assistant Achieved Sentience</a>
+                        </h3>
+                        <p class="log-description">The Home Assistant automation system has become suspiciously good at predicting my behavior. It now turns on lights before I enter rooms and starts the coffee maker before my alarm goes off. Should I be concerned?</p>
+                        <div class="log-tags">
+                            <span class="log-tag">home-assistant</span>
+                            <span class="log-tag">automation</span>
+                            <span class="log-tag">ai-uprising</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="log-footer">
+                <div class="log-stats">
+                    <span class="stat-item">
+                        <span class="stat-label">Total Entries:</span>
+                        <span class="stat-value neon-green">{{ site.lab-logs.size | default: '∞' }}</span>
+                    </span>
+                    <span class="stat-item">
+                        <span class="stat-label">Coffee Consumed:</span>
+                        <span class="stat-value amber">CRITICAL LEVELS</span>
+                    </span>
+                    <span class="stat-item">
+                        <span class="stat-label">Sleep Deprivation:</span>
+                        <span class="stat-value red">MAXIMUM</span>
+                    </span>
+                </div>
+                
+                <div class="terminal-prompt">
+                    <span class="prompt">mayor@bytebox:~/logs$</span>
+                    <span class="cursor blink">█</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.logs-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    margin: var(--spacing-lg) 0;
+    border: 1px solid var(--terminal-border);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.log-entry {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+    transition: all 0.3s ease;
+}
+
+.log-entry:hover {
+    background: rgba(0, 255, 65, 0.05);
+    border-left: 3px solid var(--neon-green);
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+.log-timestamp {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.timestamp {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+.log-level {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.7em;
+    font-weight: bold;
+    text-align: center;
+    
+    &.info {
+        background: rgba(0, 255, 65, 0.2);
+        color: var(--neon-green);
+    }
+    
+    &.warn {
+        background: rgba(255, 176, 0, 0.2);
+        color: var(--amber);
+    }
+    
+    &.error {
+        background: rgba(255, 0, 64, 0.2);
+        color: var(--red);
+    }
+}
+
+.log-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.log-title {
+    margin: 0;
+}
+
+.log-link {
+    color: var(--neon-green);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.log-link:hover {
+    text-shadow: 0 0 10px var(--neon-green-glow);
+    text-decoration: underline;
+}
+
+.log-description {
+    color: var(--terminal-text);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.log-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.log-tag {
+    background: rgba(138, 43, 226, 0.2);
+    color: var(--purple);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.7em;
+    border: 1px solid var(--purple);
+}
+
+.log-stats {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-md);
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--terminal-border);
+    border-radius: 4px;
+}
+
+.stat-item {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.stat-label {
+    color: var(--terminal-text);
+    font-size: 0.9em;
+}
+
+.stat-value {
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+    .log-entry {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .log-timestamp {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .log-stats {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .logs-container {
+        max-height: 50vh;
+    }
+}
+</style>

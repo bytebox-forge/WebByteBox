@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspberry Pi Kubernetes Cluster: Because Why Not? - Byte Box</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Building a Kubernetes cluster on Raspberry Pi 4s - a tale of tiny computers doing big things, questionable life choices, and surprising performance.">
+    <meta name="keywords" content="homelab, cyberpunk, docker, kubernetes, raspberry pi, networking, automation, security, monitoring, infrastructure">
+    <meta name="author" content="Mayor">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Raspberry Pi Kubernetes Cluster: Because Why Not? - Byte Box">
+    <meta property="og:description" content="Building a Kubernetes cluster on Raspberry Pi 4s - a tale of tiny computers doing big things, questionable life choices, and surprising performance.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://localhost:4000/WebByteBox/lab-logs/2024-12-05-raspberry-pi-kubernetes/">
+    <meta property="og:image" content="http://localhost:4000/WebByteBox/assets/img/og-image.png">
+    <meta property="og:site_name" content="Byte Box">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Raspberry Pi Kubernetes Cluster: Because Why Not? - Byte Box">
+    <meta name="twitter:description" content="Building a Kubernetes cluster on Raspberry Pi 4s - a tale of tiny computers doing big things, questionable life choices, and surprising performance.">
+    <meta name="twitter:image" content="http://localhost:4000/WebByteBox/assets/img/twitter-card.png">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#00ff41">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ByteBox">
+    <meta name="application-name" content="ByteBox">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="/WebByteBox/assets/img/icon-144x144.png">
+    
+    <!-- Cyberpunk Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/WebByteBox/manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="/WebByteBox/assets/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/WebByteBox/assets/img/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/WebByteBox/assets/img/icon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/WebByteBox/assets/img/apple-touch-icon.png">
+    
+    <!-- Custom Cyberpunk Styles -->
+    <link rel="stylesheet" href="/WebByteBox/assets/css/main.css">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/WebByteBox/assets/js/matrix-clean.js" as="script">
+    <link rel="preload" href="/WebByteBox/assets/js/palette-selector.js" as="script">
+    
+    <!-- SEO and Meta -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Raspberry Pi Kubernetes Cluster: Because Why Not? | Byte Box</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Raspberry Pi Kubernetes Cluster: Because Why Not?" />
+<meta name="author" content="Mayor" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Building a Kubernetes cluster on Raspberry Pi 4s - a tale of tiny computers doing big things, questionable life choices, and surprising performance." />
+<meta property="og:description" content="Building a Kubernetes cluster on Raspberry Pi 4s - a tale of tiny computers doing big things, questionable life choices, and surprising performance." />
+<link rel="canonical" href="http://localhost:4000/WebByteBox/lab-logs/2024-12-05-raspberry-pi-kubernetes/" />
+<meta property="og:url" content="http://localhost:4000/WebByteBox/lab-logs/2024-12-05-raspberry-pi-kubernetes/" />
+<meta property="og:site_name" content="Byte Box" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-12-05T15:15:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Raspberry Pi Kubernetes Cluster: Because Why Not?" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Mayor"},"dateModified":"2024-12-05T15:15:00-05:00","datePublished":"2024-12-05T15:15:00-05:00","description":"Building a Kubernetes cluster on Raspberry Pi 4s - a tale of tiny computers doing big things, questionable life choices, and surprising performance.","headline":"Raspberry Pi Kubernetes Cluster: Because Why Not?","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/WebByteBox/lab-logs/2024-12-05-raspberry-pi-kubernetes/"},"url":"http://localhost:4000/WebByteBox/lab-logs/2024-12-05-raspberry-pi-kubernetes/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/WebByteBox/feed.xml" title="Byte Box" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "name": "Byte Box",
+      "description": "A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem",
+      "url": "http://localhost:4000/WebByteBox",
+      
+      "headline": "Raspberry Pi Kubernetes Cluster: Because Why Not?",
+      "datePublished": "2024-12-05T15:15:00-05:00",
+      "dateModified": "2024-12-05T15:15:00-05:00",
+      
+      "author": {
+        "@type": "Person",
+        "name": "Mayor"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Byte Box",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "http://localhost:4000/WebByteBox/assets/img/logo.png"
+        }
+      }
+    }
+    </script>
+    
+    <!-- CRT Effect Toggle -->
+    <script>
+        // TODO: Add localStorage toggle for CRT effects
+        const crtEnabled = localStorage.getItem('crt-mode') !== 'false';
+    </script>
+</head>
+<body class="crt-mode">
+    <!-- Matrix-style background pattern -->
+    <div class="matrix-bg" id="matrix-bg"></div>
+    
+    <!-- CRT Scanlines Overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- Terminal-style Header -->
+    <header class="terminal-header">
+        <div class="container">
+            <div class="terminal-window">                <div class="terminal-title-bar">
+                    <span class="terminal-button close"></span>
+                    <span class="terminal-button minimize"></span>
+                    <span class="terminal-button maximize"></span>
+                    <span class="terminal-title">root@bytebox:~$ ./bytebox</span>
+                    
+                    <!-- Palette Selector -->
+                    <div class="palette-selector">
+                        <span class="palette-label">THEME:</span>
+                        <div class="palette-options">
+                            <button class="palette-option active" data-theme="classic-green" title="Matrix Green">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00ff00, #008000);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="cyber-blue" title="Cyber Blue">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00d4ff, #0066cc);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="hacker-red" title="Hacker Red">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ff0040, #cc0033);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="retro-amber" title="Retro Amber">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ffaa00, #cc8800);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="purple-haze" title="Purple Haze">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #aa00ff, #6600cc);"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div><nav class="terminal-nav">
+                    <a href="/WebByteBox/" class="nav-link ">~/home</a>
+                    <a href="/WebByteBox/about.html" class="nav-link ">./whoami</a>
+                    <a href="/WebByteBox/lab-logs/" class="nav-link active">./lab-logs</a>
+                    <a href="/WebByteBox/modules/" class="nav-link ">./modules</a>
+                    <a href="/WebByteBox/payloads/" class="nav-link ">./payloads</a>
+                    <a href="/WebByteBox/blackbox/" class="nav-link ">./blackbox</a>
+                    <a href="/WebByteBox/community.html" class="nav-link ">./community</a>
+                    <a href="/WebByteBox/contact.html" class="nav-link ">./contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <article class="terminal-post">
+    <header class="post-header">
+        <div class="terminal-window">
+            <div class="terminal-title-bar">
+                <span class="terminal-button close"></span>
+                <span class="terminal-button minimize"></span>
+                <span class="terminal-button maximize"></span>
+                <span class="terminal-title">root@bytebox:~$ cat raspberry-pi-kubernetes-cluster-because-why-not.md</span>
+            </div>
+            <div class="post-meta">
+                <span class="prompt">root@bytebox:~$</span>
+                <span class="command">ls -la raspberry-pi-kubernetes-cluster-because-why-not.md</span>
+                <div class="file-info">
+                    <span class="permissions">-rw-r--r--</span>
+                    <span class="owner">root</span>
+                    <span class="group">bytebox</span>
+                    <span class="size">15949</span>
+                    <span class="date">Dec 05 15:15</span>
+                    <span class="filename neon-green">raspberry-pi-kubernetes-cluster-because-why-not.md</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="post-content terminal-content">
+        <h1 class="post-title glitch-text" data-text="Raspberry Pi Kubernetes Cluster: Because Why Not?">Raspberry Pi Kubernetes Cluster: Because Why Not?</h1>
+        
+        
+        <div class="post-description">
+            <span class="prompt">root@bytebox:~$</span>
+            <span class="command">head -n 1 raspberry-pi-kubernetes-cluster-because-why-not.md</span>
+            <div class="output">Building a Kubernetes cluster on Raspberry Pi 4s - a tale of tiny computers doing big things, questionable life choices, and surprising performance.</div>
+        </div>
+        
+
+        
+        <div class="post-tags">
+            <span class="prompt">root@bytebox:~$</span>
+            <span class="command">grep -o "#[a-zA-Z0-9_]*" raspberry-pi-kubernetes-cluster-because-why-not.md</span>
+            <div class="output">
+                
+                <span class="tag">#kubernetes</span>
+                
+                <span class="tag">#raspberry-pi</span>
+                
+                <span class="tag">#k3s</span>
+                
+                <span class="tag">#cluster</span>
+                
+                <span class="tag">#masochism</span>
+                
+            </div>
+        </div>
+        
+
+        <div class="content-body">
+            <h2 id="the-questionable-decision">The Questionable Decision</h2>
+
+<p>Someone on Reddit said “you can run Kubernetes on Raspberry Pis” and my brain translated that to “you SHOULD run Kubernetes on Raspberry Pis.”</p>
+
+<p>Narrator: <em>He should not have.</em></p>
+
+<p>But here we are, with 8 Raspberry Pi 4s pretending to be a serious Kubernetes cluster.</p>
+
+<h2 id="the-hardware">The Hardware</h2>
+
+<p><strong>Cluster Specifications:</strong></p>
+<ul>
+  <li>8x Raspberry Pi 4 (8GB RAM each)</li>
+  <li>8x 128GB Samsung EVO Select microSD cards</li>
+  <li>1x 8-port Gigabit switch</li>
+  <li>1x Custom 3D-printed rack (because aesthetics matter)</li>
+  <li>1x Lot of patience</li>
+</ul>
+
+<p><strong>Network Layout:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pi-k8s-master-01  (192.168.1.10) - Control Plane
+pi-k8s-master-02  (192.168.1.11) - Control Plane  
+pi-k8s-master-03  (192.168.1.12) - Control Plane
+pi-k8s-worker-01  (192.168.1.20) - Worker Node
+pi-k8s-worker-02  (192.168.1.21) - Worker Node
+pi-k8s-worker-03  (192.168.1.22) - Worker Node
+pi-k8s-worker-04  (192.168.1.23) - Worker Node
+pi-k8s-worker-05  (192.168.1.24) - Worker Node
+</code></pre></div></div>
+
+<h2 id="installation-journey">Installation Journey</h2>
+
+<h3 id="step-1-ubuntu-server-setup">Step 1: Ubuntu Server Setup</h3>
+<p>Because Raspberry Pi OS is for people who like their lives easy.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Flash Ubuntu Server 22.04 LTS to all 8 SD cards</span>
+<span class="c"># Enable SSH and set up SSH keys</span>
+<span class="c"># Update all the things</span>
+<span class="nb">sudo </span>apt update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt upgrade <span class="nt">-y</span>
+<span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> curl wget vim git
+</code></pre></div></div>
+
+<h3 id="step-2-k3s-installation">Step 2: K3s Installation</h3>
+<p>Chose K3s because it’s Kubernetes for people who don’t hate themselves <em>that</em> much.</p>
+
+<p><strong>Master Node Setup:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># On first master node</span>
+curl <span class="nt">-sfL</span> https://get.k3s.io | sh <span class="nt">-s</span> - server <span class="nt">--cluster-init</span>
+
+<span class="c"># Get the token for other nodes</span>
+<span class="nb">sudo cat</span> /var/lib/rancher/k3s/server/node-token
+</code></pre></div></div>
+
+<p><strong>Additional Masters:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># On remaining master nodes</span>
+curl <span class="nt">-sfL</span> https://get.k3s.io | sh <span class="nt">-s</span> - server <span class="se">\</span>
+  <span class="nt">--server</span> https://192.168.1.10:6443 <span class="se">\</span>
+  <span class="nt">--token</span> &lt;TOKEN_FROM_FIRST_MASTER&gt;
+</code></pre></div></div>
+
+<p><strong>Worker Nodes:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># On worker nodes</span>
+curl <span class="nt">-sfL</span> https://get.k3s.io | <span class="nv">K3S_URL</span><span class="o">=</span>https://192.168.1.10:6443 <span class="se">\</span>
+  <span class="nv">K3S_TOKEN</span><span class="o">=</span>&lt;TOKEN&gt; sh -
+</code></pre></div></div>
+
+<h2 id="the-cluster-in-action">The Cluster in Action</h2>
+
+<p><strong>Node Status:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get nodes <span class="nt">-o</span> wide
+NAME               STATUS   ROLES                       AGE     VERSION
+pi-k8s-master-01   Ready    control-plane,etcd,master   12d     v1.28.4+k3s2
+pi-k8s-master-02   Ready    control-plane,etcd,master   12d     v1.28.4+k3s2
+pi-k8s-master-03   Ready    control-plane,etcd,master   12d     v1.28.4+k3s2
+pi-k8s-worker-01   Ready    &lt;none&gt;                      12d     v1.28.4+k3s2
+pi-k8s-worker-02   Ready    &lt;none&gt;                      12d     v1.28.4+k3s2
+pi-k8s-worker-03   Ready    &lt;none&gt;                      12d     v1.28.4+k3s2
+pi-k8s-worker-04   Ready    &lt;none&gt;                      12d     v1.28.4+k3s2
+pi-k8s-worker-05   Ready    &lt;none&gt;                      12d     v1.28.4+k3s2
+</code></pre></div></div>
+
+<p><strong>Cluster Resources:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl describe nodes | <span class="nb">grep</span> <span class="nt">-A</span> 5 <span class="s2">"Capacity:"</span>
+Capacity:
+  cpu:                4
+  ephemeral-storage:  125293548Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             8010840Ki
+</code></pre></div></div>
+
+<p>Total cluster capacity: 32 CPU cores, 64GB RAM. Not bad for a bunch of credit card-sized computers.</p>
+
+<h2 id="deployed-applications">Deployed Applications</h2>
+
+<h3 id="nginx-ingress-controller">Nginx Ingress Controller</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nginx-ingress-controller</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">LoadBalancer</span>
+  <span class="na">externalIPs</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">192.168.1.100</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
+      <span class="na">targetPort</span><span class="pi">:</span> <span class="m">80</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">http</span>
+    <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">443</span>
+      <span class="na">targetPort</span><span class="pi">:</span> <span class="m">443</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">https</span>
+</code></pre></div></div>
+
+<h3 id="monitoring-stack">Monitoring Stack</h3>
+<p>Yes, we’re monitoring the monitors. It’s monitors all the way down.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Prometheus on ARM64</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">prometheus</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">prometheus</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">prometheus</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">prometheus</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">prom/prometheus:latest</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">requests</span><span class="pi">:</span>
+            <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">512Mi"</span>
+            <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">500m"</span>
+          <span class="na">limits</span><span class="pi">:</span>
+            <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1Gi"</span>
+            <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1000m"</span>
+</code></pre></div></div>
+
+<h3 id="demo-applications">Demo Applications</h3>
+<p>Because what’s a Kubernetes cluster without some apps that serve cat pictures?</p>
+
+<p><strong>Cat Picture API:</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">cat-api</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">cat-api</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">cat-api</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">cat-api</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:alpine</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">requests</span><span class="pi">:</span>
+            <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">64Mi"</span>
+            <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">50m"</span>
+          <span class="na">limits</span><span class="pi">:</span>
+            <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">128Mi"</span>
+            <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">100m"</span>
+</code></pre></div></div>
+
+<h2 id="performance-metrics">Performance Metrics</h2>
+
+<p><strong>Cluster Stats After 2 Weeks:</strong></p>
+<ul>
+  <li><strong>Uptime</strong>: 99.2% (that 0.8% was me accidentally unplugging things)</li>
+  <li><strong>Average CPU Usage</strong>: 15% across all nodes</li>
+  <li><strong>Memory Usage</strong>: ~40% (Kubernetes itself is surprisingly hungry)</li>
+  <li><strong>Pod Density</strong>: ~25 pods per node before things get interesting</li>
+</ul>
+
+<p><strong>Load Testing Results:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Using hey to load test nginx</span>
+hey <span class="nt">-n</span> 10000 <span class="nt">-c</span> 100 http://192.168.1.100
+
+Summary:
+  Total:        45.2341 secs
+  Slowest:      2.1234 secs
+  Fastest:      0.0123 secs
+  Average:      0.4521 secs
+  Requests/sec: 221.10
+</code></pre></div></div>
+
+<p>Not bad for a bunch of SBCs!</p>
+
+<h2 id="challenges-faced">Challenges Faced</h2>
+
+<h3 id="1-arm64-container-images">1. ARM64 Container Images</h3>
+<p>Half the Docker images on Docker Hub don’t have ARM64 builds. It’s 2024, people!</p>
+
+<h3 id="2-sd-card-reliability">2. SD Card Reliability</h3>
+<p>One SD card failed after 8 days. Lesson learned: enterprise storage exists for a reason.</p>
+
+<h3 id="3-power-management">3. Power Management</h3>
+<p>8 Pi 4s at full load = significant power draw. The UPS was not amused.</p>
+
+<h3 id="4-heat-management">4. Heat Management</h3>
+<p>Even with heatsinks, summer deployment required additional cooling. Tiny computers, big heat.</p>
+
+<h2 id="lessons-learned">Lessons Learned</h2>
+
+<ol>
+  <li><strong>K3s is Amazing</strong>: Lightweight Kubernetes that actually works</li>
+  <li><strong>ARM64 Ecosystem</strong>: Better than expected, but still has gaps</li>
+  <li><strong>Persistent Storage</strong>: NFS works, but NVMe would be better</li>
+  <li><strong>Power Planning</strong>: Calculate power requirements before deployment</li>
+  <li><strong>Cooling is Critical</strong>: Small computers still need airflow</li>
+</ol>
+
+<h2 id="cost-breakdown">Cost Breakdown</h2>
+
+<ul>
+  <li>8x Raspberry Pi 4 (8GB): $75 each = $600</li>
+  <li>8x 128GB microSD cards: $20 each = $160</li>
+  <li>Network switch: $80</li>
+  <li>Cables and accessories: $50</li>
+  <li>Custom rack materials: $30</li>
+  <li><strong>Total</strong>: $920</li>
+</ul>
+
+<p>For comparison, a single server with similar specs would cost $2,000+. The Pi cluster wins on cost but loses on single-threaded performance.</p>
+
+<h2 id="current-workloads">Current Workloads</h2>
+
+<p>The cluster is currently running:</p>
+<ul>
+  <li><strong>Monitoring stack</strong> (Prometheus, Grafana)</li>
+  <li><strong>CI/CD pipeline</strong> (Tekton)</li>
+  <li><strong>Development environments</strong> (Various web apps)</li>
+  <li><strong>Home automation</strong> (Node-RED, Home Assistant)</li>
+  <li><strong>Learning platform</strong> (JupyterHub)</li>
+</ul>
+
+<h2 id="future-plans">Future Plans</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Add persistent storage with NFS</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Implement GitOps with ArgoCD</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Deploy service mesh (Istio/Linkerd)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Add more monitoring and alerting</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Experiment with machine learning workloads</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Build a proper custom enclosure</li>
+</ul>
+
+<h2 id="would-i-do-it-again">Would I Do It Again?</h2>
+
+<p><strong>Absolutely.</strong></p>
+
+<p>This cluster has been surprisingly stable and performant. It’s perfect for:</p>
+<ul>
+  <li>Learning Kubernetes</li>
+  <li>Development environments</li>
+  <li>Home automation</li>
+  <li>Light production workloads</li>
+  <li>Impressing visitors</li>
+</ul>
+
+<p><strong>Status</strong>: ✅ PRODUCTION (ish)<br />
+<strong>Reliability</strong>: Better than expected<br />
+<strong>Performance</strong>: Adequate for most tasks<br />
+<strong>Cool Factor</strong>: Maximum<br />
+<strong>Wife Approval</strong>: Pending…</p>
+
+<p>The Raspberry Pi Kubernetes cluster: proving that sometimes the best ideas start with “that’s probably a terrible idea, but let’s try it anyway.”</p>
+
+<hr />
+
+<p><em>Coming next: “Why My NAS Became Sentient and Started Ordering Its Own Hard Drives”</em></p>
+
+        </div>
+    </div>
+
+    <footer class="post-footer">
+        <div class="terminal-prompt">
+            <span class="prompt">root@bytebox:~$</span>
+            <span class="command">echo "EOF reached. Exit code: 0"</span>
+        </div>
+        
+        
+
+        <!-- TODO: Add post navigation -->
+        <div class="post-navigation">
+            
+            
+            
+            <a href="/WebByteBox/lab-logs/2024-12-10-prometheus-monitoring/" class="nav-next">
+                <span class="nav-label">Next →</span>
+                <span class="nav-title">Prometheus Monitoring Stack: Watching the Watchers</span>
+            </a>
+            
+        </div>
+    </footer>
+</article>
+
+        </div>
+    </main>
+
+    <!-- Terminal Footer -->
+    <footer class="terminal-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="system-info">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">uptime</span>
+                    <div class="output">
+                        System online since 2025 | 
+                        <span id="uptime-counter">Calculating...</span> | 
+                        Load avg: <span class="neon-green">0.42 0.15 0.09</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <!-- TODO: Add your social/contact links -->
+                    <a href="#" class="footer-link glitch-text" data-text="GitHub">GitHub</a>
+                    <a href="#" class="footer-link glitch-text" data-text="Matrix">Matrix</a>
+                    <a href="/WebByteBox/feed.xml" class="footer-link glitch-text" data-text="RSS">RSS</a>
+                </div>
+            </div>
+        </div>
+    </footer>    <!-- Performance Toggle -->
+    <button class="perf-toggle" onclick="togglePerformanceStats()" title="Toggle Performance Stats" aria-label="Toggle Performance Statistics">
+        📊
+    </button>
+
+    <!-- Scripts -->
+    <script src="/WebByteBox/assets/js/terminal.js"></script>
+    <script src="/WebByteBox/assets/js/glitch.js"></script>
+    <script src="/WebByteBox/assets/js/matrix-clean.js"></script>
+    <script src="/WebByteBox/assets/js/community.js"></script>
+    <script src="/WebByteBox/assets/js/palette-selector.js"></script>
+    <script src="/WebByteBox/assets/js/accessibility.js"></script>
+    <script src="/WebByteBox/assets/js/performance.js"></script>
+    <script src="/WebByteBox/assets/js/search.js"></script>
+    
+    <!-- PWA Installation -->
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/WebByteBox/sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(registrationError => console.log('SW registration failed'));
+            });
+        }
+        
+        // PWA Install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install button
+            const installBtn = document.createElement('button');
+            installBtn.textContent = 'Install App';
+            installBtn.className = 'install-pwa-btn';
+            installBtn.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--neon-green);
+                color: var(--bg-black);
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-family: var(--font-mono);
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 1000;
+                animation: pulse 2s infinite;
+            `;
+            
+            installBtn.addEventListener('click', () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the A2HS prompt');
+                    }
+                    deferredPrompt = null;
+                    installBtn.remove();
+                });
+            });
+            
+            document.body.appendChild(installBtn);
+            
+            // Remove button after 10 seconds if not clicked
+            setTimeout(() => {
+                if (installBtn.parentNode) {
+                    installBtn.remove();
+                }
+            }, 10000);
+        });
+        
+        // Performance Dashboard Toggle
+        function togglePerformanceStats() {
+            const currentState = localStorage.getItem('showPerformanceStats') === 'true';
+            localStorage.setItem('showPerformanceStats', !currentState);
+            
+            if (!currentState) {
+                // Create performance dashboard if it doesn't exist
+                if (window.performanceOptimizer) {
+                    window.performanceOptimizer.createPerformanceDashboard();
+                }
+            } else {
+                // Remove performance dashboard
+                const dashboard = document.getElementById('performance-dashboard');
+                if (dashboard) {
+                    dashboard.remove();
+                }
+            }
+        }
+        
+        // Initialize performance optimizer
+        window.addEventListener('load', () => {
+            window.performanceOptimizer = new PerformanceOptimizer();
+        });
+    </script>
+    
+    <!-- TODO: Add analytics if needed -->
+</body>
+</html>

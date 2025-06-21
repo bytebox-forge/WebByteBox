@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prometheus Monitoring Stack: Watching the Watchers - Byte Box</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Setting up a comprehensive monitoring stack with Prometheus, Grafana, and AlertManager to keep my homelab infrastructure under surveillance.">
+    <meta name="keywords" content="homelab, cyberpunk, docker, kubernetes, raspberry pi, networking, automation, security, monitoring, infrastructure">
+    <meta name="author" content="Mayor">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Prometheus Monitoring Stack: Watching the Watchers - Byte Box">
+    <meta property="og:description" content="Setting up a comprehensive monitoring stack with Prometheus, Grafana, and AlertManager to keep my homelab infrastructure under surveillance.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://localhost:4000/WebByteBox/lab-logs/2024-12-10-prometheus-monitoring/">
+    <meta property="og:image" content="http://localhost:4000/WebByteBox/assets/img/og-image.png">
+    <meta property="og:site_name" content="Byte Box">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prometheus Monitoring Stack: Watching the Watchers - Byte Box">
+    <meta name="twitter:description" content="Setting up a comprehensive monitoring stack with Prometheus, Grafana, and AlertManager to keep my homelab infrastructure under surveillance.">
+    <meta name="twitter:image" content="http://localhost:4000/WebByteBox/assets/img/twitter-card.png">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#00ff41">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ByteBox">
+    <meta name="application-name" content="ByteBox">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="/WebByteBox/assets/img/icon-144x144.png">
+    
+    <!-- Cyberpunk Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/WebByteBox/manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="/WebByteBox/assets/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/WebByteBox/assets/img/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/WebByteBox/assets/img/icon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/WebByteBox/assets/img/apple-touch-icon.png">
+    
+    <!-- Custom Cyberpunk Styles -->
+    <link rel="stylesheet" href="/WebByteBox/assets/css/main.css">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/WebByteBox/assets/js/matrix-clean.js" as="script">
+    <link rel="preload" href="/WebByteBox/assets/js/palette-selector.js" as="script">
+    
+    <!-- SEO and Meta -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Prometheus Monitoring Stack: Watching the Watchers | Byte Box</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Prometheus Monitoring Stack: Watching the Watchers" />
+<meta name="author" content="Mayor" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Setting up a comprehensive monitoring stack with Prometheus, Grafana, and AlertManager to keep my homelab infrastructure under surveillance." />
+<meta property="og:description" content="Setting up a comprehensive monitoring stack with Prometheus, Grafana, and AlertManager to keep my homelab infrastructure under surveillance." />
+<link rel="canonical" href="http://localhost:4000/WebByteBox/lab-logs/2024-12-10-prometheus-monitoring/" />
+<meta property="og:url" content="http://localhost:4000/WebByteBox/lab-logs/2024-12-10-prometheus-monitoring/" />
+<meta property="og:site_name" content="Byte Box" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-12-10T09:22:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Prometheus Monitoring Stack: Watching the Watchers" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Mayor"},"dateModified":"2024-12-10T09:22:00-05:00","datePublished":"2024-12-10T09:22:00-05:00","description":"Setting up a comprehensive monitoring stack with Prometheus, Grafana, and AlertManager to keep my homelab infrastructure under surveillance.","headline":"Prometheus Monitoring Stack: Watching the Watchers","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/WebByteBox/lab-logs/2024-12-10-prometheus-monitoring/"},"url":"http://localhost:4000/WebByteBox/lab-logs/2024-12-10-prometheus-monitoring/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/WebByteBox/feed.xml" title="Byte Box" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "name": "Byte Box",
+      "description": "A cyberpunk playground for homelab experiments, Docker projects, and digital mayhem",
+      "url": "http://localhost:4000/WebByteBox",
+      
+      "headline": "Prometheus Monitoring Stack: Watching the Watchers",
+      "datePublished": "2024-12-10T09:22:00-05:00",
+      "dateModified": "2024-12-10T09:22:00-05:00",
+      
+      "author": {
+        "@type": "Person",
+        "name": "Mayor"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Byte Box",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "http://localhost:4000/WebByteBox/assets/img/logo.png"
+        }
+      }
+    }
+    </script>
+    
+    <!-- CRT Effect Toggle -->
+    <script>
+        // TODO: Add localStorage toggle for CRT effects
+        const crtEnabled = localStorage.getItem('crt-mode') !== 'false';
+    </script>
+</head>
+<body class="crt-mode">
+    <!-- Matrix-style background pattern -->
+    <div class="matrix-bg" id="matrix-bg"></div>
+    
+    <!-- CRT Scanlines Overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- Terminal-style Header -->
+    <header class="terminal-header">
+        <div class="container">
+            <div class="terminal-window">                <div class="terminal-title-bar">
+                    <span class="terminal-button close"></span>
+                    <span class="terminal-button minimize"></span>
+                    <span class="terminal-button maximize"></span>
+                    <span class="terminal-title">root@bytebox:~$ ./bytebox</span>
+                    
+                    <!-- Palette Selector -->
+                    <div class="palette-selector">
+                        <span class="palette-label">THEME:</span>
+                        <div class="palette-options">
+                            <button class="palette-option active" data-theme="classic-green" title="Matrix Green">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00ff00, #008000);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="cyber-blue" title="Cyber Blue">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #00d4ff, #0066cc);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="hacker-red" title="Hacker Red">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ff0040, #cc0033);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="retro-amber" title="Retro Amber">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #ffaa00, #cc8800);"></span>
+                            </button>
+                            <button class="palette-option" data-theme="purple-haze" title="Purple Haze">
+                                <span class="palette-swatch" style="background: linear-gradient(45deg, #aa00ff, #6600cc);"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div><nav class="terminal-nav">
+                    <a href="/WebByteBox/" class="nav-link ">~/home</a>
+                    <a href="/WebByteBox/about.html" class="nav-link ">./whoami</a>
+                    <a href="/WebByteBox/lab-logs/" class="nav-link active">./lab-logs</a>
+                    <a href="/WebByteBox/modules/" class="nav-link ">./modules</a>
+                    <a href="/WebByteBox/payloads/" class="nav-link ">./payloads</a>
+                    <a href="/WebByteBox/blackbox/" class="nav-link ">./blackbox</a>
+                    <a href="/WebByteBox/community.html" class="nav-link ">./community</a>
+                    <a href="/WebByteBox/contact.html" class="nav-link ">./contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <article class="terminal-post">
+    <header class="post-header">
+        <div class="terminal-window">
+            <div class="terminal-title-bar">
+                <span class="terminal-button close"></span>
+                <span class="terminal-button minimize"></span>
+                <span class="terminal-button maximize"></span>
+                <span class="terminal-title">root@bytebox:~$ cat prometheus-monitoring-stack-watching-the-watchers.md</span>
+            </div>
+            <div class="post-meta">
+                <span class="prompt">root@bytebox:~$</span>
+                <span class="command">ls -la prometheus-monitoring-stack-watching-the-watchers.md</span>
+                <div class="file-info">
+                    <span class="permissions">-rw-r--r--</span>
+                    <span class="owner">root</span>
+                    <span class="group">bytebox</span>
+                    <span class="size">23022</span>
+                    <span class="date">Dec 10 09:22</span>
+                    <span class="filename neon-green">prometheus-monitoring-stack-watching-the-watchers.md</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="post-content terminal-content">
+        <h1 class="post-title glitch-text" data-text="Prometheus Monitoring Stack: Watching the Watchers">Prometheus Monitoring Stack: Watching the Watchers</h1>
+        
+        
+        <div class="post-description">
+            <span class="prompt">root@bytebox:~$</span>
+            <span class="command">head -n 1 prometheus-monitoring-stack-watching-the-watchers.md</span>
+            <div class="output">Setting up a comprehensive monitoring stack with Prometheus, Grafana, and AlertManager to keep my homelab infrastructure under surveillance.</div>
+        </div>
+        
+
+        
+        <div class="post-tags">
+            <span class="prompt">root@bytebox:~$</span>
+            <span class="command">grep -o "#[a-zA-Z0-9_]*" prometheus-monitoring-stack-watching-the-watchers.md</span>
+            <div class="output">
+                
+                <span class="tag">#monitoring</span>
+                
+                <span class="tag">#prometheus</span>
+                
+                <span class="tag">#grafana</span>
+                
+                <span class="tag">#alertmanager</span>
+                
+                <span class="tag">#observability</span>
+                
+            </div>
+        </div>
+        
+
+        <div class="content-body">
+            <h2 id="the-mission">The Mission</h2>
+
+<p>Building a monitoring stack that would make Big Brother jealous. Because if you’re not monitoring your infrastructure, are you even home-labbing?</p>
+
+<p>The goal: Complete observability of my homelab with pretty dashboards and alerts that actually wake me up when things go sideways.</p>
+
+<h2 id="architecture-overview">Architecture Overview</h2>
+
+<pre><code class="language-ascii">┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Prometheus    │    │     Grafana     │    │  AlertManager   │
+│   (Metrics)     │◄───┤  (Dashboards)   │    │  (Notifications)│
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         ▲                        ▲                        ▲
+         │                        │                        │
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│  Node Exporter  │    │ Docker Metrics  │    │   Custom Apps   │
+│  (System Stats) │    │   (Containers)  │    │   (Business)    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+</code></pre>
+
+<h2 id="stack-components">Stack Components</h2>
+
+<h3 id="prometheus-server">Prometheus Server</h3>
+<p>The brain of the operation. Scrapes metrics from everything with a pulse.</p>
+
+<p><strong>Configuration Highlights:</strong></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">global</span><span class="pi">:</span>
+  <span class="na">scrape_interval</span><span class="pi">:</span> <span class="s">15s</span>
+  <span class="na">evaluation_interval</span><span class="pi">:</span> <span class="s">15s</span>
+
+<span class="na">rule_files</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">rules/*.yml"</span>
+
+<span class="na">scrape_configs</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">job_name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">prometheus'</span>
+    <span class="na">static_configs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">targets</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">localhost:9090'</span><span class="pi">]</span>
+
+  <span class="pi">-</span> <span class="na">job_name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">node-exporter'</span>
+    <span class="na">static_configs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">targets</span><span class="pi">:</span> 
+        <span class="pi">-</span> <span class="s1">'</span><span class="s">swarm-01:9100'</span>
+        <span class="pi">-</span> <span class="s1">'</span><span class="s">swarm-02:9100'</span>
+        <span class="pi">-</span> <span class="s1">'</span><span class="s">swarm-03:9100'</span>
+        <span class="pi">-</span> <span class="s1">'</span><span class="s">nas-server:9100'</span>
+
+  <span class="pi">-</span> <span class="na">job_name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">cadvisor'</span>
+    <span class="na">static_configs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">targets</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s1">'</span><span class="s">swarm-01:8080'</span>
+        <span class="pi">-</span> <span class="s1">'</span><span class="s">swarm-02:8080'</span>
+        <span class="pi">-</span> <span class="s1">'</span><span class="s">swarm-03:8080'</span>
+</code></pre></div></div>
+
+<h3 id="grafana-dashboards">Grafana Dashboards</h3>
+<p>Because data without visualization is just numbers screaming into the void.</p>
+
+<p><strong>Key Dashboards:</strong></p>
+
+<ol>
+  <li><strong>Infrastructure Overview</strong>
+    <ul>
+      <li>System health at a glance</li>
+      <li>Resource utilization trends</li>
+      <li>Network traffic patterns</li>
+    </ul>
+  </li>
+  <li><strong>Docker Swarm Monitoring</strong>
+    <ul>
+      <li>Container resource usage</li>
+      <li>Service health status</li>
+      <li>Cluster node status</li>
+    </ul>
+  </li>
+  <li><strong>Application Performance</strong>
+    <ul>
+      <li>Response times</li>
+      <li>Error rates</li>
+      <li>Custom business metrics</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="alertmanager-rules">AlertManager Rules</h3>
+<p>When things go wrong, I want to know IMMEDIATELY.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">groups</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">infrastructure.rules</span>
+    <span class="na">rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">alert</span><span class="pi">:</span> <span class="s">InstanceDown</span>
+        <span class="na">expr</span><span class="pi">:</span> <span class="s">up == </span><span class="m">0</span>
+        <span class="na">for</span><span class="pi">:</span> <span class="s">5m</span>
+        <span class="na">labels</span><span class="pi">:</span>
+          <span class="na">severity</span><span class="pi">:</span> <span class="s">critical</span>
+        <span class="na">annotations</span><span class="pi">:</span>
+          <span class="na">summary</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Instance</span><span class="nv">  </span><span class="s">down"</span>
+          <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">been</span><span class="nv"> </span><span class="s">down</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">more</span><span class="nv"> </span><span class="s">than</span><span class="nv"> </span><span class="s">5</span><span class="nv"> </span><span class="s">minutes."</span>
+
+      <span class="pi">-</span> <span class="na">alert</span><span class="pi">:</span> <span class="s">HighMemoryUsage</span>
+        <span class="na">expr</span><span class="pi">:</span> <span class="s">(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 &gt; </span><span class="m">90</span>
+        <span class="na">for</span><span class="pi">:</span> <span class="s">2m</span>
+        <span class="na">labels</span><span class="pi">:</span>
+          <span class="na">severity</span><span class="pi">:</span> <span class="s">warning</span>
+        <span class="na">annotations</span><span class="pi">:</span>
+          <span class="na">summary</span><span class="pi">:</span> <span class="s2">"</span><span class="s">High</span><span class="nv"> </span><span class="s">memory</span><span class="nv"> </span><span class="s">usage</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">"</span>
+          <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Memory</span><span class="nv"> </span><span class="s">usage</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">above</span><span class="nv"> </span><span class="s">90%</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">"</span>
+
+      <span class="pi">-</span> <span class="na">alert</span><span class="pi">:</span> <span class="s">HighCPUUsage</span>
+        <span class="na">expr</span><span class="pi">:</span> <span class="s">100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) &gt; </span><span class="m">85</span>
+        <span class="na">for</span><span class="pi">:</span> <span class="s">5m</span>
+        <span class="na">labels</span><span class="pi">:</span>
+          <span class="na">severity</span><span class="pi">:</span> <span class="s">warning</span>
+        <span class="na">annotations</span><span class="pi">:</span>
+          <span class="na">summary</span><span class="pi">:</span> <span class="s2">"</span><span class="s">High</span><span class="nv"> </span><span class="s">CPU</span><span class="nv"> </span><span class="s">usage</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">"</span>
+          <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">CPU</span><span class="nv"> </span><span class="s">usage</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">above</span><span class="nv"> </span><span class="s">85%</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">"</span>
+</code></pre></div></div>
+
+<h2 id="deployment-strategy">Deployment Strategy</h2>
+
+<h3 id="docker-compose-setup">Docker Compose Setup</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">prometheus</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">prom/prometheus:latest</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">prometheus</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">9090:9090"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./prometheus/config:/etc/prometheus</span>
+      <span class="pi">-</span> <span class="s">prometheus-data:/prometheus</span>
+    <span class="na">command</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">--config.file=/etc/prometheus/prometheus.yml'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">--storage.tsdb.path=/prometheus'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">--web.console.libraries=/etc/prometheus/console_libraries'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">--web.console.templates=/etc/prometheus/consoles'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">--web.enable-lifecycle'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">--storage.tsdb.retention.time=30d'</span>
+
+  <span class="na">grafana</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">grafana/grafana:latest</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">grafana</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">3000:3000"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">grafana-data:/var/lib/grafana</span>
+      <span class="pi">-</span> <span class="s">./grafana/dashboards:/etc/grafana/provisioning/dashboards</span>
+      <span class="pi">-</span> <span class="s">./grafana/datasources:/etc/grafana/provisioning/datasources</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">GF_SECURITY_ADMIN_PASSWORD=admin</span>
+      <span class="pi">-</span> <span class="s">GF_USERS_ALLOW_SIGN_UP=false</span>
+
+  <span class="na">alertmanager</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">prom/alertmanager:latest</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">alertmanager</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">9093:9093"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./alertmanager/config:/etc/alertmanager</span>
+      <span class="pi">-</span> <span class="s">alertmanager-data:/alertmanager</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">prometheus-data</span><span class="pi">:</span>
+  <span class="na">grafana-data</span><span class="pi">:</span>
+  <span class="na">alertmanager-data</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<h2 id="custom-metrics-collection">Custom Metrics Collection</h2>
+
+<h3 id="node-exporter-deployment">Node Exporter Deployment</h3>
+<p>System-level metrics from all machines:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install on each node</span>
+wget https://github.com/prometheus/node_exporter/releases/download/v1.6.1/node_exporter-1.6.1.linux-amd64.tar.gz
+<span class="nb">tar </span>xvfz node_exporter-1.6.1.linux-amd64.tar.gz
+<span class="nb">sudo cp </span>node_exporter-1.6.1.linux-amd64/node_exporter /usr/local/bin/
+
+<span class="c"># Create systemd service</span>
+<span class="nb">sudo tee</span> /etc/systemd/system/node_exporter.service <span class="o">&gt;</span> /dev/null <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
+[Unit]
+Description=Node Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=node_exporter
+Group=node_exporter
+Type=simple
+ExecStart=/usr/local/bin/node_exporter
+
+[Install]
+WantedBy=multi-user.target
+</span><span class="no">EOF
+
+</span><span class="nb">sudo </span>systemctl daemon-reload
+<span class="nb">sudo </span>systemctl <span class="nb">enable </span>node_exporter
+<span class="nb">sudo </span>systemctl start node_exporter
+</code></pre></div></div>
+
+<h3 id="custom-application-metrics">Custom Application Metrics</h3>
+<p>Because why monitor just infrastructure when you can monitor everything?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python Flask app with Prometheus metrics
+</span><span class="kn">from</span> <span class="n">prometheus_client</span> <span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">Histogram</span><span class="p">,</span> <span class="n">generate_latest</span>
+<span class="kn">from</span> <span class="n">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">Response</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="nc">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="n">REQUEST_COUNT</span> <span class="o">=</span> <span class="nc">Counter</span><span class="p">(</span><span class="sh">'</span><span class="s">http_requests_total</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Total HTTP requests</span><span class="sh">'</span><span class="p">,</span> <span class="p">[</span><span class="sh">'</span><span class="s">method</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">endpoint</span><span class="sh">'</span><span class="p">])</span>
+<span class="n">REQUEST_LATENCY</span> <span class="o">=</span> <span class="nc">Histogram</span><span class="p">(</span><span class="sh">'</span><span class="s">http_request_duration_seconds</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">HTTP request latency</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="nd">@app.before_request</span>
+<span class="k">def</span> <span class="nf">before_request</span><span class="p">():</span>
+    <span class="n">REQUEST_COUNT</span><span class="p">.</span><span class="nf">labels</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">request</span><span class="p">.</span><span class="n">method</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">request</span><span class="p">.</span><span class="n">endpoint</span><span class="p">).</span><span class="nf">inc</span><span class="p">()</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="sh">'</span><span class="s">/metrics</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">metrics</span><span class="p">():</span>
+    <span class="k">return</span> <span class="nc">Response</span><span class="p">(</span><span class="nf">generate_latest</span><span class="p">(),</span> <span class="n">mimetype</span><span class="o">=</span><span class="sh">'</span><span class="s">text/plain</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="dashboard-highlights">Dashboard Highlights</h2>
+
+<h3 id="system-overview-dashboard">System Overview Dashboard</h3>
+<ul>
+  <li><strong>Uptime</strong>: How long since the last “oops”</li>
+  <li><strong>Resource Usage</strong>: CPU, Memory, Disk, Network</li>
+  <li><strong>Service Health</strong>: All the important stuff at a glance</li>
+</ul>
+
+<h3 id="docker-swarm-dashboard">Docker Swarm Dashboard</h3>
+<ul>
+  <li><strong>Container Stats</strong>: Who’s eating all the RAM?</li>
+  <li><strong>Service Distribution</strong>: Load balancing visualization</li>
+  <li><strong>Network Traffic</strong>: Data flow patterns</li>
+</ul>
+
+<h3 id="custom-business-metrics">Custom Business Metrics</h3>
+<ul>
+  <li><strong>API Response Times</strong>: How fast are we?</li>
+  <li><strong>Error Rates</strong>: How broken are we?</li>
+  <li><strong>User Activity</strong>: Who’s actually using this?</li>
+</ul>
+
+<h2 id="alert-configuration">Alert Configuration</h2>
+
+<h3 id="notification-channels">Notification Channels</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># alertmanager.yml</span>
+<span class="na">global</span><span class="pi">:</span>
+  <span class="na">smtp_smarthost</span><span class="pi">:</span> <span class="s1">'</span><span class="s">localhost:587'</span>
+  <span class="na">smtp_from</span><span class="pi">:</span> <span class="s1">'</span><span class="s">alerts@bytebox.local'</span>
+
+<span class="na">route</span><span class="pi">:</span>
+  <span class="na">group_by</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">alertname'</span><span class="pi">]</span>
+  <span class="na">group_wait</span><span class="pi">:</span> <span class="s">10s</span>
+  <span class="na">group_interval</span><span class="pi">:</span> <span class="s">10s</span>
+  <span class="na">repeat_interval</span><span class="pi">:</span> <span class="s">1h</span>
+  <span class="na">receiver</span><span class="pi">:</span> <span class="s1">'</span><span class="s">web.hook'</span>
+
+<span class="na">receivers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">web.hook'</span>
+    <span class="na">email_configs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">to</span><span class="pi">:</span> <span class="s1">'</span><span class="s">admin@bytebox.local'</span>
+        <span class="na">subject</span><span class="pi">:</span> <span class="s1">'</span><span class="s">[ALERT]</span><span class="nv"> </span><span class="s">'</span>
+        <span class="na">body</span><span class="pi">:</span> <span class="pi">|</span>
+          
+          <span class="s">Alert: </span>
+          <span class="s">Description: </span>
+          <span class="s">Labels: </span>
+          
+    
+    <span class="na">slack_configs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">api_url</span><span class="pi">:</span> <span class="s1">'</span><span class="s">https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK'</span>
+        <span class="na">channel</span><span class="pi">:</span> <span class="s1">'</span><span class="s">#alerts'</span>
+        <span class="na">username</span><span class="pi">:</span> <span class="s1">'</span><span class="s">prometheus'</span>
+        <span class="na">title</span><span class="pi">:</span> <span class="s1">'</span><span class="s">ByteBox</span><span class="nv"> </span><span class="s">Alert'</span>
+        <span class="na">text</span><span class="pi">:</span> <span class="s1">'</span><span class="s">'</span>
+</code></pre></div></div>
+
+<h2 id="performance-metrics">Performance Metrics</h2>
+
+<p>After 2 weeks of monitoring:</p>
+
+<ul>
+  <li><strong>Data Retention</strong>: 30 days of metrics (12GB storage)</li>
+  <li><strong>Scrape Performance</strong>: ~50ms average scrape time</li>
+  <li><strong>Alert Response</strong>: Sub-60 second notification delivery</li>
+  <li><strong>Dashboard Load</strong>: &lt;2 second render time</li>
+</ul>
+
+<h2 id="lessons-learned">Lessons Learned</h2>
+
+<ol>
+  <li><strong>Start Simple</strong>: Don’t try to monitor everything on day one</li>
+  <li><strong>Meaningful Alerts</strong>: Alert fatigue is real - make them count</li>
+  <li><strong>Resource Planning</strong>: Prometheus can eat significant resources</li>
+  <li><strong>Retention Strategy</strong>: Balance storage costs with data needs</li>
+</ol>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Implement distributed tracing with Jaeger</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Add log aggregation with ELK stack</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Custom exporters for IoT devices</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Machine learning for anomaly detection</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Multi-cluster federation</li>
+</ul>
+
+<h2 id="current-status">Current Status</h2>
+
+<p><strong>Status</strong>: ✅ PRODUCTION READY<br />
+<strong>Uptime</strong>: 99.97% (that 0.03% was a planned coffee refill outage)<br />
+<strong>Metrics Collected</strong>: 847 different series<br />
+<strong>Dashboards</strong>: 12 and counting<br />
+<strong>Alerts Fired</strong>: 23 (mostly my fault)</p>
+
+<p>The monitoring system is now actively watching everything in the lab. Big Brother would be proud.</p>
+
+<hr />
+
+<p><em>Next up: “Building a CI/CD Pipeline That Actually Works (Spoiler: It Doesn’t)”</em></p>
+
+        </div>
+    </div>
+
+    <footer class="post-footer">
+        <div class="terminal-prompt">
+            <span class="prompt">root@bytebox:~$</span>
+            <span class="command">echo "EOF reached. Exit code: 0"</span>
+        </div>
+        
+        
+
+        <!-- TODO: Add post navigation -->
+        <div class="post-navigation">
+            
+            <a href="/WebByteBox/lab-logs/2024-12-05-raspberry-pi-kubernetes/" class="nav-prev">
+                <span class="nav-label">← Previous</span>
+                <span class="nav-title">Raspberry Pi Kubernetes Cluster: Because Why Not?</span>
+            </a>
+            
+            
+            
+            <a href="/WebByteBox/lab-logs/2024-12-15-docker-swarm-disaster/" class="nav-next">
+                <span class="nav-label">Next →</span>
+                <span class="nav-title">Docker Swarm Disaster: When Containers Go Rogue</span>
+            </a>
+            
+        </div>
+    </footer>
+</article>
+
+        </div>
+    </main>
+
+    <!-- Terminal Footer -->
+    <footer class="terminal-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="system-info">
+                    <span class="prompt">root@bytebox:~$</span>
+                    <span class="command">uptime</span>
+                    <div class="output">
+                        System online since 2025 | 
+                        <span id="uptime-counter">Calculating...</span> | 
+                        Load avg: <span class="neon-green">0.42 0.15 0.09</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <!-- TODO: Add your social/contact links -->
+                    <a href="#" class="footer-link glitch-text" data-text="GitHub">GitHub</a>
+                    <a href="#" class="footer-link glitch-text" data-text="Matrix">Matrix</a>
+                    <a href="/WebByteBox/feed.xml" class="footer-link glitch-text" data-text="RSS">RSS</a>
+                </div>
+            </div>
+        </div>
+    </footer>    <!-- Performance Toggle -->
+    <button class="perf-toggle" onclick="togglePerformanceStats()" title="Toggle Performance Stats" aria-label="Toggle Performance Statistics">
+        📊
+    </button>
+
+    <!-- Scripts -->
+    <script src="/WebByteBox/assets/js/terminal.js"></script>
+    <script src="/WebByteBox/assets/js/glitch.js"></script>
+    <script src="/WebByteBox/assets/js/matrix-clean.js"></script>
+    <script src="/WebByteBox/assets/js/community.js"></script>
+    <script src="/WebByteBox/assets/js/palette-selector.js"></script>
+    <script src="/WebByteBox/assets/js/accessibility.js"></script>
+    <script src="/WebByteBox/assets/js/performance.js"></script>
+    <script src="/WebByteBox/assets/js/search.js"></script>
+    
+    <!-- PWA Installation -->
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/WebByteBox/sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(registrationError => console.log('SW registration failed'));
+            });
+        }
+        
+        // PWA Install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install button
+            const installBtn = document.createElement('button');
+            installBtn.textContent = 'Install App';
+            installBtn.className = 'install-pwa-btn';
+            installBtn.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--neon-green);
+                color: var(--bg-black);
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-family: var(--font-mono);
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 1000;
+                animation: pulse 2s infinite;
+            `;
+            
+            installBtn.addEventListener('click', () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the A2HS prompt');
+                    }
+                    deferredPrompt = null;
+                    installBtn.remove();
+                });
+            });
+            
+            document.body.appendChild(installBtn);
+            
+            // Remove button after 10 seconds if not clicked
+            setTimeout(() => {
+                if (installBtn.parentNode) {
+                    installBtn.remove();
+                }
+            }, 10000);
+        });
+        
+        // Performance Dashboard Toggle
+        function togglePerformanceStats() {
+            const currentState = localStorage.getItem('showPerformanceStats') === 'true';
+            localStorage.setItem('showPerformanceStats', !currentState);
+            
+            if (!currentState) {
+                // Create performance dashboard if it doesn't exist
+                if (window.performanceOptimizer) {
+                    window.performanceOptimizer.createPerformanceDashboard();
+                }
+            } else {
+                // Remove performance dashboard
+                const dashboard = document.getElementById('performance-dashboard');
+                if (dashboard) {
+                    dashboard.remove();
+                }
+            }
+        }
+        
+        // Initialize performance optimizer
+        window.addEventListener('load', () => {
+            window.performanceOptimizer = new PerformanceOptimizer();
+        });
+    </script>
+    
+    <!-- TODO: Add analytics if needed -->
+</body>
+</html>

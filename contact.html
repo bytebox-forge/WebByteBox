@@ -4,7 +4,10 @@ title: "Secure Channel"
 ---
 
 <div class="contact-terminal">
-    <div class="terminal-window">
+    <div                                <span class="label">Handle:</span>
+                                <span class="value">
+                                    <a href="https://github.com/{{ site.author.github }}" class="contact-link">{{ site.author.github }}</a>
+                                </span>ss="terminal-window">
         <div class="terminal-title-bar">
             <span class="terminal-button close"></span>
             <span class="terminal-button minimize"></span>
@@ -90,11 +93,10 @@ title: "Secure Channel"
                             <span class="port">:443</span>
                             <span class="status">PUBLIC</span>
                         </div>
-                        <div class="method-details">
-                            <div class="detail-line">
+                        <div class="method-details">                            <div class="detail-line">
                                 <span class="label">Profile:</span>
                                 <span class="value">
-                                    <a href="https://github.com/[YOUR_USERNAME]" class="contact-link">[YOUR_USERNAME]</a> <!-- TODO: Add GitHub -->
+                                    <a href="https://github.com/{{ site.author.github }}" class="contact-link">{{ site.author.github }}</a>
                                 </span>
                             </div>
                             <div class="detail-line">
@@ -116,10 +118,9 @@ title: "Secure Channel"
                             <span class="status">FEDERATED</span>
                         </div>
                         <div class="method-details">
-                            <div class="detail-line">
-                                <span class="label">Handle:</span>
+                            <div class="detail-line">                                <span class="label">Handle:</span>
                                 <span class="value">
-                                    <a href="https://mastodon.social/@[YOUR_HANDLE]" class="contact-link">@[YOUR_HANDLE]@mastodon.social</a> <!-- TODO: Add Mastodon -->
+                                    <a href="https://infosec.exchange/{{ site.author.mastodon }}" class="contact-link">{{ site.author.mastodon }}</a>
                                 </span>
                             </div>
                             <div class="detail-line">
@@ -144,10 +145,9 @@ title: "Secure Channel"
                 <div class="pgp-key">
                     <pre class="key-block">
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-<!-- TODO: Add your actual PGP public key -->
 [YOUR PGP PUBLIC KEY GOES HERE]
 
-For now, this is a placeholder. Import your real key:
+To add your key:
 1. Generate: gpg --full-generate-key
 2. Export: gpg --armor --export [YOUR_EMAIL] > public.key
 3. Paste the contents here

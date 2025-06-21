@@ -1,6 +1,5 @@
 // Ultra-minimal Matrix Effect - Theme-aware version
-class SimpleMatrix {
-    constructor() {
+class SimpleMatrix {    constructor() {
         this.canvas = null;
         this.ctx = null;
         this.drops = [];
@@ -78,14 +77,13 @@ class SimpleMatrix {
         if (this.frameCount % 8 === 0) {
             // Create strong trailing effect with very subtle fade
             this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Slower fade for longer trails
-            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);            // Matrix characters with theme-aware color
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);            // Matrix characters with theme-aware color at 100% opacity
             this.ctx.fillStyle = this.currentColor;
+            this.ctx.globalAlpha = 1.0; // Set 100% opacity
             this.ctx.font = 'bold 20px monospace';
             // Ensure no shadow effects
             this.ctx.shadowColor = 'transparent';
-            this.ctx.shadowBlur = 0;
-            
-            for (let i = 0; i < this.drops.length; i++) {
+            this.ctx.shadowBlur = 0;            for (let i = 0; i < this.drops.length; i++) {
                 const char = Math.random() > 0.5 ? '1' : '0';
                 const x = i * 20;
                 const y = this.drops[i];
@@ -99,11 +97,13 @@ class SimpleMatrix {
                     this.drops[i] = -Math.random() * 200; // Start higher for better distribution
                 }
             }
+            
+            // Reset opacity for other drawing operations
+            this.ctx.globalAlpha = 1.0;
         }        
         requestAnimationFrame(() => this.animate());
     }
-    
-    // Method to manually refresh color (useful for debugging)
+      // Method to manually refresh color (useful for debugging)
     refreshColor() {
         this.updateColor();
     }

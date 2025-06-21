@@ -30,7 +30,7 @@ title: "whoami"
                 </div>
                 <div class="finger-output">
                     <pre class="user-details">
-Login: root                         Name: <span class="neon-green">[YOUR NAME HERE]</span> <!-- TODO: Add your name -->
+Login: root                         Name: <span class="neon-green">{{ site.author.name }}</span>
 Directory: /home/bytebox            Shell: /bin/bash
 Office: The Basement                Office Phone: 555-HACK
 Home Phone: [ENCRYPTED]             
@@ -178,7 +178,7 @@ Plan: Escape the matrix through superior infrastructure
                     <div class="contact-item">
                         <span class="contact-type">github</span>
                         <span class="contact-value">
-                            <a href="https://github.com/[YOUR_USERNAME]" class="contact-link purple">[YOUR_USERNAME]</a> <!-- TODO: Add GitHub -->
+                            <a href="https://github.com/{{ site.author.github }}" class="contact-link purple">{{ site.author.github }}</a>
                         </span>
                         <span class="contact-desc">Code Repository</span>
                     </div>

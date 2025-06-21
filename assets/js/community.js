@@ -17,17 +17,17 @@ class CommunityIntegration {    constructor() {
         }
         
         this.setupCommunityAnimations();
+        this.setupEnhancedCommunity();
     }
     
     async loadRecentDiscussions() {
         try {
             // Note: GitHub Discussions API requires GraphQL, but we can use a simpler approach
             // by fetching from the discussions page or using GitHub's RSS feed
-            
-            // For now, we'll show a placeholder with sample discussions
+              // For now, we'll show a placeholder with sample discussions
             this.showSampleDiscussions();
             
-            // TODO: Implement actual GitHub Discussions API integration
+            // Note: For production, implement GitHub Discussions API integration
             // This would require setting up a serverless function or proxy
             // to handle the GraphQL requests with authentication
             
@@ -80,7 +80,7 @@ class CommunityIntegration {    constructor() {
         this.renderDiscussions(liveDiscussions);
     }    renderDiscussions(discussions) {
         const html = discussions.map(discussion => `
-            <div class="discussion-item">
+            <div class="discussion-item" data-category="${discussion.category.toLowerCase()}">
                 <a href="${discussion.url}" 
                    target="_blank" 
                    rel="noopener noreferrer" 
@@ -193,6 +193,199 @@ class CommunityIntegration {    constructor() {
         
         // This would need to be implemented with proper authentication
         // and possibly through a serverless function to avoid CORS issues
+    }
+    
+    // Enhanced Community Features
+    setupEnhancedCommunity() {
+        this.setupLiveActivity();
+        this.setupUserPresence();
+        this.setupDiscussionFilters();
+        this.setupNotifications();
+    }
+
+    setupLiveActivity() {
+        // Simulate live community activity
+        const activityFeed = document.getElementById('activity-feed');
+        if (!activityFeed) return;
+
+        const activities = [
+            "mayor pushed new commits to homelab-configs",
+            "anonymous-user starred WebByteBox repository",
+            "hackerman opened discussion about Docker security",
+            "caffeine-addict posted in #lab-logs channel",
+            "digital-nomad joined the community",
+            "bot-overlord updated monitoring alerts",
+            "script-kiddie asked about Kubernetes setup",
+            "privacy-advocate shared new security tools"
+        ];
+
+        let activityIndex = 0;
+        setInterval(() => {
+            this.addActivityToFeed(activities[activityIndex % activities.length]);
+            activityIndex++;
+        }, 30000); // New activity every 30 seconds
+    }
+
+    addActivityToFeed(activity) {
+        const activityFeed = document.getElementById('activity-feed');
+        if (!activityFeed) return;
+
+        const activityItem = document.createElement('div');
+        activityItem.className = 'activity-item';
+        const timestamp = new Date().toLocaleTimeString();
+        
+        activityItem.innerHTML = `
+            <span class="activity-time">[${timestamp}]</span>
+            <span class="activity-text">${activity}</span>
+        `;
+
+        // Add to top of feed
+        activityFeed.insertBefore(activityItem, activityFeed.firstChild);
+
+        // Remove old items if too many
+        const items = activityFeed.querySelectorAll('.activity-item');
+        if (items.length > 10) {
+            items[items.length - 1].remove();
+        }
+
+        // Animate new item
+        activityItem.style.opacity = '0';
+        activityItem.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+            activityItem.style.transition = 'all 0.5s ease';
+            activityItem.style.opacity = '1';
+            activityItem.style.transform = 'translateY(0)';
+        }, 100);
+    }
+
+    setupUserPresence() {
+        // Show online users simulation
+        const usersList = document.getElementById('online-users');
+        if (!usersList) return;
+
+        const users = [
+            { name: 'mayor', status: 'coding', color: 'neon-green' },
+            { name: 'hackerman', status: 'deploying', color: 'amber' },
+            { name: 'caffeine-addict', status: 'debugging', color: 'purple' },
+            { name: 'digital-nomad', status: 'traveling', color: 'blue' },
+            { name: 'bot-overlord', status: 'monitoring', color: 'red' }
+        ];
+
+        const onlineCount = Math.floor(Math.random() * 5) + 3;
+        const onlineUsers = users.slice(0, onlineCount);
+
+        usersList.innerHTML = onlineUsers.map(user => `
+            <div class="user-item">
+                <span class="user-status ${user.color}">●</span>
+                <span class="user-name">${user.name}</span>
+                <span class="user-activity">(${user.status})</span>
+            </div>
+        `).join('');
+
+        // Update presence periodically
+        setInterval(() => {
+            onlineUsers.forEach(user => {
+                const activities = ['coding', 'debugging', 'deploying', 'coffee break', 'thinking', 'documenting'];
+                user.status = activities[Math.floor(Math.random() * activities.length)];
+            });
+            
+            usersList.innerHTML = onlineUsers.map(user => `
+                <div class="user-item">
+                    <span class="user-status ${user.color}">●</span>
+                    <span class="user-name">${user.name}</span>
+                    <span class="user-activity">(${user.status})</span>
+                </div>
+            `).join('');
+        }, 60000); // Update every minute
+    }
+
+    setupDiscussionFilters() {
+        const filterButtons = document.querySelectorAll('.discussion-filter');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                e.target.classList.add('active');
+                
+                const filter = e.target.dataset.filter;
+                this.filterDiscussions(filter);
+            });
+        });
+    }
+
+    filterDiscussions(filter) {
+        const discussions = document.querySelectorAll('.discussion-item');
+        discussions.forEach(discussion => {
+            const category = discussion.dataset.category;
+            if (filter === 'all' || category === filter) {
+                discussion.style.display = 'block';
+            } else {
+                discussion.style.display = 'none';
+            }
+        });
+    }
+
+    setupNotifications() {
+        // Simulate occasional community notifications
+        const notificationContainer = document.getElementById('community-notifications');
+        if (!notificationContainer) return;
+
+        const notifications = [
+            { type: 'info', message: 'New lab log posted: "Kubernetes cluster disaster recovery"', icon: '📝' },
+            { type: 'success', message: 'Community member milestone: 100 commits reached!', icon: '🎉' },
+            { type: 'warning', message: 'Scheduled maintenance: Docker registry offline for 5 minutes', icon: '⚠️' },
+            { type: 'info', message: 'Discussion trending: "Best practices for homelab security"', icon: '🔥' }
+        ];
+
+        // Show random notification every 2-5 minutes
+        setTimeout(() => {
+            this.showNotification(notifications[Math.floor(Math.random() * notifications.length)]);
+        }, Math.random() * 180000 + 120000);
+    }
+
+    showNotification(notification) {
+        const notificationContainer = document.getElementById('community-notifications');
+        if (!notificationContainer) return;
+
+        const notificationElement = document.createElement('div');
+        notificationElement.className = `notification ${notification.type}`;
+        notificationElement.innerHTML = `
+            <span class="notification-icon">${notification.icon}</span>
+            <span class="notification-message">${notification.message}</span>
+            <button class="notification-close">×</button>
+        `;
+
+        notificationContainer.appendChild(notificationElement);
+
+        // Add animation
+        notificationElement.style.opacity = '0';
+        notificationElement.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            notificationElement.style.transition = 'all 0.3s ease';
+            notificationElement.style.opacity = '1';
+            notificationElement.style.transform = 'translateX(0)';
+        }, 100);
+
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            this.removeNotification(notificationElement);
+        }, 5000);
+
+        // Close button functionality
+        notificationElement.querySelector('.notification-close').addEventListener('click', () => {
+            this.removeNotification(notificationElement);
+        });
+    }
+
+    removeNotification(notificationElement) {
+        notificationElement.style.opacity = '0';
+        notificationElement.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notificationElement.parentNode) {
+                notificationElement.remove();
+            }
+        }, 300);
     }
 }
 

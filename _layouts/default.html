@@ -1,24 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="keywords" content="homelab, cyberpunk, docker, kubernetes, raspberry pi, networking, automation, security, monitoring, infrastructure">
+    <meta name="author" content="{{ site.author.name }}">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:image" content="{{ '/assets/img/og-image.png' | absolute_url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}">
+    <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="twitter:image" content="{{ '/assets/img/twitter-card.png' | absolute_url }}">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#00ff41">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ByteBox">
+    <meta name="application-name" content="ByteBox">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="{{ '/assets/img/icon-144x144.png' | relative_url }}">
     
     <!-- Cyberpunk Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="{{ '/assets/img/favicon.ico' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/img/icon-32x32.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/img/icon-16x16.png' | relative_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+    
     <!-- Custom Cyberpunk Styles -->
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="{{ '/assets/js/matrix-clean.js' | relative_url }}" as="script">
+    <link rel="preload" href="{{ '/assets/js/palette-selector.js' | relative_url }}" as="script">
     
     <!-- SEO and Meta -->
     {% seo %}
     {% feed_meta %}
     
-    <!-- Favicon TODO: Add cyberpunk favicon -->
-    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "{% if page.layout == 'post' %}BlogPosting{% else %}WebSite{% endif %}",
+      "name": "{{ site.title }}",
+      "description": "{{ site.description }}",
+      "url": "{{ site.url }}{{ site.baseurl }}",
+      {% if page.layout == 'post' %}
+      "headline": "{{ page.title }}",
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+      {% endif %}
+      "author": {
+        "@type": "Person",
+        "name": "{{ site.author.name }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.title }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ '/assets/img/logo.png' | absolute_url }}"
+        }
+      }
+    }
+    </script>
     
     <!-- CRT Effect Toggle -->
     <script>
@@ -105,12 +173,103 @@
                 </div>
             </div>
         </div>
-    </footer>    <!-- Scripts -->
+    </footer>    <!-- Performance Toggle -->
+    <button class="perf-toggle" onclick="togglePerformanceStats()" title="Toggle Performance Stats" aria-label="Toggle Performance Statistics">
+        📊
+    </button>
+
+    <!-- Scripts -->
     <script src="{{ '/assets/js/terminal.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/glitch.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/matrix-clean.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/community.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/palette-selector.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/accessibility.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/performance.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
+    
+    <!-- PWA Installation -->
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/WebByteBox/sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(registrationError => console.log('SW registration failed'));
+            });
+        }
+        
+        // PWA Install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install button
+            const installBtn = document.createElement('button');
+            installBtn.textContent = 'Install App';
+            installBtn.className = 'install-pwa-btn';
+            installBtn.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--neon-green);
+                color: var(--bg-black);
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-family: var(--font-mono);
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 1000;
+                animation: pulse 2s infinite;
+            `;
+            
+            installBtn.addEventListener('click', () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the A2HS prompt');
+                    }
+                    deferredPrompt = null;
+                    installBtn.remove();
+                });
+            });
+            
+            document.body.appendChild(installBtn);
+            
+            // Remove button after 10 seconds if not clicked
+            setTimeout(() => {
+                if (installBtn.parentNode) {
+                    installBtn.remove();
+                }
+            }, 10000);
+        });
+        
+        // Performance Dashboard Toggle
+        function togglePerformanceStats() {
+            const currentState = localStorage.getItem('showPerformanceStats') === 'true';
+            localStorage.setItem('showPerformanceStats', !currentState);
+            
+            if (!currentState) {
+                // Create performance dashboard if it doesn't exist
+                if (window.performanceOptimizer) {
+                    window.performanceOptimizer.createPerformanceDashboard();
+                }
+            } else {
+                // Remove performance dashboard
+                const dashboard = document.getElementById('performance-dashboard');
+                if (dashboard) {
+                    dashboard.remove();
+                }
+            }
+        }
+        
+        // Initialize performance optimizer
+        window.addEventListener('load', () => {
+            window.performanceOptimizer = new PerformanceOptimizer();
+        });
+    </script>
     
     <!-- TODO: Add analytics if needed -->
 </body>

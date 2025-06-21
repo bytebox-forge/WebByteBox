@@ -6,9 +6,11 @@ baseurl: "/WebByteBox"
 
 # Author info
 author:
-  name: "Mayor" # TODO: Customize your hacker alias
-  email: "alexnyk@outlook.com" # TODO: Add your secure contact
- # matrix: "@you:matrix.org" # TODO: Add Matrix handle if desired
+  name: "Mayor"
+  email: "alexnyk@outlook.com"
+  matrix: "@mayor:matrix.bytebox.local"
+  github: "bytebox-forge"
+  mastodon: "@mayor@infosec.exchange"
 
 # Build settings
 markdown: kramdown
