@@ -7,13 +7,13 @@ class SimpleMatrix {
         this.overlayCtx = null;
         this.drops = [];
         this.frameCount = 0;
-        this.currentColor = '#00ff41'; // Default fallback
-        this.overlaySettings = {
+        this.currentColor = '#00ff41'; // Default fallback        this.overlaySettings = {
             enabled: true,
-            type: 'scanlines', // 'scanlines', 'grid', 'noise', 'gradient', 'pulse'
-            opacity: 0.3,
+            type: 'scanlines', // Default to professional scanlines
+            opacity: 0.3, // Darker overlay to reduce matrix intensity
             speed: 1,
-            color: '#00ff41'
+            color: '#00ff41',
+            intensity: 'medium' // 'low', 'medium', 'high'
         };
         this.init();
     }
@@ -119,8 +119,7 @@ class SimpleMatrix {
         
         const { type, opacity, speed, color } = this.overlaySettings;
         this.overlayCtx.globalAlpha = opacity;
-        
-        switch (type) {
+          switch (type) {
             case 'scanlines':
                 this.drawScanlines();
                 break;
@@ -135,6 +134,15 @@ class SimpleMatrix {
                 break;
             case 'pulse':
                 this.drawPulse();
+                break;
+            case 'cyberpunk-mix':
+                this.drawCyberpunkMix();
+                break;
+            case 'data-stream':
+                this.drawDataStream();
+                break;
+            case 'holographic':
+                this.drawHolographic();
                 break;
             case 'crt':
                 this.drawCRT();
@@ -194,45 +202,88 @@ class SimpleMatrix {
         this.overlayCtx.putImageData(imageData, 0, 0);
     }
     
-    drawGradient() {
-        const gradient = this.overlayCtx.createLinearGradient(0, 0, 0, this.overlayCanvas.height);
-        gradient.addColorStop(0, 'transparent');
-        gradient.addColorStop(0.5, this.overlaySettings.color);
-        gradient.addColorStop(1, 'transparent');
+    // New enhanced overlay methods
+    drawCyberpunkMix() {
+        // Combination of subtle scanlines + circuit grid + data elements
+        this.overlayCtx.globalAlpha = this.overlaySettings.opacity * 0.7;
         
-        this.overlayCtx.fillStyle = gradient;
-        this.overlayCtx.fillRect(0, 0, this.overlayCanvas.width, this.overlayCanvas.height);
+        // Subtle scanlines
+        this.overlayCtx.strokeStyle = this.overlaySettings.color;
+        this.overlayCtx.lineWidth = 0.5;
+        for (let y = 0; y < this.overlayCanvas.height; y += 4) {
+            if (Math.random() > 0.8) { // Sparse scanlines
+                this.overlayCtx.globalAlpha = this.overlaySettings.opacity * (0.3 + Math.random() * 0.3);
+                this.overlayCtx.beginPath();
+                this.overlayCtx.moveTo(0, y);
+                this.overlayCtx.lineTo(this.overlayCanvas.width, y);
+                this.overlayCtx.stroke();
+            }
+        }
+        
+        // Circuit-style grid (very subtle)
+        this.overlayCtx.globalAlpha = this.overlaySettings.opacity * 0.3;
+        this.overlayCtx.strokeStyle = this.overlaySettings.color;
+        this.overlayCtx.lineWidth = 0.3;
+        
+        const gridSize = 100;
+        for (let x = 0; x < this.overlayCanvas.width; x += gridSize) {
+            for (let y = 0; y < this.overlayCanvas.height; y += gridSize) {
+                if (Math.random() > 0.7) {
+                    // Draw small circuit-like rectangles
+                    this.overlayCtx.strokeRect(x, y, 20, 15);
+                }
+            }
+        }
     }
     
-    drawPulse() {
-        const time = this.frameCount * 0.02 * this.overlaySettings.speed;
-        const pulse = (Math.sin(time) + 1) / 2; // 0 to 1
-        
-        this.overlayCtx.globalAlpha = this.overlaySettings.opacity * pulse;
+    drawDataStream() {
+        // Floating binary/hex numbers
         this.overlayCtx.fillStyle = this.overlaySettings.color;
-        this.overlayCtx.fillRect(0, 0, this.overlayCanvas.width, this.overlayCanvas.height);
+        this.overlayCtx.font = '12px monospace';
+        this.overlayCtx.globalAlpha = this.overlaySettings.opacity * 0.6;
+        
+        const dataChars = '01ABCDEF';
+        const streamCount = 15;
+        
+        for (let i = 0; i < streamCount; i++) {
+            const x = Math.random() * this.overlayCanvas.width;
+            const y = (Date.now() * 0.05 + i * 50) % (this.overlayCanvas.height + 100);
+            const char = dataChars[Math.floor(Math.random() * dataChars.length)];
+            
+            // Fade based on position
+            this.overlayCtx.globalAlpha = this.overlaySettings.opacity * (1 - y / this.overlayCanvas.height);
+            this.overlayCtx.fillText(char, x, y);
+        }
     }
     
-    drawCRT() {
-        // Combine scanlines with slight curvature effect
-        this.drawScanlines();
+    drawHolographic() {
+        // Subtle RGB distortion effect
+        const time = Date.now() * 0.001;
         
-        // Add slight vignette
-        const centerX = this.overlayCanvas.width / 2;
-        const centerY = this.overlayCanvas.height / 2;
-        const maxRadius = Math.sqrt(centerX * centerX + centerY * centerY);
+        // Create subtle color separation effect
+        this.overlayCtx.globalCompositeOperation = 'screen';
+        this.overlayCtx.globalAlpha = this.overlaySettings.opacity * 0.1;
         
-        const gradient = this.overlayCtx.createRadialGradient(
-            centerX, centerY, 0,
-            centerX, centerY, maxRadius
-        );
-        gradient.addColorStop(0, 'transparent');
-        gradient.addColorStop(0.8, 'transparent');
-        gradient.addColorStop(1, 'rgba(0, 0, 0, 0.3)');
+        // Red channel shift
+        this.overlayCtx.fillStyle = '#ff0000';
+        this.overlayCtx.fillRect(1, 0, this.overlayCanvas.width, this.overlayCanvas.height);
         
-        this.overlayCtx.fillStyle = gradient;
-        this.overlayCtx.fillRect(0, 0, this.overlayCanvas.width, this.overlayCanvas.height);
-    }    animate() {
+        // Green channel shift
+        this.overlayCtx.fillStyle = '#00ff00';
+        this.overlayCtx.fillRect(-1, 0, this.overlayCanvas.width, this.overlayCanvas.height);
+        
+        // Occasional glitch lines
+        if (Math.random() > 0.95) {
+            this.overlayCtx.globalAlpha = this.overlaySettings.opacity * 0.5;
+            this.overlayCtx.fillStyle = this.overlaySettings.color;
+            const y = Math.random() * this.overlayCanvas.height;
+            this.overlayCtx.fillRect(0, y, this.overlayCanvas.width, 2);
+        }
+        
+        this.overlayCtx.globalCompositeOperation = 'source-over';
+    }
+
+    animate() {
         if (!this.ctx) return;
         
         this.frameCount++;
@@ -242,10 +293,9 @@ class SimpleMatrix {
             // Create strong trailing effect with very subtle fade
             this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Slower fade for longer trails
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-            
-            // Matrix characters with theme-aware color at 100% opacity
+              // Matrix characters with theme-aware color at reduced opacity
             this.ctx.fillStyle = this.currentColor;
-            this.ctx.globalAlpha = 1.0; // Set 100% opacity
+            this.ctx.globalAlpha = 0.6; // Reduced opacity for less intense matrix rain
             this.ctx.font = 'bold 20px monospace';
             // Ensure no shadow effects
             this.ctx.shadowColor = 'transparent';
@@ -265,9 +315,8 @@ class SimpleMatrix {
                     this.drops[i] = -Math.random() * 200; // Start higher for better distribution
                 }
             }
-            
-            // Reset opacity for other drawing operations
-            this.ctx.globalAlpha = 1.0;
+              // Reset opacity for other drawing operations
+            this.ctx.globalAlpha = 0.6;
         }
         
         // Update overlay on every frame for smooth effects

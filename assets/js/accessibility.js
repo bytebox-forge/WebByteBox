@@ -338,9 +338,7 @@ class AccessibilityEnhancer {
         }
         
         localStorage.setItem('highContrast', enabled);
-    }
-
-    addMatrixOverlayControls() {
+    }    addMatrixOverlayControls() {
         const overlayControl = document.createElement('div');
         overlayControl.className = 'accessibility-control matrix-overlay-control';
         overlayControl.innerHTML = `
@@ -349,22 +347,37 @@ class AccessibilityEnhancer {
                 <input type="checkbox" class="overlay-toggle" checked>
                 Enable Overlay Effects
             </label>
+            
+            <!-- Quick Presets -->
+            <div class="overlay-presets">
+                <h4>Quick Presets:</h4>
+                <div class="preset-buttons">
+                    <button class="preset-btn" data-preset="professional">Professional</button>
+                    <button class="preset-btn" data-preset="subtle">Subtle Tech</button>
+                    <button class="preset-btn" data-preset="cyberpunk">Full Cyberpunk</button>
+                    <button class="preset-btn" data-preset="minimal">Minimal</button>
+                </div>
+            </div>
+            
             <div class="overlay-options">
                 <label class="control-label">
                     <span>Overlay Type:</span>
                     <select class="overlay-type">
-                        <option value="scanlines">Scanlines</option>
-                        <option value="grid">Grid</option>
+                        <option value="scanlines">Scanlines (Recommended)</option>
+                        <option value="grid">Tech Grid</option>
                         <option value="noise">Static Noise</option>
-                        <option value="gradient">Gradient</option>
-                        <option value="pulse">Pulse</option>
-                        <option value="crt">CRT Effect</option>
+                        <option value="gradient">Gradient Flow</option>
+                        <option value="pulse">Pulse Effect</option>
+                        <option value="crt">CRT Monitor</option>
+                        <option value="cyberpunk-mix">Cyberpunk Mix</option>
+                        <option value="data-stream">Data Stream</option>
+                        <option value="holographic">Holographic</option>
                     </select>
                 </label>
                 <label class="control-label">
                     <span>Opacity:</span>
-                    <input type="range" class="overlay-opacity" min="0" max="1" step="0.1" value="0.3">
-                    <span class="opacity-value">30%</span>
+                    <input type="range" class="overlay-opacity" min="0" max="0.5" step="0.02" value="0.12">
+                    <span class="opacity-value">12%</span>
                 </label>
                 <label class="control-label">
                     <span>Speed:</span>
@@ -384,6 +397,15 @@ class AccessibilityEnhancer {
         const speedRange = overlayControl.querySelector('.overlay-speed');
         const opacityValue = overlayControl.querySelector('.opacity-value');
         const speedValue = overlayControl.querySelector('.speed-value');
+        const presetButtons = overlayControl.querySelectorAll('.preset-btn');
+        
+        // Preset button handlers
+        presetButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const preset = e.target.dataset.preset;
+                this.applyOverlayPreset(preset, typeSelect, opacityRange, speedRange, opacityValue, speedValue);
+            });
+        });
         
         toggle.addEventListener('change', (e) => {
             this.updateMatrixOverlay({ enabled: e.target.checked });
