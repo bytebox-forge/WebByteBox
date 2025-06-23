@@ -3,6 +3,8 @@ class SimpleMatrix {
     constructor() {
         this.canvas = null;
         this.ctx = null;
+        this.overlayCanvas = null;
+        this.overlayCtx = null;
         this.drops = [];
         this.frameCount = 0;
         this.currentColor = '#00ff41'; // Default fallback
@@ -22,10 +24,26 @@ class SimpleMatrix {
         this.canvas.style.left = '0';
         this.canvas.style.pointerEvents = 'none';
         this.canvas.style.zIndex = '-2';
+          this.ctx = this.canvas.getContext('2d');
         
-        this.ctx = this.canvas.getContext('2d');
+        // Create simple overlay canvas
+        this.overlayCanvas = document.createElement('canvas');
+        this.overlayCanvas.width = window.innerWidth;
+        this.overlayCanvas.height = window.innerHeight;
+        
+        this.overlayCanvas.style.position = 'fixed';
+        this.overlayCanvas.style.top = '0';
+        this.overlayCanvas.style.left = '0';
+        this.overlayCanvas.style.pointerEvents = 'none';
+        this.overlayCanvas.style.zIndex = '-1'; // Overlay on top of matrix
+        
+        this.overlayCtx = this.overlayCanvas.getContext('2d');
         
         container.appendChild(this.canvas);
+        container.appendChild(this.overlayCanvas);
+        
+        // Create simple black overlay with 20% opacity
+        this.createSimpleOverlay();
         
         // Initialize drops
         const columns = Math.floor(this.canvas.width / 20);
@@ -108,6 +126,15 @@ class SimpleMatrix {
       // Method to manually refresh color (useful for debugging)
     refreshColor() {
         this.updateColor();
+    }    createSimpleOverlay() {
+        if (!this.overlayCtx) return;
+        
+        // Clear the overlay
+        this.overlayCtx.clearRect(0, 0, this.overlayCanvas.width, this.overlayCanvas.height);
+        
+        // Create simple black overlay with 50% opacity
+        this.overlayCtx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        this.overlayCtx.fillRect(0, 0, this.overlayCanvas.width, this.overlayCanvas.height);
     }
 }
 

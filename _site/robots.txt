@@ -1,1 +1,1 @@
-Sitemap: http://0.0.0.0:4000/WebByteBox/sitemap.xml
+Sitemap: https://bytebox-forge.github.io/WebByteBox/sitemap.xml
