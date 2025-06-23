@@ -2,14 +2,14 @@
 class AccessibilityEnhancer {
     constructor() {
         this.init();
-    }
-      init() {
+    }    init() {
         this.addKeyboardNavigation();
         this.addSkipLinks();
         this.addFocusManagement();
         this.addReducedMotionSupport();
         this.addTouchGestures();
         this.addAdvancedAccessibility();
+        this.addMatrixOverlayControls();
         this.loadAccessibilityPreferences();
     }
     
@@ -188,6 +188,7 @@ class AccessibilityEnhancer {
         this.addAnimationControls();
         this.addHighContrastMode();
         this.addScreenReaderEnhancements();
+        this.addMatrixOverlayControls();
     }
 
     addColorBlindnessSupport() {
@@ -339,6 +340,81 @@ class AccessibilityEnhancer {
         localStorage.setItem('highContrast', enabled);
     }
 
+    addMatrixOverlayControls() {
+        const overlayControl = document.createElement('div');
+        overlayControl.className = 'accessibility-control matrix-overlay-control';
+        overlayControl.innerHTML = `
+            <h3>Matrix Background Effects</h3>
+            <label class="control-label">
+                <input type="checkbox" class="overlay-toggle" checked>
+                Enable Overlay Effects
+            </label>
+            <div class="overlay-options">
+                <label class="control-label">
+                    <span>Overlay Type:</span>
+                    <select class="overlay-type">
+                        <option value="scanlines">Scanlines</option>
+                        <option value="grid">Grid</option>
+                        <option value="noise">Static Noise</option>
+                        <option value="gradient">Gradient</option>
+                        <option value="pulse">Pulse</option>
+                        <option value="crt">CRT Effect</option>
+                    </select>
+                </label>
+                <label class="control-label">
+                    <span>Opacity:</span>
+                    <input type="range" class="overlay-opacity" min="0" max="1" step="0.1" value="0.3">
+                    <span class="opacity-value">30%</span>
+                </label>
+                <label class="control-label">
+                    <span>Speed:</span>
+                    <input type="range" class="overlay-speed" min="0.1" max="3" step="0.1" value="1">
+                    <span class="speed-value">1x</span>
+                </label>
+            </div>
+        `;
+        
+        const settingsPanel = this.getOrCreateSettingsPanel();
+        settingsPanel.appendChild(overlayControl);
+        
+        // Setup event listeners
+        const toggle = overlayControl.querySelector('.overlay-toggle');
+        const typeSelect = overlayControl.querySelector('.overlay-type');
+        const opacityRange = overlayControl.querySelector('.overlay-opacity');
+        const speedRange = overlayControl.querySelector('.overlay-speed');
+        const opacityValue = overlayControl.querySelector('.opacity-value');
+        const speedValue = overlayControl.querySelector('.speed-value');
+        
+        toggle.addEventListener('change', (e) => {
+            this.updateMatrixOverlay({ enabled: e.target.checked });
+        });
+        
+        typeSelect.addEventListener('change', (e) => {
+            this.updateMatrixOverlay({ type: e.target.value });
+        });
+        
+        opacityRange.addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value);
+            opacityValue.textContent = Math.round(value * 100) + '%';
+            this.updateMatrixOverlay({ opacity: value });
+        });
+        
+        speedRange.addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value);
+            speedValue.textContent = value + 'x';
+            this.updateMatrixOverlay({ speed: value });
+        });
+    }
+    
+    updateMatrixOverlay(settings) {
+        if (window.simpleMatrix && window.simpleMatrix.overlaySettings) {
+            Object.assign(window.simpleMatrix.overlaySettings, settings);
+            
+            // Save to localStorage
+            localStorage.setItem('matrixOverlaySettings', JSON.stringify(window.simpleMatrix.overlaySettings));
+        }
+    }
+
     addScreenReaderEnhancements() {
         // Add live region for dynamic content
         const liveRegion = document.createElement('div');
@@ -411,9 +487,7 @@ class AccessibilityEnhancer {
         }
         
         return panel.querySelector('.settings-content');
-    }
-
-    // Load saved accessibility preferences
+    }    // Load saved accessibility preferences
     loadAccessibilityPreferences() {
         const textSize = localStorage.getItem('textSize');
         if (textSize) {
@@ -434,6 +508,40 @@ class AccessibilityEnhancer {
             this.toggleHighContrast(true);
             const contrastToggle = document.querySelector('.contrast-toggle');
             if (contrastToggle) contrastToggle.checked = true;
+        }
+        
+        // Load matrix overlay settings
+        const matrixSettings = localStorage.getItem('matrixOverlaySettings');
+        if (matrixSettings) {
+            try {
+                const settings = JSON.parse(matrixSettings);
+                if (window.simpleMatrix && window.simpleMatrix.overlaySettings) {
+                    Object.assign(window.simpleMatrix.overlaySettings, settings);
+                    
+                    // Update UI controls
+                    setTimeout(() => {
+                        const toggle = document.querySelector('.overlay-toggle');
+                        const typeSelect = document.querySelector('.overlay-type');
+                        const opacityRange = document.querySelector('.overlay-opacity');
+                        const speedRange = document.querySelector('.overlay-speed');
+                        const opacityValue = document.querySelector('.opacity-value');
+                        const speedValue = document.querySelector('.speed-value');
+                        
+                        if (toggle) toggle.checked = settings.enabled;
+                        if (typeSelect) typeSelect.value = settings.type;
+                        if (opacityRange) {
+                            opacityRange.value = settings.opacity;
+                            if (opacityValue) opacityValue.textContent = Math.round(settings.opacity * 100) + '%';
+                        }
+                        if (speedRange) {
+                            speedRange.value = settings.speed;
+                            if (speedValue) speedValue.textContent = settings.speed + 'x';
+                        }
+                    }, 1000);
+                }
+            } catch (e) {
+                console.warn('Failed to load matrix overlay settings:', e);
+            }
         }
     }
 }

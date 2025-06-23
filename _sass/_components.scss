@@ -2526,3 +2526,92 @@ textarea:focus,
         }
     }
 }
+
+// Matrix overlay controls styling
+.matrix-overlay-control {
+    .overlay-options {
+        margin-left: var(--spacing-md);
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        
+        .control-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xs);
+            
+            span {
+                color: var(--terminal-text);
+                font-family: var(--font-mono);
+                font-size: var(--font-size-sm);
+            }
+            
+            select, input[type="range"] {
+                background: var(--terminal-bg);
+                border: 1px solid var(--terminal-border);
+                color: var(--neon-green);
+                font-family: var(--font-mono);
+                font-size: var(--font-size-sm);
+                padding: var(--spacing-xs);
+                border-radius: 3px;
+                min-width: 120px;
+                
+                &:focus {
+                    outline: 2px solid var(--neon-green);
+                    outline-offset: 1px;
+                    box-shadow: 0 0 5px var(--neon-green-glow);
+                }
+            }
+            
+            input[type="range"] {
+                accent-color: var(--neon-green);
+                background: transparent;
+                border: none;
+                
+                &::-webkit-slider-track {
+                    background: var(--terminal-border);
+                    height: 4px;
+                    border-radius: 2px;
+                }
+                
+                &::-webkit-slider-thumb {
+                    background: var(--neon-green);
+                    border: none;
+                    height: 16px;
+                    width: 16px;
+                    border-radius: 50%;
+                    box-shadow: 0 0 5px var(--neon-green-glow);
+                }
+                
+                &::-moz-range-track {
+                    background: var(--terminal-border);
+                    height: 4px;
+                    border-radius: 2px;
+                    border: none;
+                }
+                
+                &::-moz-range-thumb {
+                    background: var(--neon-green);
+                    border: none;
+                    height: 16px;
+                    width: 16px;
+                    border-radius: 50%;
+                    box-shadow: 0 0 5px var(--neon-green-glow);
+                }
+            }
+            
+            .opacity-value,
+            .speed-value {
+                color: var(--amber);
+                font-weight: bold;
+                min-width: 40px;
+                text-align: right;
+            }
+        }
+    }
+    
+    .overlay-toggle:not(:checked) + .overlay-options {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
