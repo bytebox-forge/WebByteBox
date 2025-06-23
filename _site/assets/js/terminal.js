@@ -128,6 +128,12 @@ class Terminal {
         }
     }
     
+    playTypingSound() {
+        // Placeholder for typing sound effect
+        // Could be expanded to play actual sound files if needed
+        return;
+    }
+
     setupUptime() {
         const uptimeElement = document.getElementById('uptime-counter');
         if (!uptimeElement) return;

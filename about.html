@@ -27,9 +27,8 @@ title: "whoami"
                 <div class="cmd-line">
                     <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
                     <span class="command">display /home/bytebox/.profile/avatar.jpg</span>
-                </div>
-                <div class="avatar-container">
-                    <img src="/assets/img/profile-headshot.jpg" alt="Profile Avatar" class="profile-image">
+                </div>                <div class="avatar-container">
+                    <img src="{{ '/assets/img/profile-headshot.jpg' | relative_url }}" alt="Profile Avatar" class="profile-image">
                     <div class="avatar-overlay">
                         <div class="scan-line"></div>
                         <div class="glitch-effect"></div>

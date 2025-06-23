@@ -3401,6 +3401,81 @@ textarea:focus,
     gap: var(--spacing-sm);
   }
 }
+.matrix-overlay-control .overlay-options {
+  margin-left: var(--spacing-md);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.matrix-overlay-control .overlay-options .control-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+}
+.matrix-overlay-control .overlay-options .control-label span {
+  color: var(--terminal-text);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+}
+.matrix-overlay-control .overlay-options .control-label select, .matrix-overlay-control .overlay-options .control-label input[type=range] {
+  background: var(--terminal-bg);
+  border: 1px solid var(--terminal-border);
+  color: var(--neon-green);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xs);
+  border-radius: 3px;
+  min-width: 120px;
+}
+.matrix-overlay-control .overlay-options .control-label select:focus, .matrix-overlay-control .overlay-options .control-label input[type=range]:focus {
+  outline: 2px solid var(--neon-green);
+  outline-offset: 1px;
+  box-shadow: 0 0 5px var(--neon-green-glow);
+}
+.matrix-overlay-control .overlay-options .control-label input[type=range] {
+  accent-color: var(--neon-green);
+  background: transparent;
+  border: none;
+}
+.matrix-overlay-control .overlay-options .control-label input[type=range]::-webkit-slider-track {
+  background: var(--terminal-border);
+  height: 4px;
+  border-radius: 2px;
+}
+.matrix-overlay-control .overlay-options .control-label input[type=range]::-webkit-slider-thumb {
+  background: var(--neon-green);
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--neon-green-glow);
+}
+.matrix-overlay-control .overlay-options .control-label input[type=range]::-moz-range-track {
+  background: var(--terminal-border);
+  height: 4px;
+  border-radius: 2px;
+  border: none;
+}
+.matrix-overlay-control .overlay-options .control-label input[type=range]::-moz-range-thumb {
+  background: var(--neon-green);
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--neon-green-glow);
+}
+.matrix-overlay-control .overlay-options .control-label .opacity-value,
+.matrix-overlay-control .overlay-options .control-label .speed-value {
+  color: var(--amber);
+  font-weight: bold;
+  min-width: 40px;
+  text-align: right;
+}
+.matrix-overlay-control .overlay-toggle:not(:checked) + .overlay-options {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 @keyframes blink {
   0%, 50% {
     opacity: 1;
