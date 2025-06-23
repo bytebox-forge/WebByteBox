@@ -8,19 +8,23 @@ class SimpleMatrix {
         this.drops = [];
         this.frameCount = 0;
         this.currentColor = '#00ff41'; // Default fallback        this.overlaySettings = {
-            enabled: true,
+            enabled: false, // Temporarily disable overlay to test matrix
             type: 'scanlines', // Default to professional scanlines
-            opacity: 0.3, // Darker overlay to reduce matrix intensity
+            opacity: 0.15, // Light overlay so matrix shows through
             speed: 1,
             color: '#00ff41',
             intensity: 'medium' // 'low', 'medium', 'high'
         };
         this.init();
     }
-    
-    init() {
+      init() {
+        console.log('Matrix init starting...');
         const container = document.querySelector('.matrix-bg');
-        if (!container) return;
+        if (!container) {
+            console.error('Matrix container not found!');
+            return;
+        }
+        console.log('Matrix container found:', container);
         
         // Create main matrix canvas
         this.canvas = document.createElement('canvas');
@@ -55,9 +59,9 @@ class SimpleMatrix {
         
         container.appendChild(this.canvas);
         container.appendChild(this.overlayCanvas);
-        
-        // Initialize drops with slower spacing
+          // Initialize drops with slower spacing
         const columns = Math.floor(this.canvas.width / 20);
+        console.log('Creating', columns, 'matrix columns');
         for (let i = 0; i < columns; i++) {
             this.drops[i] = Math.random() * this.canvas.height;
         }
@@ -67,10 +71,10 @@ class SimpleMatrix {
         
         // Listen for theme changes
         this.setupThemeListener();
-        
-        // Setup overlay controls
+          // Setup overlay controls
         this.setupOverlayControls();
-        
+
+        console.log('Starting matrix animation...');
         this.animate();
     }    updateColor() {
         // Get the current --neon-green color from CSS
@@ -281,21 +285,21 @@ class SimpleMatrix {
         }
         
         this.overlayCtx.globalCompositeOperation = 'source-over';
-    }
-
-    animate() {
-        if (!this.ctx) return;
+    }    animate() {
+        if (!this.ctx) {
+            console.error('Canvas context not available!');
+            return;
+        }
         
         this.frameCount++;
         
         // Only update every 8 frames for much slower animation
         if (this.frameCount % 8 === 0) {
-            // Create strong trailing effect with very subtle fade
-            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Slower fade for longer trails
-            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-              // Matrix characters with theme-aware color at reduced opacity
-            this.ctx.fillStyle = this.currentColor;
-            this.ctx.globalAlpha = 0.6; // Reduced opacity for less intense matrix rain
+            console.log('Drawing matrix frame', this.frameCount);// Create trailing effect with very light fade
+            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.005)'; // Much slower fade to keep matrix visible
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);            // Matrix characters with bright green color at full opacity
+            this.ctx.fillStyle = '#00ff41'; // Force bright green
+            this.ctx.globalAlpha = 1.0; // Full opacity for maximum visibility
             this.ctx.font = 'bold 20px monospace';
             // Ensure no shadow effects
             this.ctx.shadowColor = 'transparent';
@@ -314,9 +318,8 @@ class SimpleMatrix {
                 if (this.drops[i] > this.canvas.height) {
                     this.drops[i] = -Math.random() * 200; // Start higher for better distribution
                 }
-            }
-              // Reset opacity for other drawing operations
-            this.ctx.globalAlpha = 0.6;
+            }            // Reset opacity for other drawing operations
+            this.ctx.globalAlpha = 1.0;
         }
         
         // Update overlay on every frame for smooth effects
