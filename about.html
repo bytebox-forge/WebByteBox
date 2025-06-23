@@ -19,7 +19,21 @@ title: "whoami"
                     <span class="command">cat /etc/passwd | grep $(whoami)</span>
                 </div>
                 <div class="output">
-                    <span class="username neon-green">root</span>:x:0:0:<span class="amber">Digital Architect, Homelab Overlord</span>:/home/bytebox:/bin/bash
+                    <span class="username neon-green">root</span>:x:0:0:<span class="amber">Digital Architect, Homelab Overlord</span>:/home/bytebox:/bin/bash                </div>
+            </div>
+
+            <!-- Profile Avatar Section -->
+            <div class="profile-avatar">
+                <div class="cmd-line">
+                    <span class="prompt">{{ site.cyberpunk.terminal_prompt }}</span>
+                    <span class="command">display /home/bytebox/.profile/avatar.img</span>
+                </div>
+                <div class="avatar-container">
+                    <img src="/assets/img/profile-headshot.jpg" alt="Profile Avatar" class="profile-image">
+                    <div class="avatar-overlay">
+                        <div class="scan-line"></div>
+                        <div class="glitch-effect"></div>
+                    </div>
                 </div>
             </div>
 
