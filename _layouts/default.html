@@ -166,9 +166,8 @@
                     </div>
                 </div>
                 <div class="footer-links">
-                    <!-- TODO: Add your social/contact links -->
-                    <a href="#" class="footer-link glitch-text" data-text="GitHub">GitHub</a>
-                    <a href="#" class="footer-link glitch-text" data-text="Matrix">Matrix</a>
+                    <a href="https://github.com/{{ site.author.github }}" class="footer-link glitch-text" data-text="GitHub" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://matrix.to/#/{{ site.author.matrix }}" class="footer-link glitch-text" data-text="Matrix" target="_blank" rel="noopener noreferrer">Matrix</a>
                     <a href="{{ '/feed.xml' | relative_url }}" class="footer-link glitch-text" data-text="RSS">RSS</a>
                 </div>
             </div>
@@ -193,7 +192,7 @@
         // Register service worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/WebByteBox/sw.js')
+                navigator.serviceWorker.register('{{ '/sw.js' | relative_url }}')
                     .then(registration => console.log('SW registered'))
                     .catch(registrationError => console.log('SW registration failed'));
             });

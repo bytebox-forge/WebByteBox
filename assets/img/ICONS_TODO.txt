@@ -1,0 +1,47 @@
+PWA Icons Needed
+==================
+
+To complete PWA setup, generate these icon sizes:
+
+Required Icons:
+- favicon.ico (16x16, 32x32, 48x48 multi-resolution)
+- icon-16x16.png
+- icon-32x32.png
+- icon-144x144.png (Microsoft Tile)
+- icon-192x192.png (Android)
+- icon-512x512.png (Android splash)
+- apple-touch-icon.png (180x180 for iOS)
+
+Quick Generation Options:
+========================
+
+Option 1: RealFaviconGenerator (Recommended)
+- Visit: https://realfavicongenerator.net/
+- Upload a square logo/image (at least 512x512px)
+- Download the generated package
+- Extract all icons to /assets/img/
+- Use the generated manifest.json icons array
+
+Option 2: Use Existing Profile Image
+- Use the existing profile-headshot.jpg
+- Crop to square
+- Resize to 512x512px
+- Use Option 1 above to generate all sizes
+
+Option 3: Simple Placeholder (Quick Start)
+- Create a simple colored square with "BB" text
+- Use any image editor
+- Export at 512x512px
+- Generate other sizes with Option 1
+
+Current Status:
+- Profile image exists: profile-headshot.jpg ✓
+- PWA icons: MISSING (placeholder icons needed)
+
+Note: The site will work without icons, but:
+- No app icon when installed as PWA
+- No favicon in browser tabs
+- Not truly production-ready for mobile installation
+
+Priority: Medium
+Time to fix: 10-15 minutes with RealFaviconGenerator
